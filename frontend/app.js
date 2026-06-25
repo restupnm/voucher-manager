@@ -874,33 +874,6 @@ function viewDashboard() {
           <p class="text-ink-soft mt-1">${state.sidebarView === 'backup' ? t('backupDesc') : t('voucherManagerDesc')}</p>
         </div>
         ${state.sidebarView === 'dashboard' ? `
-<div class="flex flex-col items-end gap-3">
-
-  <!-- floating language switch -->
-  <div class="self-end">
-    ${langSwitcherHTML()}
-  </div>
-
-  <!-- action buttons -->
-  <div class="flex gap-3">
-    <button
-      data-testid="add-voucher-btn"
-      onclick="openAddModal()"
-      class="btn-primary min-w-[210px] justify-center">
-      <i data-lucide="plus" class="w-4 h-4"></i>
-      ${t('addVoucher')}
-    </button>
-
-    <button
-      data-testid="import-btn"
-      onclick="openImportModal()"
-      class="btn-secondary min-w-[210px] justify-center">
-      <i data-lucide="upload" class="w-4 h-4"></i>
-      ${t('importVoucher')}
-    </button>
-  </div>
-
-</div>
 
       ${state.sidebarView === 'backup' ? backupViewHTML() : `
 
