@@ -1,0 +1,9 @@
+{
+  "name": "cloud-spot-voucher",
+  "version": "1.0.0",
+  "description": "WiFi Voucher Manager — static github.io app",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Static app — copy index.html, app.js, styles.css to your github.io repo.'"
+  }
+}
