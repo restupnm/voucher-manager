@@ -875,17 +875,21 @@ function viewDashboard() {
         </div>
         
 ${state.sidebarView === 'dashboard' ? `
-<div class="flex flex-col items-end gap-3 shrink-0">
-  <div class="self-end">${langSwitcherHTML()}</div>
-  <div class="flex items-center gap-3">
-    <button data-testid="import-btn" onclick="openImportModal()" class="btn-secondary min-w-[180px] justify-center">
-      <i data-lucide="upload" class="w-4 h-4"></i> ${t('importVoucher')}
-    </button>
-    <button data-testid="add-voucher-btn" onclick="openAddModal()" class="btn-primary min-w-[180px] justify-center">
-      <i data-lucide="plus" class="w-4 h-4"></i> ${t('addVoucher')}
-    </button>
+<div class="mb-7 fade-in">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h1 class="font-display font-bold text-3xl sm:text-4xl text-brand">${state.sidebarView==='backup'?t('backupTitle'):t('voucherManager')}</h1>
+      <p class="text-ink-soft mt-1">${state.sidebarView==='backup'?t('backupDesc'):t('voucherManagerDesc')}</p>
+    </div>
+    <div>${langSwitcherHTML()}</div>
   </div>
-</div>` : `<div class="self-end">${langSwitcherHTML()}</div>`}
+
+  ${state.sidebarView==='dashboard'?`
+  <div class="flex justify-end gap-3 mt-5">
+    <button data-testid="import-btn" onclick="openImportModal()" class="btn-secondary min-w-[180px] justify-center"><i data-lucide="upload" class="w-4 h-4"></i> ${t('importVoucher')}</button>
+    <button data-testid="add-voucher-btn" onclick="openAddModal()" class="btn-primary min-w-[180px] justify-center"><i data-lucide="plus" class="w-4 h-4"></i> ${t('addVoucher')}</button>
+  </div>`:''}
+</div>
 
       ${state.sidebarView === 'backup' ? backupViewHTML() : `
 
