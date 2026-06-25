@@ -873,16 +873,6 @@ function viewDashboard() {
           <h1 class="font-display font-bold text-3xl sm:text-4xl text-brand">${state.sidebarView === 'backup' ? t('backupTitle') : t('voucherManager')}</h1>
           <p class="text-ink-soft mt-1">${state.sidebarView === 'backup' ? t('backupDesc') : t('voucherManagerDesc')}</p>
         </div>
-        
-${state.sidebarView === 'dashboard' ? `
-<div class="mb-7 fade-in">
-  <div class="flex items-start justify-between gap-4">
-    <div>
-      <h1 class="font-display font-bold text-3xl sm:text-4xl text-brand">${state.sidebarView==='backup'?t('backupTitle'):t('voucherManager')}</h1>
-      <p class="text-ink-soft mt-1">${state.sidebarView==='backup'?t('backupDesc'):t('voucherManagerDesc')}</p>
-    </div>
-    <div>${langSwitcherHTML()}</div>
-  </div>
 
   ${state.sidebarView==='dashboard'?`
   <div class="flex justify-end gap-3 mt-5">
