@@ -868,19 +868,17 @@ function viewDashboard() {
   <div class="flex min-h-screen">
     ${sidebarHTML()}
     <main class="flex-1 p-5 sm:p-8 lg:pl-10 min-w-0">
+    <div class="fixed top-5 right-5 z-50">
+  ${langSwitcherHTML()}
+    </div>
       <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-7 fade-in">
         <div>
           <h1 class="font-display font-bold text-3xl sm:text-4xl text-brand">${state.sidebarView === 'backup' ? t('backupTitle') : t('voucherManager')}</h1>
           <p class="text-ink-soft mt-1">${state.sidebarView === 'backup' ? t('backupDesc') : t('voucherManagerDesc')}</p>
         </div>
 
-<div class="relative">
-  <div class="absolute right-0 -top-1">
-    ${langSwitcherHTML()}
-  </div>
-
   ${state.sidebarView==='dashboard'?`
-  <div class="flex items-center gap-3 mt-12">
+  <div class="flex items-center gap-3">
     <button data-testid="import-btn" onclick="openImportModal()" class="btn-secondary min-w-[180px] justify-center"><i data-lucide="upload" class="w-4 h-4"></i> ${t('importVoucher')}</button>
     <button data-testid="add-voucher-btn" onclick="openAddModal()" class="btn-primary min-w-[180px] justify-center"><i data-lucide="plus" class="w-4 h-4"></i> ${t('addVoucher')}</button>
   </div>`:''}
