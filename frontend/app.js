@@ -874,13 +874,13 @@ function viewDashboard() {
           <p class="text-ink-soft mt-1">${state.sidebarView === 'backup' ? t('backupDesc') : t('voucherManagerDesc')}</p>
         </div>
 
-  <div class="flex flex-col items-end gap-3 shrink-0">
-  <div>
+<div class="relative">
+  <div class="absolute right-0 -top-1">
     ${langSwitcherHTML()}
   </div>
 
   ${state.sidebarView==='dashboard'?`
-  <div class="flex items-center gap-3">
+  <div class="flex items-center gap-3 mt-12">
     <button data-testid="import-btn" onclick="openImportModal()" class="btn-secondary min-w-[180px] justify-center"><i data-lucide="upload" class="w-4 h-4"></i> ${t('importVoucher')}</button>
     <button data-testid="add-voucher-btn" onclick="openAddModal()" class="btn-primary min-w-[180px] justify-center"><i data-lucide="plus" class="w-4 h-4"></i> ${t('addVoucher')}</button>
   </div>`:''}
