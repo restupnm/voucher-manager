@@ -868,7 +868,7 @@ function viewDashboard() {
   <div class="flex min-h-screen">
     ${sidebarHTML()}
     <main class="flex-1 p-5 sm:p-8 lg:pl-10 min-w-0">
-    <div class="fixed top-5 right-5 z-50">
+    <div class="fixed bottom-5 right-5 z-50">
   ${langSwitcherHTML()}
     </div>
       <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-7 fade-in">
