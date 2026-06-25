@@ -1,0 +1,110 @@
+{
+  "project_context": {
+    "name": "cloud.spot",
+    "domain": "WiFi Voucher Monitoring Web App",
+    "vibe": "Friendly, modern, approachable, reliable utility.",
+    "user_requirements": "Single front page (guest check / admin hidden login), JSON indexedDB storage, WA message sending with auto-download image, Language Switcher (EN/ID/JW)."
+  },
+  "theme_and_archetype": {
+    "theme": "light",
+    "archetype": "Archetype 3 (Pastel & Soft) infused with User's Deep Indigo",
+    "reasoning": "A dashboard utility needs clean structure, but for guest and local cafe usage it must feel soft and approachable. The user-requested Indigo/Violet is used as the high-contrast anchor in a sea of soft lavender and white backgrounds."
+  },
+  "design_system": {
+    "colors": {
+      "brand": {
+        "primary": "#3D1FB8",
+        "primary_hover": "#311894",
+        "primary_light": "#EFEBFF",
+        "gradient_primary": "bg-gradient-to-br from-[#3D1FB8] to-[#5A3BE8]"
+      },
+      "base": {
+        "background": "#F8F7FB",
+        "surface": "#FFFFFF",
+        "surface_glass": "rgba(255, 255, 255, 0.7)"
+      },
+      "text": {
+        "primary": "#1A1525",
+        "secondary": "#6A6577",
+        "inverse": "#FFFFFF",
+        "accent": "#3D1FB8"
+      },
+      "status": {
+        "success": "#10B981",
+        "warning": "#F59E0B",
+        "danger": "#EF4444",
+        "info": "#3B82F6"
+      }
+    },
+    "typography": {
+      "heading_font": "Outfit",
+      "body_font": "Plus Jakarta Sans",
+      "scales": {
+        "h1": "text-4xl sm:text-5xl font-bold tracking-tight text-[#1A1525]",
+        "h2": "text-2xl sm:text-3xl font-semibold tracking-tight text-[#1A1525]",
+        "h3": "text-xl font-medium tracking-tight text-[#1A1525]",
+        "body": "text-base leading-relaxed text-[#6A6577]",
+        "label": "text-xs font-bold tracking-widest uppercase text-[#6A6577]"
+      }
+    },
+    "spacing_and_layout": {
+      "global_padding": "p-6 md:p-8",
+      "dashboard_grid": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6",
+      "border_radius": {
+        "card": "rounded-3xl",
+        "button": "rounded-xl",
+        "input": "rounded-xl"
+      },
+      "shadows": {
+        "card_soft": "shadow-[0_8px_30px_rgb(61,31,184,0.08)]",
+        "button_hover": "shadow-[0_4px_15px_rgb(61,31,184,0.3)]"
+      }
+    }
+  },
+  "components": {
+    "card": {
+      "style": "bg-white rounded-3xl shadow-[0_8px_30px_rgb(61,31,184,0.08)] border border-[#3D1FB8]/5 p-6 md:p-8"
+    },
+    "button": {
+      "primary": "bg-[#3D1FB8] text-white rounded-xl px-6 py-3 font-semibold transition-all duration-200 hover:bg-[#311894] hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgb(61,31,184,0.3)] active:translate-y-0",
+      "secondary": "bg-white text-[#3D1FB8] rounded-xl px-6 py-3 font-semibold border border-[#3D1FB8]/20 transition-all hover:bg-[#EFEBFF]"
+    },
+    "input": {
+      "style": "bg-[#F8F7FB] border border-transparent rounded-xl px-4 py-3 text-[#1A1525] placeholder:text-[#B4B0C0] focus:bg-white focus:border-[#3D1FB8]/30 focus:ring-4 focus:ring-[#3D1FB8]/10 transition-all outline-none w-full"
+    },
+    "table": {
+      "style": "w-full text-left border-collapse",
+      "header": "text-xs font-bold tracking-widest uppercase text-[#6A6577] border-b border-[#F8F7FB] pb-4",
+      "row": "border-b border-[#F8F7FB] transition-colors hover:bg-[#EFEBFF]/30",
+      "cell": "py-4 text-[#1A1525]"
+    },
+    "modal": {
+      "backdrop": "backdrop-blur-md bg-[#1A1525]/40",
+      "container": "bg-white rounded-3xl shadow-2xl w-full max-w-lg mx-auto p-8 border border-white/20"
+    }
+  },
+  "icons": {
+    "library": "lucide-react",
+    "strategy": "Use stroke-width 2, round edges. Example uses: Cloud (logo), Wifi (stat), Users (stat), Clock (stat), Database (backup)."
+  },
+  "media": {
+    "landing_background": {
+      "url": "https://images.unsplash.com/photo-1634655377962-e6e7b446e7e9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGxpZ2h0JTIwbGF2ZW5kZXIlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc4MjQxNjQzNXww&ixlib=rb-4.1.0&q=85",
+      "description": "Abstract light lavender background for the landing page hero section."
+    },
+    "admin_avatar": {
+      "url": "https://images.pexels.com/photos/20157010/pexels-photo-20157010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Elegant portrait for the admin user card in the sidebar."
+    }
+  },
+  "instructions_to_main_agent": {
+    "routing": "Since it's a single page static app with no backend, use React state to toggle between 'LandingView' and 'AdminDashboardView'.",
+    "auth_logic": "On the landing page input, if the user types 'admin123', immediately transition to the AdminDashboardView. Otherwise, treat it as a guest voucher check.",
+    "voucher_logic": "Voucher codes starting with '1M' mean 1 Minggu (Week), '1B' mean 1 Bulan (Month), '1H' mean 1 Hari (Day).",
+    "storage": "Use standard IndexedDB API (or a library like localforage) to store voucher lists. Save as JSON internally.",
+    "whatsapp_integration": "For 'Send Voucher', generate a wa.me URL. To auto-download the voucher image, use an HTML-to-canvas library (like html2canvas) to snapshot the voucher card element and trigger a download.",
+    "language_switcher": "Implement a simple i18n state dictionary mapping EN, ID (Indonesia), and JW (Jawa) keys. Toggle dynamically via sidebar.",
+    "data_testid": "CRITICAL: All interactive elements (inputs, buttons, language toggles, table rows, tab switches) MUST have a `data-testid` attribute (e.g., `data-testid='login-input'`).",
+    "file_extensions": "Use .js and .jsx extensions. Do not use .tsx or .ts."
+  }
+}
