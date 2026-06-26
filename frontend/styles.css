@@ -129,16 +129,20 @@ margin:0 32px;
 display:flex;
 align-items:center;
 gap:10px;
-height:44px;
-width:108%;
+width:112%;
+height:56px;
 margin-left:-24px;
-padding:0 24px;
-background:linear-gradient(90deg,#311B92,#4F2DD6);
+padding:0 32px;
+background:linear-gradient(90deg,#311B92 0%,#4F2DD6 100%);
 color:#fff;
-border-radius:0 26px 26px 0;
 font-size:15px;
 font-weight:600;
 overflow:hidden;
+
+border-top-left-radius:0;
+border-bottom-left-radius:0;
+border-top-right-radius:0;
+border-bottom-right-radius:42px;
 }
 
 /* Stat card */
