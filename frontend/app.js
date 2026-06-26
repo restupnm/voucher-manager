@@ -711,43 +711,12 @@ function viewLanding() {
   </div>`;
 }
 
-function cloudLogoHTML(iconSize = 'w-7 h-7') {
+function cloudLogoHTML() {
   return `
-    <span class="flex items-center gap-3">
-      <svg
-        viewBox="0 0 423 111"
-        class="${iconSize} w-auto"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none">
-
-        <!-- Cloud -->
-        <path
-          d="M63 81
-             C41 81 24 64 24 43
-             C24 22 41 5 63 5
-             C76 5 88 11 95 21
-             C100 18 107 16 114 16
-             C133 16 149 32 149 51
-             C149 70 133 86 114 86
-             H63"
-          stroke="currentColor"
-          stroke-width="8"
-          stroke-linecap="round"
-          stroke-linejoin="round"/>
-
-        <!-- Check -->
-        <path
-          d="M63 47 L74 58 L93 36"
-          stroke="currentColor"
-          stroke-width="8"
-          stroke-linecap="round"
-          stroke-linejoin="round"/>
-
-      </svg>
-              <!-- cloud.spot -->
-          cloud.spot
-      
-    </span>
+    <img
+      src="assets/logo.png"
+      alt="cloud.spot"
+      class="h-10 w-auto select-none">
   `;
 }
 
