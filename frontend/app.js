@@ -706,19 +706,12 @@ function viewLanding() {
         </div>
       </div>
 
-      <footer class="text-center mt-10 opacity-80">${cloudLogoHTML('w-6 h-6')}</footer>
+      <footer class="justify-center items-center">${cloudLogoHTML('w-8 h-8')}</footer>
     </main>
   </div>`;
 }
 
-function cloudLogoHTML() {
-  return `
-    <img
-      src="assets/logo.png"
-      alt="cloud.spot"
-      class="h-10 w-auto select-none">
-  `;
-}
+function cloudLogoHTML(){return`<div class="flex justify-center w-full"><img src="assets/logo.png" alt="cloud.spot" class="h-14 w-auto mx-auto"></div>`;}
 
 function langSwitcherHTML() {
   const langs = ['en', 'id', 'jw'];
