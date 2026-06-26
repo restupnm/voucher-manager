@@ -838,12 +838,12 @@ function voucherCardHTML(v, status, days, idSuffix = '') {
     </div>
   </div>
 
-  <div class="mt-6">
-    <div class="bg-brand text-white rounded-l-full rounded-r-3xl px-6 py-3 inline-flex items-center gap-3">
-      <i data-lucide="globe" class="w-5 h-5"></i>
-      <span class="font-semibold">${t('websiteLabel')}</span>
-    </div>
+<div class="mt-6 -ml-9">
+  <div class="w-[110%] bg-brand text-white rounded-r-full px-10 py-4 flex items-center gap-3">
+    <i data-lucide="globe" class="w-5 h-5"></i>
+    <span class="font-semibold">${t('websiteLabel')}</span>
   </div>
+</div>
 
 </div>
 <div class="mx-8 border-l-2 border-dashed border-brand/20"></div>
