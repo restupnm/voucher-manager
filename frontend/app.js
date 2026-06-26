@@ -836,11 +836,11 @@ ${t('voucherCode')}
 ${escapeHtml(v.code)}
 </div>
 
-<div class="mt-4 -ml-5">
-<div class="bg-brand text-white h-11 w-[108%] rounded-r-full flex items-center px-5 gap-2">
-<i data-lucide="globe" class="w-4 h-4"></i>
-<span class="text-sm font-semibold">${t('websiteLabel')}</span>
-</div>
+<div class="mt-4">
+  <div class="voucher-ribbon">
+    <i data-lucide="globe" class="w-4 h-4"></i>
+    <span class="font-semibold">${t('websiteLabel')}</span>
+  </div>
 </div>
 
 </div>
