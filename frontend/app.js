@@ -823,7 +823,7 @@ function voucherCardHTML(v, status, days, idSuffix = '') {
     <div class="left">
       <div>
         ${cloudLogoHTML('w-7 h-7')}
-/* div vouchercardsubtitle here */
+        
       <div class="mt-4">
         <div class="text-xs font-bold tracking-widest uppercase text-brand">${t('voucherCode').toUpperCase()}</div>
         <div class="voucher-code-box mt-1.5">${escapeHtml(v.code)}</div>
