@@ -657,7 +657,7 @@ function viewLanding() {
   return `
   <div class="relative min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
     <div class="bg-blobs"></div>
-    <div class="absolute top-5 right-5 z-10">${langSwitcherHTML()}</div>
+    <div class="absolute top-3 right-3 z-20">${langSwitcherHTML()}</div>
 
     <main class="relative z-10 w-full max-w-md fade-in">
       <div class="flex justify-center mb-6">
