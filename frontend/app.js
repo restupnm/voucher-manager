@@ -868,10 +868,6 @@ function viewDashboard() {
   <div class="flex min-h-screen">
     ${sidebarHTML()}
     <main class="flex-1 p-5 sm:p-8 lg:pl-10 min-w-0">
-    
-    <div style="position:fixed;top:10px;left:10px;z-index:9999;background:red;color:white;padding:8px;border-radius:8px;font-weight:bold;">
-  ${window.innerWidth}px
-</div>
 
     <div class="fixed bottom-5 right-5 z-50">
   ${langSwitcherHTML()}
