@@ -106,14 +106,17 @@ justify-content:center;
 }
 
 .voucher-code-box{
-margin-top:12px;
-padding:18px 28px;
-border:2px solid rgba(61,31,184,.15);
-border-radius:20px;
-font-size:64px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:22px 32px;
+margin-top:14px;
+font-size:4rem;
 font-weight:800;
-color:#2b2150;
+border:3px solid rgba(87,68,200,.18);
+border-radius:24px;
 background:#faf9ff;
+letter-spacing:-.03em;
 }
 
 .divider{
