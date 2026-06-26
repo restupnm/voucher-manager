@@ -147,3 +147,10 @@ html, body { background: var(--bg); }
 @media (max-width: 1023px) {
   .sidebar-mobile-hidden { display: none; }
 }
+
+@media (max-width: 420px) {
+  [data-testid="lang-switcher"] {
+    transform: scale(.85);
+    transform-origin: top right;
+  }
+}
