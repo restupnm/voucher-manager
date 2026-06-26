@@ -626,9 +626,19 @@ function logout() {
 
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
+    const backdrop = document.getElementById("sidebar-backdrop");
+
     if (!sidebar) return;
 
-    sidebar.classList.toggle("-translate-x-full");
+    const isOpen = !sidebar.classList.contains("-translate-x-full");
+
+    if (isOpen) {
+        sidebar.classList.add("-translate-x-full");
+        backdrop.classList.add("hidden");
+    } else {
+        sidebar.classList.remove("-translate-x-full");
+        backdrop.classList.remove("hidden");
+    }
 }
 
 /* ================================================================== *
@@ -975,7 +985,9 @@ function statCardHTML(icon, bgColor, fgColor, title, value, sub, testid) {
 }
 
 function sidebarHTML() {
-return `<aside id="sidebar"
+return `
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden" onclick="toggleSidebar()"> </div>
+<aside id="sidebar"
 class="
 fixed left-0 top-0 z-40
 w-64 h-screen
@@ -991,10 +1003,10 @@ flex-col">
       <a data-testid="nav-dashboard" class="nav-item ${state.sidebarView==='dashboard'?'active':''}" onclick="setState({sidebarView:'dashboard',page:1}); if (window.innerWidth < 1024) toggleSidebar();">
         <i data-lucide="layout-grid" class="w-5 h-5"></i> ${t('dashboard')}
       </a>
-      <a data-testid="nav-backup" class="nav-item ${state.sidebarView==='backup'?'active':''}" onclick="setState({sidebarView:'backup'})">
+      <a data-testid="nav-backup" class="nav-item ${state.sidebarView==='backup'?'active':''}" onclick="setState({sidebarView:'backup'}); if (window.innerWidth < 1024) toggleSidebar();">
         <i data-lucide="cloud-download" class="w-5 h-5"></i> ${t('backup')}
       </a>
-      <a data-testid="nav-settings" class="nav-item" onclick="openSettingsModal()">
+      <a data-testid="nav-settings" class="nav-item" onclick="openSettingsModal(); if (window.innerWidth < 1024) toggleSidebar();">
         <i data-lucide="settings" class="w-5 h-5"></i> ${t('settings')}
       </a>
     </nav>
