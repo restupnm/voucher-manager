@@ -817,56 +817,50 @@ function startCountdown() {
   state.countdownTimerId = setInterval(tick, 1000);
 }
 
-function voucherCardHTML(v, status, days, idSuffix = '') {
-  return `
-  <div class="voucher-card flex items-center p-8 gap-8" id="voucher-card-${escapeHtml(idSuffix)}">
-<div class="left flex flex-col justify-between">
+function voucherCardHTML(v,status,days,idSuffix=''){return`
+<div class="voucher-card flex items-center bg-white rounded-[2rem] p-6 gap-6" id="voucher-card-${escapeHtml(idSuffix)}">
 
-  <div>
-    <div class="flex justify-start">
-      <img src="assets/logo.png" class="w-72 h-auto">
-    </div>
+<div class="flex flex-col justify-between w-[60%] h-full">
 
-    <div class="border-b border-brand/20 my-4"></div>
+<div>
+<div class="flex justify-start">
+<img src="assets/logo.png" class="h-14 w-auto">
+</div>
 
-    <div class="text-xs font-bold tracking-[0.25em] uppercase text-brand">
-      ${t('voucherCode')}
-    </div>
+<div class="border-b border-brand/20 mt-3 mb-4"></div>
 
-    <div class="voucher-code-box mt-3">
-      ${escapeHtml(v.code)}
-    </div>
-  </div>
+<div class="text-[13px] font-bold tracking-[0.28em] uppercase text-brand">${t('voucherCode')}</div>
 
-<div class="mt-6 -ml-9">
-  <div class="w-[110%] bg-brand text-white rounded-r-full px-10 py-4 flex items-center gap-3">
-    <i data-lucide="globe" class="w-5 h-5"></i>
-    <span class="font-semibold">${t('websiteLabel')}</span>
-  </div>
+<div class="voucher-code-box mt-3 text-6xl font-extrabold">
+${escapeHtml(v.code)}
+</div>
+</div>
+
+<div class="mt-5 -ml-6">
+<div class="w-[108%] h-14 bg-brand text-white rounded-r-full flex items-center gap-3 px-7">
+<i data-lucide="globe" class="w-5 h-5"></i>
+<span class="font-semibold text-lg">${t('websiteLabel')}</span>
+</div>
 </div>
 
 </div>
-<div class="mx-8 border-l-2 border-dashed border-brand/20"></div>
-<div class="right flex flex-col items-center justify-center">
 
-  <div class="bg-white border-2 border-brand rounded-2xl p-3">
-    <img id="qr-${escapeHtml(idSuffix)}"
-         data-qr-text="${escapeHtml(v.code)}"
-         class="w-44 h-44"/>
-  </div>
+<div class="self-stretch border-l-2 border-dashed border-brand/20"></div>
 
-  <div class="mt-5 text-center text-ink">
-    <div class="text-xl leading-tight">
-        ${t('scanToConnect')}
-    </div>
-    <div class="font-bold text-brand text-2xl">
-      ${days} ${t('days')}
-    </div>
-  </div>
+<div class="flex flex-col items-center justify-center w-[40%]">
+
+<div class="border-2 border-brand rounded-2xl p-2">
+<img id="qr-${escapeHtml(idSuffix)}" data-qr-text="${escapeHtml(v.code)}" class="w-52 h-52"/>
+</div>
+
+<div class="mt-4 text-center leading-tight">
+<div class="text-2xl text-ink">${t('scanToConnect')}</div>
+<div class="text-brand font-bold text-3xl">${days} ${t('days')}</div>
+</div>
 
 </div>
-  </div>`;
-}
+
+</div>`;}
 
 // After voucher card renders, fill the QR <img>
 async function fillVoucherQRs(scope = document) {
