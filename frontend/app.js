@@ -888,9 +888,28 @@ function viewDashboard() {
 <main class="flex-1 min-w-0 w-full p-5 sm:p-8 lg:p-8 lg:ml-64">
 
 <button
-onclick="toggleSidebar()"
-class="lg:hidden mb-5 p-3 rounded-xl bg-white shadow-soft">
-    <i data-lucide="menu" class="w-6 h-6"></i>
+    onclick="toggleSidebar()"
+    class="
+        lg:hidden
+        fixed
+        bottom-6
+        left-6
+        z-50
+        w-14
+        h-14
+        rounded-2xl
+        bg-brand
+        text-white
+        shadow-glow
+        hover:scale-105
+        active:scale-95
+        transition-all
+        flex
+        items-center
+        justify-center">
+
+    <i data-lucide="menu" class="w-7 h-7"></i>
+
 </button>
    
     <div class="fixed bottom-5 right-5 z-50">
