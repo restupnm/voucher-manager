@@ -706,7 +706,7 @@ function viewLanding() {
         </div>
       </div>
 
-      <footer class="justify-center items-center">${cloudLogoHTML('w-8 h-8')}</footer>
+      <footer class="justify-center items-center mt-10 opacity-80">${cloudLogoHTML('w-8 h-8')}</footer>
     </main>
   </div>`;
 }
