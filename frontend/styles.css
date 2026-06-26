@@ -126,18 +126,19 @@ margin:0 32px;
 }
 
 .voucher-ribbon{
-height:46px;
-width:100%;
 display:flex;
 align-items:center;
 gap:10px;
-padding:0 22px;
+height:44px;
+width:108%;
+margin-left:-24px;
+padding:0 24px;
+background:linear-gradient(90deg,#311B92,#4F2DD6);
 color:#fff;
-background:linear-gradient(90deg,#311B92 0%,#4F2DD6 100%);
-border-top-left-radius:0;
-border-bottom-left-radius:0;
-border-top-right-radius:42px;
-border-bottom-right-radius:42px;
+border-radius:0 26px 26px 0;
+font-size:15px;
+font-weight:600;
+overflow:hidden;
 }
 
 /* Stat card */
