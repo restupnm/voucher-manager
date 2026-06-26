@@ -140,9 +140,9 @@ font-weight:600;
 overflow:hidden;
 
 border-top-left-radius:0;
-border-bottom-left-radius:0;
-border-top-right-radius:0;
-border-bottom-right-radius:42px;
+border-bottom-left-radius:42px;
+border-top-right-radius:64px;
+border-bottom-right-radius:0px;
 }
 
 /* Stat card */
