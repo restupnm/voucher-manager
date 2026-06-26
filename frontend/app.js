@@ -872,7 +872,7 @@ function viewDashboard() {
   const pageItems = filtered.slice(pageStart, pageStart + PER_PAGE);
 
   return `
-  <div class="flex min-h-screen">
+  <div class="flex min-h-screen overflow-hidden">
     ${sidebarHTML()}
 <button
 onclick="toggleSidebar()"
@@ -985,9 +985,7 @@ lg:flex
 flex-col">
     <div class="mb-8">${cloudLogoHTML('w-7 h-7')}</div>
     <nav class="flex flex-col gap-1.5 flex-1">
-      <a data-testid="nav-dashboard" class="nav-item ${state.sidebarView==='dashboard'?'active':''}" onclick="setState({sidebarView:'dashboard',page:1}); if (window.innerWidth < 1024)
-
-    toggleSidebar();">
+      <a data-testid="nav-dashboard" class="nav-item ${state.sidebarView==='dashboard'?'active':''}" onclick="setState({sidebarView:'dashboard',page:1}); if (window.innerWidth < 1024) toggleSidebar();">
         <i data-lucide="layout-grid" class="w-5 h-5"></i> ${t('dashboard')}
       </a>
       <a data-testid="nav-backup" class="nav-item ${state.sidebarView==='backup'?'active':''}" onclick="setState({sidebarView:'backup'})">
