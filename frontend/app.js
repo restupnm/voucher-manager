@@ -819,27 +819,52 @@ function startCountdown() {
 
 function voucherCardHTML(v, status, days, idSuffix = '') {
   return `
-  <div class="voucher-card" id="voucher-card-${escapeHtml(idSuffix)}">
-    <div class="left">
-      <div>
-        ${cloudLogoHTML('w-7 h-7')}
-        
-      <div class="mt-4">
-        <div class="text-xs font-bold tracking-widest uppercase text-brand">${t('voucherCode').toUpperCase()}</div>
-        <div class="voucher-code-box mt-1.5">${escapeHtml(v.code)}</div>
-      </div>
-      <div class="ribbon"><i data-lucide="globe" class="w-4 h-4"></i> ${t('websiteLabel')}</div>
+  <div class="voucher-card flex items-center p-8 gap-8" id="voucher-card-${escapeHtml(idSuffix)}">
+<div class="left flex flex-col justify-between">
+
+  <div>
+    <div class="flex justify-start">
+      <img src="assets/logo.png" class="w-72 h-auto">
     </div>
-    <div class="divider"></div>
-    <div class="right">
-      ${status === 'available'
-        ? `<span class="pill pill-available"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> ${t('statusAvailable')}</span>`
-        : status === 'used'
-        ? `<span class="pill pill-used"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> ${t('statusUsed')}</span>`
-        : `<span class="pill pill-expired"><i data-lucide="x-circle" class="w-3.5 h-3.5"></i> ${t('statusExpired')}</span>`}
-      <div class="bg-white border-2 border-brand/15 rounded-xl p-2"><img id="qr-${escapeHtml(idSuffix)}" alt="qr" data-qr-text="${escapeHtml(v.code)}" class="w-36 h-36"/></div>
-      <div class="text-xs text-ink-soft text-center">${t('scanToConnect')}<br/><span class="font-bold text-brand">${days} ${t('days')}</span></div>
+
+    <div class="border-b border-brand/20 my-4"></div>
+
+    <div class="text-xs font-bold tracking-[0.25em] uppercase text-brand">
+      ${t('voucherCode')}
     </div>
+
+    <div class="voucher-code-box mt-3">
+      ${escapeHtml(v.code)}
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <div class="bg-brand text-white rounded-l-full rounded-r-3xl px-6 py-3 inline-flex items-center gap-3">
+      <i data-lucide="globe" class="w-5 h-5"></i>
+      <span class="font-semibold">${t('websiteLabel')}</span>
+    </div>
+  </div>
+
+</div>
+<div class="mx-8 border-l-2 border-dashed border-brand/20"></div>
+<div class="right flex flex-col items-center justify-center">
+
+  <div class="bg-white border-2 border-brand rounded-2xl p-3">
+    <img id="qr-${escapeHtml(idSuffix)}"
+         data-qr-text="${escapeHtml(v.code)}"
+         class="w-44 h-44"/>
+  </div>
+
+  <div class="mt-5 text-center text-ink">
+    <div class="text-xl leading-tight">
+        ${t('scanToConnect')}
+    </div>
+    <div class="font-bold text-brand text-2xl">
+      ${days} ${t('days')}
+    </div>
+  </div>
+
+</div>
   </div>`;
 }
 
