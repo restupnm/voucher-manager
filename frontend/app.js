@@ -711,7 +711,7 @@ function viewLanding() {
   </div>`;
 }
 
-function cloudLogoHTML(){return`<div class="flex justify-center items-center w-full py-4"><img src="assets/logo.png" alt="cloud.spot" style="width:165px;height:auto"></div>`;}
+function cloudLogoHTML(){return`<div class="flex justify-center items-center w-full py-2"><img src="assets/logo.png" alt="cloud.spot" style="width:160px;height:auto"></div>`;}
 
 function langSwitcherHTML() {
   const langs = ['en', 'id', 'jw'];
