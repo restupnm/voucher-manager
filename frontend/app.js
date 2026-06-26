@@ -743,7 +743,8 @@ function cloudLogoHTML(iconSize = 'w-7 h-7') {
           stroke-linecap="round"
           stroke-linejoin="round"/>
 
-        <!-- cloud.spot -->
+      </svg>
+              <!-- cloud.spot -->
         <text
           x="170"
           y="66"
@@ -753,8 +754,6 @@ function cloudLogoHTML(iconSize = 'w-7 h-7') {
           font-weight="800">
           cloud.spot
         </text>
-
-      </svg>
     </span>
   `;
 }
