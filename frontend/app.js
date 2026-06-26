@@ -818,44 +818,52 @@ function startCountdown() {
 }
 
 function voucherCardHTML(v,status,days,idSuffix=''){return`
-<div class="voucher-card flex items-center bg-white rounded-[2rem] p-6 gap-6" id="voucher-card-${escapeHtml(idSuffix)}">
+<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-5 w-[640px] max-w-full bg-white rounded-[24px] p-5 shadow-sm">
 
-<div class="flex flex-col justify-between w-[60%] h-full">
+<div class="flex flex-col justify-between w-[63%] h-full">
 
 <div>
-<div class="flex justify-start">
-<img src="assets/logo.png" class="h-14 w-auto">
+
+<img src="assets/logo.png" class="h-11 w-auto">
+
+<div class="border-b border-brand/20 mt-2 mb-3"></div>
+
+<div class="text-[11px] font-bold tracking-[0.35em] uppercase text-brand">
+${t('voucherCode')}
 </div>
 
-<div class="border-b border-brand/20 mt-3 mb-4"></div>
-
-<div class="text-[13px] font-bold tracking-[0.28em] uppercase text-brand">${t('voucherCode')}</div>
-
-<div class="voucher-code-box mt-3 text-6xl font-extrabold">
+<div class="voucher-code-box mt-2">
 ${escapeHtml(v.code)}
 </div>
+
+<div class="mt-4 -ml-5">
+<div class="bg-brand text-white h-11 w-[108%] rounded-r-full flex items-center px-5 gap-2">
+<i data-lucide="globe" class="w-4 h-4"></i>
+<span class="text-sm font-semibold">${t('websiteLabel')}</span>
+</div>
 </div>
 
-<div class="mt-5 -ml-6">
-<div class="w-[108%] h-14 bg-brand text-white rounded-r-full flex items-center gap-3 px-7">
-<i data-lucide="globe" class="w-5 h-5"></i>
-<span class="font-semibold text-lg">${t('websiteLabel')}</span>
-</div>
 </div>
 
 </div>
 
 <div class="self-stretch border-l-2 border-dashed border-brand/20"></div>
 
-<div class="flex flex-col items-center justify-center w-[40%]">
+<div class="flex flex-col items-center justify-center w-[37%]">
 
 <div class="border-2 border-brand rounded-2xl p-2">
-<img id="qr-${escapeHtml(idSuffix)}" data-qr-text="${escapeHtml(v.code)}" class="w-52 h-52"/>
+<img id="qr-${escapeHtml(idSuffix)}"
+data-qr-text="${escapeHtml(v.code)}"
+class="w-36 h-36"/>
 </div>
 
-<div class="mt-4 text-center leading-tight">
-<div class="text-2xl text-ink">${t('scanToConnect')}</div>
-<div class="text-brand font-bold text-3xl">${days} ${t('days')}</div>
+<div class="mt-3 text-center leading-tight">
+<div class="text-base">
+${t('scanToConnect')}
+</div>
+<div class="text-xl font-bold text-brand">
+${days} ${t('days')}
+</div>
 </div>
 
 </div>
