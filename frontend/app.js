@@ -960,7 +960,7 @@ function statCardHTML(icon, bgColor, fgColor, title, value, sub, testid) {
 }
 
 function sidebarHTML() {
-  return `<aside class="hidden lg:flex flex-col w-64 bg-white border-r border-brand/5 p-5 sticky top-0 h-screen">
+  return `<aside class="hidden md:flex flex-col w-64 bg-white border-r border-brand/5 p-5 sticky top-0 h-screen">
     <div class="mb-8">${cloudLogoHTML('w-7 h-7')}</div>
     <nav class="flex flex-col gap-1.5 flex-1">
       <a data-testid="nav-dashboard" class="nav-item ${state.sidebarView==='dashboard'?'active':''}" onclick="setState({sidebarView:'dashboard',page:1})">
