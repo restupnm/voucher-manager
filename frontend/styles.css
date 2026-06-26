@@ -125,6 +125,21 @@ border-left:2px dashed rgba(61,31,184,.15);
 margin:0 32px;
 }
 
+.voucher-ribbon{
+height:46px;
+width:100%;
+display:flex;
+align-items:center;
+gap:10px;
+padding:0 22px;
+color:#fff;
+background:linear-gradient(90deg,#311B92 0%,#4F2DD6 100%);
+border-top-left-radius:0;
+border-bottom-left-radius:0;
+border-top-right-radius:42px;
+border-bottom-right-radius:42px;
+}
+
 /* Stat card */
 .stat-card { background:#fff; border-radius: 1.5rem; padding: 1.35rem 1.5rem; box-shadow: 0 4px 20px rgba(61,31,184,0.05); border: 1px solid rgba(61,31,184,0.04); display:flex; align-items:center; gap: 1rem; }
 .stat-icon { width: 52px; height: 52px; border-radius: 1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
