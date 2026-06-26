@@ -874,6 +874,7 @@ function viewDashboard() {
   return `
   <div class="flex min-h-screen overflow-hidden">
     ${sidebarHTML()}
+  <main class="flex-1 min-w-0 w-full p-5 sm:p-8 lg:p-8">
 <button
 onclick="toggleSidebar()"
 class="lg:hidden mb-5 p-3 rounded-xl bg-white shadow-soft">
@@ -887,6 +888,7 @@ class="lg:hidden mb-5 p-3 rounded-xl bg-white shadow-soft">
         <div>
           <h1 class="font-display font-bold text-3xl sm:text-4xl text-brand">${state.sidebarView === 'backup' ? t('backupTitle') : t('voucherManager')}</h1>
           <p class="text-ink-soft mt-1">${state.sidebarView === 'backup' ? t('backupDesc') : t('voucherManagerDesc')}</p>
+        </main>
         </div>
 
   ${state.sidebarView==='dashboard'?`
