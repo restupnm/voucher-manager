@@ -154,3 +154,58 @@ html, body { background: var(--bg); }
     transform-origin: top right;
   }
 }
+/* ==========================================================
+   Tablet Desktop Layout (768px - 1199px)
+   ========================================================== */
+
+@media (min-width:768px) and (max-width:1199px){
+
+  /* Sidebar */
+  aside{
+    width:220px !important;
+  }
+
+  /* Main content */
+  main{
+    padding:20px !important;
+  }
+
+  /* Cards */
+  .card{
+    border-radius:20px;
+  }
+
+  /* Stats */
+  .stat-card{
+    padding:16px;
+  }
+
+  .stat-icon{
+    width:46px;
+    height:46px;
+  }
+
+  /* Table */
+  .tbl th,
+  .tbl td{
+    padding:12px 8px;
+    white-space:nowrap;
+  }
+
+  .tbl{
+    width:100%;
+  }
+
+  /* Filters */
+  .input{
+    padding:.75rem .9rem;
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .btn-secondary{
+    padding:.75rem 1rem;
+  }
+
+}
+
