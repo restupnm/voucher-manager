@@ -745,15 +745,8 @@ function cloudLogoHTML(iconSize = 'w-7 h-7') {
 
       </svg>
               <!-- cloud.spot -->
-        <text
-          x="170"
-          y="66"
-          fill="currentColor"
-          font-size="46"
-          font-family="Outfit, sans-serif"
-          font-weight="800">
           cloud.spot
-        </text>
+      
     </span>
   `;
 }
