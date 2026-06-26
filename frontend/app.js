@@ -712,14 +712,51 @@ function viewLanding() {
 }
 
 function cloudLogoHTML(iconSize = 'w-7 h-7') {
-  return `<span class="cloud-logo">
-    <svg viewBox="0 0 24 24" class="${iconSize}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M17.5 19a4.5 4.5 0 1 0-.7-8.95A6 6 0 0 0 5 12a4 4 0 0 0 0 8h12.5z" fill="currentColor" fill-opacity=".12"/>
-      <path d="M17.5 19a4.5 4.5 0 1 0-.7-8.95A6 6 0 0 0 5 12a4 4 0 0 0 0 8h12.5z"/>
-      <path d="M9 14l3 3 3-5" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    cloud.spot
-  </span>`;
+  return `
+    <span class="flex items-center gap-3">
+      <svg
+        viewBox="0 0 423 111"
+        class="${iconSize} w-auto"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none">
+
+        <!-- Cloud -->
+        <path
+          d="M63 81
+             C41 81 24 64 24 43
+             C24 22 41 5 63 5
+             C76 5 88 11 95 21
+             C100 18 107 16 114 16
+             C133 16 149 32 149 51
+             C149 70 133 86 114 86
+             H63"
+          stroke="currentColor"
+          stroke-width="8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+        <!-- Check -->
+        <path
+          d="M63 47 L74 58 L93 36"
+          stroke="currentColor"
+          stroke-width="8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+        <!-- cloud.spot -->
+        <text
+          x="170"
+          y="66"
+          fill="currentColor"
+          font-size="46"
+          font-family="Outfit, sans-serif"
+          font-weight="800">
+          cloud.spot
+        </text>
+
+      </svg>
+    </span>
+  `;
 }
 
 function langSwitcherHTML() {
