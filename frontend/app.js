@@ -818,17 +818,17 @@ function startCountdown() {
 }
 
 function voucherCardHTML(v,status,days,idSuffix=''){return`
-<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-5 w-[640px] max-w-full bg-white rounded-[24px] p-5 shadow-sm">
+<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full bg-white rounded-[24px] px-6 py-5 shadow-sm">
 
-<div class="flex flex-col justify-between w-[63%] h-full">
+<div class="flex flex-col justify-between w-[64%]">
 
 <div>
 
-<img src="assets/logo.png" class="h-11 w-auto">
+<img src="assets/logo.png" class="h-10 w-auto">
 
 <div class="border-b border-brand/20 mt-2 mb-3"></div>
 
-<div class="text-[11px] font-bold tracking-[0.35em] uppercase text-brand">
+<div class="text-[10px] tracking-[0.35em] font-bold uppercase text-brand">
 ${t('voucherCode')}
 </div>
 
@@ -837,10 +837,10 @@ ${escapeHtml(v.code)}
 </div>
 
 <div class="mt-4">
-  <div class="voucher-ribbon">
-    <i data-lucide="globe" class="w-4 h-4"></i>
-    <span class="font-semibold">${t('websiteLabel')}</span>
-  </div>
+<div class="voucher-ribbon">
+<i data-lucide="globe" class="w-4 h-4"></i>
+<span>${t('websiteLabel')}</span>
+</div>
 </div>
 
 </div>
@@ -849,19 +849,19 @@ ${escapeHtml(v.code)}
 
 <div class="self-stretch border-l-2 border-dashed border-brand/20"></div>
 
-<div class="flex flex-col items-center justify-center w-[37%]">
+<div class="flex flex-col items-center justify-start pt-2 w-[36%]">
 
 <div class="border-2 border-brand rounded-2xl p-2">
 <img id="qr-${escapeHtml(idSuffix)}"
 data-qr-text="${escapeHtml(v.code)}"
-class="w-36 h-36"/>
+class="w-32 h-32"/>
 </div>
 
 <div class="mt-3 text-center leading-tight">
-<div class="text-base">
+<div class="text-[15px]">
 ${t('scanToConnect')}
 </div>
-<div class="text-xl font-bold text-brand">
+<div class="text-[18px] font-bold text-brand">
 ${days} ${t('days')}
 </div>
 </div>
