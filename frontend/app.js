@@ -1552,39 +1552,6 @@ function openSettingsModal() {
   `);
 }
 
-<div class="pt-3 border-t border-brand/10">
-
-<div class="font-semibold text-ink mb-3">
-Router Configuration
-</div>
-
-<div class="space-y-3">
-
-<div>
-<label class="block text-sm font-semibold text-ink mb-2">
-Router Address
-</label>
-
-<input
-id="router-url"
-class="input"
-placeholder="http://192.168.88.1"
-value="${await DB.getSetting('routerUrl') || 'http://192.168.88.1'}">
-</div>
-
-<button
-class="btn-primary w-full"
-onclick="saveRouterSettings()">
-
-<i data-lucide="save" class="w-4 h-4"></i>
-Save Router
-
-</button>
-
-</div>
-
-</div>
-
 async function changePassword() {
   const oldP = document.getElementById('set-old').value;
   const newP = document.getElementById('set-new').value;
