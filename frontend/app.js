@@ -1539,6 +1539,33 @@ function openSettingsModal() {
             ${['en','id','jw'].map(l => `<button data-testid="settings-lang-${l}" onclick="changeLang('${l}');openSettingsModal();" class="btn-secondary ${state.lang===l?'!bg-brand !text-white':''}">${LANG_NAMES[l]}</button>`).join('')}
           </div>
         </div>
+
+<div class="pt-3 border-t border-brand/10">
+
+<div class="font-semibold text-ink mb-3">
+Router Configuration
+</div>
+
+<div class="space-y-3">
+
+<input
+id="router-url"
+class="input"
+placeholder="http://192.168.88.1/login">
+
+<button
+class="btn-primary w-full"
+onclick="saveRouterSettings()">
+
+<i data-lucide="save" class="w-4 h-4"></i>
+Save Router
+
+</button>
+
+</div>
+
+</div>
+        
         <div class="pt-3 border-t border-brand/10">
           <div class="font-semibold text-ink mb-3">${t('changePassword')}</div>
           <div class="space-y-3">
@@ -1561,6 +1588,13 @@ async function changePassword() {
   await DB.setSetting('adminPassword', newP);
   closeModal();
   toast(t('passwordChanged'), 'success');
+}
+
+async function saveRouterSettings(){
+const url=document.getElementById("router-url").value.trim();
+await DB.setSetting("routerUrl",url);
+toast("Router saved","success");
+closeModal();
 }
 
 /* --- Check Preview (admin clicks QR or Purchased in table) --- */
@@ -1637,6 +1671,7 @@ window.downloadJSON = downloadJSON;
 window.downloadExcel = downloadExcel;
 window.restoreJSON = restoreJSON;
 window.changePassword = changePassword;
+window.saveRouterSettings = saveRouterSettings;
 window.closeModal = closeModal;
 window.togglePeriodSort = togglePeriodSort;
 window.downloadVoucherImage = downloadVoucherImage;
