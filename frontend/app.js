@@ -675,7 +675,7 @@ function viewLanding() {
     <main class="relative z-10 w-full max-w-md fade-in">
       <div class="flex justify-center mb-6">
         <div class="w-16 h-16 rounded-2xl bg-brand-light flex items-center justify-center scale-in">
-          <i data-lucide="ticket" class="w-9 h-9 text-brand"></i>
+          <i data-lucide="tickets" class="w-12 h-12 text-brand"></i>
         </div>
       </div>
       <h1 class="font-display font-bold text-4xl sm:text-5xl text-center text-brand tracking-tight">${t('enterVoucher')}</h1>
@@ -684,7 +684,7 @@ function viewLanding() {
       <div class="card p-6 sm:p-7 scale-in" style="animation-delay:.05s">
         <label class="block font-semibold text-ink mb-3" for="voucher-input">${t('voucherCode')}</label>
         <div class="relative">
-          <i data-lucide="ticket" class="w-5 h-5 text-brand absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          <i data-lucide="tickets" class="w-5 h-5 text-brand absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"></i>
           <input id="voucher-input" data-testid="voucher-input"
             class="input input-lg pl-12 pr-4 tracking-wide"
             placeholder="${t('voucherPlaceholder')}" autocomplete="off" autofocus
@@ -945,7 +945,7 @@ function viewDashboard() {
 
       <!-- Stats -->
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7 fade-in">
-        ${statCardHTML('ticket',  '#EFEBFF', '#3D1FB8', t('totalVoucher'), stats.total, t('allVouchers'), 'stat-total')}
+        ${statCardHTML('tickets',  '#EFEBFF', '#3D1FB8', t('totalVoucher'), stats.total, t('allVouchers'), 'stat-total')}
         ${statCardHTML('check-circle', '#DCFCE7', '#15803D', t('available'), stats.available, t('readyToUse'), 'stat-available')}
         ${statCardHTML('check-circle-2', '#FEF3C7', '#B45309', t('used'), stats.used, t('alreadyUsed'), 'stat-used')}
         ${statCardHTML('clock', '#FEE2E2', '#B91C1C', t('expired'), stats.expired, t('expiredDesc'), 'stat-expired')}
