@@ -898,7 +898,7 @@ function viewDashboard() {
   <div class="flex min-h-screen overflow-hidden">
     ${sidebarHTML()}
     
-<main class="flex-1 min-w-0 w-full p-5 sm:p-8 lg:p-8">
+<main class="flex-1 min-w-0 w-full p-5 sm:p-8 lg:p-8 lg:ml-64">
 
 <button
     onclick="toggleSidebar()"
