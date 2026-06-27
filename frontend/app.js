@@ -522,14 +522,35 @@ function normalizePhone(p) {
   if (s.startsWith('0')) s = '62' + s.slice(1);   // Indonesian convention
   return s;
 }
+console.log("QRCode object:", typeof QRCode, QRCode);
+async function makeQR(text,size=256){
 
-async function makeQR(text, size = 256) {
-  if (state.qrCache[text + '@' + size]) return state.qrCache[text + '@' + size];
-  const url = await QRCode.toDataURL(text, {
-    errorCorrectionLevel: 'M', margin: 1, width: size, color: { dark: '#1A1525', light: '#FFFFFF' },
-  });
-  state.qrCache[text + '@' + size] = url;
-  return url;
+  console.log("Generating QR:",text);
+
+  try{
+
+    const url=await QRCode.toDataURL(text,{
+      errorCorrectionLevel:"M",
+      margin:1,
+      width:size,
+      color:{
+        dark:"#1A1525",
+        light:"#FFFFFF"
+      }
+    });
+
+    console.log("QR generated");
+
+    return url;
+
+  }catch(err){
+
+    console.error("QR ERROR:",err);
+
+    throw err;
+
+  }
+
 }
 
 function toast(msg, type = 'info', ms = 2600) {
