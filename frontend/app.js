@@ -818,7 +818,7 @@ function startCountdown() {
 }
 
 function voucherCardHTML(v,status,days,idSuffix=''){return`
-<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full bg-white rounded-[24px] px-6 py-4 shadow-sm">
+<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full bg-white rounded-[24px] px-6 py-4">
 
 <div class="flex flex-col justify-between w-[64%]">
 
@@ -1255,7 +1255,7 @@ function openSellModal(code) {
         <h2 class="font-display font-bold text-2xl text-ink">${t('sellModalTitle')}</h2>
         <button class="btn-ghost" onclick="closeModal()"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="mb-5">${voucherCardHTML(v, 'available', days, 'sell-card')}</div>
+      <div class="mb-6 px-2 py-2">${voucherCardHTML(v, 'available', days, 'sell-card')}</div>
       <div class="space-y-3">
         <div>
           <label class="block text-sm font-semibold text-ink mb-1.5">${t('name')}</label>
