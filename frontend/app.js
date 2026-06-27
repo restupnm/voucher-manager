@@ -1021,7 +1021,9 @@ return `
 <div id="sidebar-backdrop" class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden" onclick="toggleSidebar()"> </div>
 <aside id="sidebar"
 class="
-fixed lg:relative
+fixed 
+lg:sticky
+self-start
 left-0 top-0
 z-40
 w-64
