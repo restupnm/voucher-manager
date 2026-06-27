@@ -1566,8 +1566,7 @@ Router Configuration
 <input
 id="router-url"
 class="input"
-placeholder="http://192.168.0.1/login"
-value="${await DB.getSetting('routerUrl') || 'http://192.168.0.1/login'}">
+placeholder="http://192.168.0.1/login">
 
 <button
 class="btn-primary w-full"
