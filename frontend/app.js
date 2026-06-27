@@ -522,7 +522,7 @@ function normalizePhone(p) {
   if (s.startsWith('0')) s = '62' + s.slice(1);   // Indonesian convention
   return s;
 }
-console.log("QRCode object:", typeof QRCode, QRCode);
+
 async function makeQR(text,size=256){
 
   console.log("Generating QR:",text);
