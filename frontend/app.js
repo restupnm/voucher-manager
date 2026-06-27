@@ -1022,7 +1022,7 @@ return `
 <aside id="sidebar"
 class="
 fixed 
-lg:sticky
+lg:fixed
 self-start
 left-0 top-0
 z-40
