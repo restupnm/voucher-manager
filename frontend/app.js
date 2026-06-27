@@ -524,31 +524,24 @@ function normalizePhone(p) {
 }
 
 async function makeQR(text, size = 256) {
+  const cacheKey = `${text}@${size}`;
 
-  try {
-
-    const url = await QRCode.toDataURL(text, {
-      errorCorrectionLevel: "M",
-      margin: 1,
-      width: size,
-      color: {
-        dark: "#1A1525",
-        light: "#FFFFFF"
-      }
-    });
-
-    alert("QR generated!");
-
-    return url;
-
-  } catch (e) {
-
-    alert(e.message);
-
-    throw e;
-
+  if (state.qrCache[cacheKey]) {
+    return state.qrCache[cacheKey];
   }
 
+  const url = await QRCode.toDataURL(text, {
+    errorCorrectionLevel: 'M',
+    margin: 1,
+    width: size,
+    color: {
+      dark: '#1A1525',
+      light: '#FFFFFF'
+    }
+  });
+
+  state.qrCache[cacheKey] = url;
+  return url;
 }
 
 function toast(msg, type = 'info', ms = 2600) {
@@ -953,9 +946,6 @@ async function fillVoucherQRs(scope = document) {
       `${routerUrl}?username=${encodeURIComponent(code)}&password=${encodeURIComponent(code)}`;
 
     const url = await makeQR(qrText, 256);
-
-    console.log(qrText);
-    console.log(url);
 
     img.src = url;
     img.setAttribute("data-qr-done", "1");
