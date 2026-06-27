@@ -908,12 +908,29 @@ ${days} ${t('days')}
 
 // After voucher card renders, fill the QR <img>
 async function fillVoucherQRs(scope = document) {
-  const imgs = scope.querySelectorAll('img[data-qr-text]:not([data-qr-done])');
+  const imgs = scope.querySelectorAll(
+    'img[data-qr-text]:not([data-qr-done])'
+  );
+
+  // Router URL from Settings
+  let routerUrl = await DB.getSetting("routerUrl");
+
+  // Fallback if nothing has been saved yet
+  if (!routerUrl) {
+    routerUrl = "http://192.168.0.1/login";
+  }
+
   for (const img of imgs) {
-    const text = img.getAttribute('data-qr-text');
-    const url = await makeQR(text, 256);
+    const code = img.getAttribute("data-qr-text");
+
+    // username=password voucher
+    const qrText =
+      `${routerUrl}?username=${encodeURIComponent(code)}&password=${encodeURIComponent(code)}`;
+
+    const url = await makeQR(qrText, 256);
+
     img.src = url;
-    img.setAttribute('data-qr-done', '1');
+    img.setAttribute("data-qr-done", "1");
   }
 }
 
@@ -1532,13 +1549,6 @@ function openSettingsModal() {
         <h2 class="font-display font-bold text-2xl text-ink">${t('settings')}</h2>
         <button class="btn-ghost" onclick="closeModal()"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-semibold text-ink mb-2">${t('language')}</label>
-          <div class="grid grid-cols-3 gap-2">
-            ${['en','id','jw'].map(l => `<button data-testid="settings-lang-${l}" onclick="changeLang('${l}');openSettingsModal();" class="btn-secondary ${state.lang===l?'!bg-brand !text-white':''}">${LANG_NAMES[l]}</button>`).join('')}
-          </div>
-        </div>
 
 <div class="pt-3 border-t border-brand/10">
 
@@ -1551,7 +1561,8 @@ Router Configuration
 <input
 id="router-url"
 class="input"
-placeholder="http://192.168.88.1/login">
+placeholder="http://192.168.0.1/login"
+value="${await DB.getSetting('routerUrl') || 'http://192.168.0.1/login'}">
 
 <button
 class="btn-primary w-full"
@@ -1591,10 +1602,13 @@ async function changePassword() {
 }
 
 async function saveRouterSettings(){
-const url=document.getElementById("router-url").value.trim();
-await DB.setSetting("routerUrl",url);
-toast("Router saved","success");
-closeModal();
+  const url=document.getElementById("router-url").value.trim();
+  if(!url){
+    toast("Please enter a router URL","warn");
+    return;
+  }
+  await DB.setSetting("routerUrl",url);
+  toast("Router URL saved","success");
 }
 
 /* --- Check Preview (admin clicks QR or Purchased in table) --- */
