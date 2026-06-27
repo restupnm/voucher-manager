@@ -666,46 +666,82 @@ function render() {
 /* ================================================================== *
  *  View: Landing
  * ================================================================== */
-function viewLanding() {
-  return `
-  <div class="relative min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
-    <div class="bg-blobs"></div>
-    <div class="absolute top-3 right-3 z-20">${langSwitcherHTML()}</div>
+function viewLanding(){return`
+<div class="relative min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
 
-    <main class="relative z-10 w-full max-w-md fade-in">
-      <div class="flex justify-center mb-6">
-        <div class="w-16 h-16 rounded-2xl bg-brand-light flex items-center justify-center scale-in">
-          <i data-lucide="wifi-pen" class="w-12 h-12 text-brand"></i>
-        </div>
-      </div>
-      <h1 class="font-display font-bold text-4xl sm:text-5xl text-center text-brand tracking-tight">${t('enterVoucher')}</h1>
-      <p class="text-center text-ink-soft mt-3 mb-8 px-4 leading-relaxed">${t('enterVoucherDesc')}</p>
+<div class="bg-blobs"></div>
 
-      <div class="card p-6 sm:p-7 scale-in" style="animation-delay:.05s">
-        <label class="block font-semibold text-ink mb-3" for="voucher-input">${t('voucherCode')}</label>
-        <div class="relative">
-          <i data-lucide="tickets" class="w-5 h-5 text-brand absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-          <input id="voucher-input" data-testid="voucher-input"
-            class="input input-lg pl-12 pr-4 tracking-wide"
-            placeholder="${t('voucherPlaceholder')}" autocomplete="off" autofocus
-            onkeydown="if(event.key==='Enter'){event.preventDefault();document.querySelector('[data-testid=cek-voucher-btn]').click();}" />
-        </div>
-        <button data-testid="cek-voucher-btn"
-          class="btn-primary w-full mt-5 text-lg py-4"
-          onclick="handleEntry(document.getElementById('voucher-input').value)">
-          <i data-lucide="search" class="w-5 h-5"></i>
-          <span>${t('checkVoucher')}</span>
-        </button>
-        <div class="flex items-center gap-2 mt-5 text-sm text-ink-soft">
-          <i data-lucide="info" class="w-4 h-4 text-brand flex-shrink-0"></i>
-          <span>${t('onlyValidNote')}</span>
-        </div>
-      </div>
+<div class="absolute top-3 right-3 z-20">
+${langSwitcherHTML()}
+</div>
 
-      <footer class="justify-center items-center mt-10 opacity-80">${cloudLogoHTML('w-8 h-8')}</footer>
-    </main>
-  </div>`;
-}
+<main class="relative z-10 w-full max-w-md fade-in">
+
+<div class="flex items-center justify-center gap-4 mb-4 scale-in">
+
+<div class="w-14 h-14 rounded-2xl bg-brand-light shadow-sm flex items-center justify-center flex-shrink-0">
+<i data-lucide="settings-2" class="w-8 h-8 text-brand"></i>
+</div>
+
+<h1 class="font-display font-bold text-4xl sm:text-5xl tracking-tight text-brand">
+${t('enterVoucher')}
+</h1>
+
+</div>
+
+<p class="text-center text-ink-soft mb-8 px-5 leading-relaxed">
+${t('enterVoucherDesc')}
+</p>
+
+<div class="card p-6 sm:p-7 scale-in" style="animation-delay:.05s">
+
+<label class="block font-semibold text-ink mb-3" for="voucher-input">
+${t('voucherCode')}
+</label>
+
+<div class="relative">
+
+<i data-lucide="settings-2" class="w-5 h-5 text-brand absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+
+<input
+id="voucher-input"
+data-testid="voucher-input"
+class="input input-lg pl-12 pr-4 tracking-wide"
+placeholder="${t('voucherPlaceholder')}"
+autocomplete="off"
+autofocus
+onkeydown="if(event.key==='Enter'){event.preventDefault();document.querySelector('[data-testid=cek-voucher-btn]').click();}"
+>
+
+</div>
+
+<button
+data-testid="cek-voucher-btn"
+class="btn-primary w-full mt-5 text-lg py-4"
+onclick="handleEntry(document.getElementById('voucher-input').value)">
+
+<i data-lucide="search" class="w-5 h-5"></i>
+<span>${t('checkVoucher')}</span>
+
+</button>
+
+<div class="flex items-center gap-2 mt-5 text-sm text-ink-soft">
+
+<i data-lucide="info" class="w-4 h-4 text-brand flex-shrink-0"></i>
+
+<span>${t('onlyValidNote')}</span>
+
+</div>
+
+</div>
+
+<footer class="flex justify-center mt-10 opacity-80">
+${cloudLogoHTML()}
+</footer>
+
+</main>
+
+</div>`;}
 
 function cloudLogoHTML(){return`<div class="flex justify-center items-center w-full py-2"><img src="assets/logo.png" alt="cloud.spot" style="width:160px;height:auto"></div>`;}
 
