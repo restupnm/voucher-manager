@@ -917,6 +917,7 @@ async function fillVoucherQRs(scope = document) {
     'img[data-qr-text]:not([data-qr-done])'
   );
 
+  console.log("QR images found:", imgs.length);
   // Router URL from Settings
   let routerUrl = await DB.getSetting("routerUrl");
 
@@ -933,6 +934,9 @@ async function fillVoucherQRs(scope = document) {
       `${routerUrl}?username=${encodeURIComponent(code)}&password=${encodeURIComponent(code)}`;
 
     const url = await makeQR(qrText, 256);
+
+    console.log(qrText);
+    console.log(url);
 
     img.src = url;
     img.setAttribute("data-qr-done", "1");
