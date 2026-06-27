@@ -659,8 +659,13 @@ function render() {
   if (window.lucide) lucide.createIcons();
 
   // Post render tasks
-  if (state.view === 'check-result') startCountdown();
-  if (state.view === 'dashboard') renderQRThumbnails();
+if(state.view==="check-result"){
+    fillVoucherQRs();
+    startCountdown();
+}
+
+if(state.view==="dashboard"){
+    renderQRThumbnails();
 }
 
 /* ================================================================== *
