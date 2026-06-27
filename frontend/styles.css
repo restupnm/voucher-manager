@@ -86,13 +86,16 @@ html, body { background: var(--bg); }
 
 /* Voucher Card preview */
 .voucher-card{
-background:#fff;
-border:2px solid #e3ddff;
-border-radius:24px;
-box-shadow:
-0 10px 25px rgba(67,37,180,.10),
-0 24px 60px rgba(67,37,180,.18),
-0 40px 90px rgba(67,37,180,.12);
+    position:relative;
+    background:#fff;
+    border:2px solid #e3ddff;
+    border-radius:24px;
+    overflow:visible;
+
+    box-shadow:
+        0 6px 18px rgba(61,31,184,.10),
+        0 20px 55px rgba(61,31,184,.18),
+        0 36px 90px rgba(61,31,184,.14);
 }
 
 .left{flex:1;}
