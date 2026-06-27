@@ -818,7 +818,7 @@ function startCountdown() {
 }
 
 function voucherCardHTML(v,status,days,idSuffix=''){return`
-<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full bg-white rounded-[24px] px-6 py-5 shadow-sm">
+<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full bg-white rounded-[24px] px-6 py-4 shadow-sm">
 
 <div class="flex flex-col justify-between w-[64%]">
 
@@ -836,7 +836,7 @@ ${t('voucherCode')}
 ${escapeHtml(v.code)}
 </div>
 
-<div class="mt-4 -ml-6 relative top-[10px] -mb-[10px]">
+<div class="mt-4 relative top-[10px] -mb-[10px]">
 <div class="voucher-ribbon">
 <i data-lucide="globe" class="w-4 h-4"></i>
 <span>${t('websiteLabel')}</span>
@@ -857,11 +857,11 @@ data-qr-text="${escapeHtml(v.code)}"
 class="w-32 h-32"/>
 </div>
 
-<div class="mt-3 text-center leading-tight">
-<div class="text-[8px]">
+<div class="mt-2 text-center leading-tight">
+<div class="text-[10px]">
 ${t('scanToConnect')}
 </div>
-<div class="text-[10px] font-bold text-brand">
+<div class="text-[14px] font-bold text-brand">
 ${days} ${t('days')}
 </div>
 </div>
