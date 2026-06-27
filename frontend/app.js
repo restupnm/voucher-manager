@@ -625,20 +625,16 @@ function logout() {
 }
 
 function toggleSidebar() {
+
+    if (window.innerWidth >= 1024) return;
+
     const sidebar = document.getElementById("sidebar");
     const backdrop = document.getElementById("sidebar-backdrop");
 
     if (!sidebar) return;
 
-    const isOpen = !sidebar.classList.contains("-translate-x-full");
-
-    if (isOpen) {
-        sidebar.classList.add("-translate-x-full");
-        backdrop.classList.add("hidden");
-    } else {
-        sidebar.classList.remove("-translate-x-full");
-        backdrop.classList.remove("hidden");
-    }
+    sidebar.classList.toggle("-translate-x-full");
+    backdrop.classList.toggle("hidden");
 }
 
 /* ================================================================== *
@@ -902,7 +898,7 @@ function viewDashboard() {
   <div class="flex min-h-screen overflow-hidden">
     ${sidebarHTML()}
     
-<main class="flex-1 min-w-0 w-full p-5 sm:p-8 lg:p-8 lg:ml-64">
+<main class="flex-1 min-w-0 w-full p-5 sm:p-8 lg:p-8">
 
 <button
     onclick="toggleSidebar()"
@@ -1025,13 +1021,20 @@ return `
 <div id="sidebar-backdrop" class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden" onclick="toggleSidebar()"> </div>
 <aside id="sidebar"
 class="
-fixed left-0 top-0 z-40
-w-64 h-screen
-bg-white border-r border-brand/5 p-5
-transition-transform duration-300
+fixed lg:relative
+left-0 top-0
+z-40
+w-64
+h-screen
+flex-shrink-0
+bg-white
+border-r border-brand/5
+p-5
+
 -translate-x-full
 lg:translate-x-0
-lg:sticky
+
+transition-transform duration-300
 lg:flex
 flex-col">
     <div class="mb-8">${cloudLogoHTML('w-7 h-7')}</div>
