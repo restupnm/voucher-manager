@@ -523,34 +523,21 @@ function normalizePhone(p) {
   return s;
 }
 
-async function makeQR(text,size=256){
+async function makeQR(text, size = 256) {
 
-  console.log("Generating QR:",text);
+  alert("makeQR called");
 
-  try{
+  const url = await QRCode.toDataURL(text, {
+    errorCorrectionLevel: "M",
+    margin: 1,
+    width: size,
+    color: {
+      dark: "#1A1525",
+      light: "#FFFFFF"
+    }
+  });
 
-    const url=await QRCode.toDataURL(text,{
-      errorCorrectionLevel:"M",
-      margin:1,
-      width:size,
-      color:{
-        dark:"#1A1525",
-        light:"#FFFFFF"
-      }
-    });
-
-    console.log("QR generated");
-
-    return url;
-
-  }catch(err){
-
-    console.error("QR ERROR:",err);
-
-    throw err;
-
-  }
-
+  return url;
 }
 
 function toast(msg, type = 'info', ms = 2600) {
