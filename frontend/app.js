@@ -525,19 +525,30 @@ function normalizePhone(p) {
 
 async function makeQR(text, size = 256) {
 
-  alert("makeQR called");
+  try {
 
-  const url = await QRCode.toDataURL(text, {
-    errorCorrectionLevel: "M",
-    margin: 1,
-    width: size,
-    color: {
-      dark: "#1A1525",
-      light: "#FFFFFF"
-    }
-  });
+    const url = await QRCode.toDataURL(text, {
+      errorCorrectionLevel: "M",
+      margin: 1,
+      width: size,
+      color: {
+        dark: "#1A1525",
+        light: "#FFFFFF"
+      }
+    });
 
-  return url;
+    alert("QR generated!");
+
+    return url;
+
+  } catch (e) {
+
+    alert(e.message);
+
+    throw e;
+
+  }
+
 }
 
 function toast(msg, type = 'info', ms = 2600) {
