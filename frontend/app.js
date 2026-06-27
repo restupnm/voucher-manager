@@ -675,7 +675,7 @@ function viewLanding() {
     <main class="relative z-10 w-full max-w-md fade-in">
       <div class="flex justify-center mb-6">
         <div class="w-16 h-16 rounded-2xl bg-brand-light flex items-center justify-center scale-in">
-          <i data-lucide="tickets" class="w-12 h-12 text-brand"></i>
+          <i data-lucide="wifi-pen" class="w-12 h-12 text-brand"></i>
         </div>
       </div>
       <h1 class="font-display font-bold text-4xl sm:text-5xl text-center text-brand tracking-tight">${t('enterVoucher')}</h1>
