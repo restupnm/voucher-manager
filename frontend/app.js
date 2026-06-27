@@ -683,8 +683,12 @@ ${langSwitcherHTML()}
 <i data-lucide="settings-2" class="w-8 h-8 text-brand"></i>
 </div>
 
-<h1 class="font-display font-bold text-4xl sm:text-5xl tracking-tight text-brand">
-${t('enterVoucher')}
+<h1 class="font-display font-bold tracking-tight text-brand whitespace-nowrap ${
+    state.lang === 'en'
+        ? 'text-4xl sm:text-5xl'
+        : 'text-3xl sm:text-4xl'
+}">
+    ${t('enterVoucher')}
 </h1>
 
 </div>
