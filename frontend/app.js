@@ -824,11 +824,11 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
 
 <div>
 
-<img src="assets/logo.png" class="h-10 w-auto">
+<img src="assets/logo.png" class="h-8 w-auto">
 
 <div class="border-b border-brand/20 mt-2 mb-3"></div>
 
-<div class="text-[10px] tracking-[0.35em] font-bold uppercase text-brand">
+<div class="text-[8px] tracking-[0.35em] font-bold uppercase text-brand">
 ${t('voucherCode')}
 </div>
 
@@ -836,7 +836,7 @@ ${t('voucherCode')}
 ${escapeHtml(v.code)}
 </div>
 
-<div class="mt-4">
+<div class="mt-4 -ml-6 relative top-[10px] -mb-[10px]">
 <div class="voucher-ribbon">
 <i data-lucide="globe" class="w-4 h-4"></i>
 <span>${t('websiteLabel')}</span>
@@ -858,10 +858,10 @@ class="w-32 h-32"/>
 </div>
 
 <div class="mt-3 text-center leading-tight">
-<div class="text-[15px]">
+<div class="text-[8px]">
 ${t('scanToConnect')}
 </div>
-<div class="text-[18px] font-bold text-brand">
+<div class="text-[10px] font-bold text-brand">
 ${days} ${t('days')}
 </div>
 </div>
