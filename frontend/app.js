@@ -22,7 +22,7 @@ const I18N = {
     cekVoucherTitle: 'Voucher Details',
     cekVoucherDesc: 'View voucher information and validity',
     backToHome: 'Back',
-    scanToConnect: 'Scan to connect',
+    scanToConnect: 'Scan to connect, valid for',
     userLabel: 'User',
     purchasedAtLabel: 'Purchased At',
     remainingTime: 'Remaining Time',
@@ -152,7 +152,7 @@ const I18N = {
     cekVoucherTitle: 'Cek Voucher',
     cekVoucherDesc: 'Lihat informasi dan masa berlaku voucher',
     backToHome: 'Kembali',
-    scanToConnect: 'Scan untuk terhubung',
+    scanToConnect: 'Scan untuk terhubung, berlaku untuk',
     userLabel: 'User',
     purchasedAtLabel: 'Purchased At',
     remainingTime: 'Sisa Waktu',
@@ -272,7 +272,7 @@ const I18N = {
     cekVoucherTitle: 'Cek Voucher',
     cekVoucherDesc: 'Ndelok info lan suwene voucher',
     backToHome: 'Mbalik',
-    scanToConnect: 'Scan nggo nyambung',
+    scanToConnect: 'Scan gawe nyambung, iso kanggo',
     userLabel: 'Pangguno',
     purchasedAtLabel: 'Tuku Tanggal',
     remainingTime: 'Sisa Wektu',
@@ -925,7 +925,7 @@ class="w-32 h-32"/>
         ${t('scanToConnect')}
     </div>
 
-    <div class="mt-2 text-[12px] font-bold text-brand whitespace-nowrap">
+    <div class="mt-1 text-[12px] font-bold text-brand whitespace-nowrap">
         ${days} ${t('days')}
     </div>
 </div>
