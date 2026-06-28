@@ -88,7 +88,7 @@ html, body { background: var(--bg); }
 .voucher-card{
     position: relative;
     background: #fff;
-    border: 2px solid #1A1525;
+    border: 2px solid #311B92;
     border-radius: 24px;
     overflow: hidden;
 
@@ -132,14 +132,14 @@ margin:0 32px;
     position:absolute;
     left:-26px;
     bottom:-8px;
-    margin-top:10px;
+    margin-top:20px;
 
     display:flex;
     align-items:center;
     gap:10px;
 
     width:114%;
-    height:48px;
+    height:32px;
 
     padding:0 32px;
 
