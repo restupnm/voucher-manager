@@ -112,7 +112,7 @@ justify-content:center;
 display:flex;
 justify-content:center;
 align-items:center;
-height:80px;
+height:70px;
 border:2px solid rgba(87,68,200,.18);
 border-radius:20px;
 background:#faf9ff;
@@ -132,14 +132,14 @@ margin:0 32px;
     position:absolute;
     left:-26px;
     bottom:-8px;
-    margin-top:20px;
+    margin-top:26px;
 
     display:flex;
     align-items:center;
     gap:10px;
 
     width:114%;
-    height:32px;
+    height:48px;
 
     padding:0 32px;
 
