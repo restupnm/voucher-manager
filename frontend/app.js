@@ -880,11 +880,9 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
 <div class="voucher-export-logo">
     <i data-lucide="radio-tower" class="voucher-export-radio"></i>
 
-    <span class="voucher-export-brand">
-        c
-        <i data-lucide="cloud" class="voucher-export-cloud"></i>
-        loud<span class="voucher-export-dot">.</span>spot
-    </span>
+    <div class="voucher-export-brand">
+        c<i data-lucide="cloud" class="voucher-export-cloud"></i>loud<span class="voucher-export-dot">.</span>spot
+    </div>
 </div>
 
 <div class="border-b border-brand/20 mt-2 mb-3"></div>
