@@ -141,7 +141,7 @@ margin:0 32px;
 .voucher-ribbon{
     position:absolute;
     left:-26px;
-    bottom:-22px;
+    bottom:0px;
 
     display:flex;
     align-items:center;
@@ -173,7 +173,7 @@ margin:0 32px;
     display:flex;
     align-items:center;
     gap:10px;
-    margin-top:-50px;
+    margin-top:-44px;
     margin-bottom:10px;
 }
 
