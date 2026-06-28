@@ -877,16 +877,16 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
 
 <div>
 
-<div class="voucher-export-logo">
-    <i data-lucide="radio-tower" class="voucher-export-radio"></i>
+<div class="voucher-export-header">
 
-    <div class="voucher-export-word">
-        <span>c</span>
-        <i data-lucide="cloud" class="voucher-export-cloud"></i>
-        <span>loud</span>
-        <span class="voucher-export-dot">.</span>
-        <span>spot</span>
+    <div class="voucher-export-icon">
+        <i data-lucide="radio-tower"></i>
     </div>
+
+    <div class="voucher-export-text">
+        cloud<span class="voucher-export-dot">.</span>spot
+    </div>
+
 </div>
 
 <div class="border-b border-brand/20 mt-2 mb-3"></div>
