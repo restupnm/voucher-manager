@@ -90,7 +90,7 @@ html, body { background: var(--bg); }
     background: #fff;
     border: 2px solid #fff;
     border-radius: 24px;
-    overflow: visible;
+    overflow: hidden;
 
     box-shadow:
         0 8px 20px rgba(0,0,0,.08),
@@ -129,29 +129,33 @@ margin:0 32px;
 }
 
 .voucher-ribbon{
-display:flex;
-align-items:center;
-gap:10px;
+    position:absolute;
+    left:-26px;
+    bottom:-8px;
 
-width:114%;
-height:54px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 
-margin-left:-28px;
-margin-top:-10px;
-margin-bottom:2px;
+    width:114%;
+    height:62px;
 
-padding:0 32px;
+    padding:0 32px;
 
-background:linear-gradient(90deg,#311B92 0%,#4F2DD6 100%);
-color:#fff;
-font-size:15px;
-font-weight:600;
-overflow:hidden;
+    background:linear-gradient(90deg,#311B92 0%,#4F2DD6 100%);
+    color:#fff;
 
-border-top-left-radius:0;
-border-bottom-left-radius:34px;   /* was 42 */
-border-top-right-radius:64px;     /* was 64 */
-border-bottom-right-radius:0;
+    font-size:15px;
+    font-weight:600;
+
+    overflow:hidden;
+
+    border-top-left-radius:0;
+    border-bottom-left-radius:34px;
+    border-top-right-radius:64px;
+    border-bottom-right-radius:0;
+
+    box-sizing:border-box;
 }
 
 /*Voucher logo*/
