@@ -877,7 +877,10 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
 
 <div>
 
-src="${window.CLOUD_LOGO}"
+<img
+  src="${window.CLOUD_LOGO}"
+  alt="cloud.spot"
+  style="width:160px;height:auto">
 
 <div class="border-b border-brand/20 mt-2 mb-3"></div>
 
@@ -1388,7 +1391,7 @@ await Promise.all(
 await new Promise(r => setTimeout(r, 50));
   const dataURL = await htmlToImage.toPng(cardEl, {
     pixelRatio: 4,
-    backgroundColor: "#ffffff",
+    backgroundColor: null,
     cacheBust: true
   });
   downloadDataURL(dataURL, `voucher-${v.code}.png`);
@@ -1693,7 +1696,7 @@ await Promise.all(
 await new Promise(r => setTimeout(r, 50));
   const dataURL = await htmlToImage.toPng(cardEl, {
     pixelRatio: 4,
-    backgroundColor: "#ffffff",
+    backgroundColor: null,
     cacheBust: true
   });
   downloadDataURL(
