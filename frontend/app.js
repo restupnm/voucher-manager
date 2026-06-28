@@ -400,7 +400,7 @@ const PERIODS = {
 };
 const PERIOD_ORDER = ['1H', '1M', '1B'];
 
-const DEFAULT_ADMIN_PASSWORD = 'admin123';
+const DEFAULT_ADMIN_PASSWORD = 'zzzz';
 const PER_PAGE = 10;
 const DB_NAME = 'cloudspot';
 const DB_VERSION = 1;
@@ -899,7 +899,7 @@ ${t('voucherCode')}
 ${escapeHtml(v.code)}
 </div>
 
-<div class="mt-4 relative top-[10px] -mb-[10px]">
+<div class="mt-4 relative">
 <div class="voucher-ribbon">
 <i data-lucide="globe" class="w-4 h-4"></i>
 <span>${t('websiteLabel')}</span>
