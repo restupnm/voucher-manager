@@ -920,12 +920,12 @@ data-qr-text="${escapeHtml(v.code)}"
 class="w-32 h-32"/>
 </div>
 
-<div class="mt-3 flex flex-col items-center">
+<div class="mt-2 flex flex-col items-center">
     <div class="text-[8px] leading-none whitespace-nowrap">
         ${t('scanToConnect')}
     </div>
 
-    <div class="mt-1 text-[12px] font-bold text-brand whitespace-nowrap">
+    <div class="text-[12px] font-bold text-brand whitespace-nowrap">
         ${days} ${t('days')}
     </div>
 </div>
