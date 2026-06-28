@@ -925,7 +925,7 @@ class="w-32 h-32"/>
         ${t('scanToConnect')}
     </div>
 
-    <div class="mt-2 text-[12px] font-bold text-brand leading-none">
+    <div class="mt-2 text-[12px] font-bold text-brand whitespace-nowrap">
         ${days} ${t('days')}
     </div>
 </div>
