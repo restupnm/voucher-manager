@@ -920,8 +920,8 @@ data-qr-text="${escapeHtml(v.code)}"
 class="w-32 h-32"/>
 </div>
 
-<div class="mt-2 text-center leading-tight">
-<div class="text-[10px]">
+<div class="mt-2 mb-1 text-center leading-tight">
+<div class="text-[8px]">
 ${t('scanToConnect')}
 </div>
 <div class="mt-1 text-[12px] font-bold text-brand">
