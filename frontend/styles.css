@@ -149,9 +149,48 @@ font-weight:600;
 overflow:hidden;
 
 border-top-left-radius:0;
-border-bottom-left-radius:30px;   /* was 42 */
+border-bottom-left-radius:32px;   /* was 42 */
 border-top-right-radius:64px;     /* was 64 */
 border-bottom-right-radius:0;
+}
+
+/*Voucher logo*/
+.voucher-export-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.voucher-export-radio{
+    width:22px;
+    height:22px;
+    color:#5A3BE8;
+    stroke-width:2.2;
+    flex-shrink:0;
+}
+
+.voucher-export-brand{
+    display:flex;
+    align-items:center;
+    font-family:'Outfit',sans-serif;
+    font-size:46px;
+    font-weight:800;
+    letter-spacing:-1.4px;
+    color:#241845;
+    line-height:1;
+}
+
+.voucher-export-cloud{
+    width:34px;
+    height:34px;
+    margin:0 1px;
+    color:#241845;
+    stroke-width:2;
+}
+
+.voucher-export-dot{
+    color:#7C4DFF;
 }
 
 /* Stat card */
