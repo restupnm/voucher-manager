@@ -112,13 +112,13 @@ justify-content:center;
 display:flex;
 justify-content:center;
 align-items:center;
-height:96px;
+height:80px;
 border:2px solid rgba(87,68,200,.18);
 border-radius:20px;
 background:#faf9ff;
-font-size:3.5rem;
-font-weight:800;
-letter-spacing:-.03em;
+font-size:2.5rem;
+font-weight:600;
+letter-spacing:-.02em;
 }
 
 .divider{
