@@ -1373,10 +1373,13 @@ async function sendVoucher(code) {
   const cardEl = document.getElementById('voucher-card-sell-card');
   await fillVoucherQRs(document.getElementById('modal-root'));
   await new Promise(r => setTimeout(r, 80)); // let img paint
-  const canvas = await html2canvas(cardEl, { backgroundColor: '#ffffff', scale: 2, useCORS: true });
-  const dataURL = canvas.toDataURL('image/png');
+  const dataURL = await htmlToImage.toPng(cardEl, {
+    pixelRatio: 4,
+    backgroundColor: "#ffffff",
+    cacheBust: true
+  });
   downloadDataURL(dataURL, `voucher-${v.code}.png`);
-
+  
   // 2. Save sale to DB
   v.purchasedAt = new Date().toISOString();
   v.userName = name;
@@ -1662,8 +1665,15 @@ async function downloadVoucherImage(code, idSuffix) {
   if (!cardEl) return;
   await fillVoucherQRs(cardEl.parentElement);
   await new Promise(r => setTimeout(r, 80));
-  const canvas = await html2canvas(cardEl, { backgroundColor: '#ffffff', scale: 2, useCORS: true });
-  downloadDataURL(canvas.toDataURL('image/png'), `voucher-${code}.png`);
+  const dataURL = await htmlToImage.toPng(cardEl, {
+    pixelRatio: 4,
+    backgroundColor: "#ffffff",
+    cacheBust: true
+  });
+  downloadDataURL(
+    dataURL,
+    `voucher-${code}.png`
+  );
   toast(t('saved'), 'success');
 }
 
