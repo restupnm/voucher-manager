@@ -899,7 +899,7 @@ ${t('voucherCode')}
 ${escapeHtml(v.code)}
 </div>
 
-<div>
+<div class="mt-4 relative top-[10px] -mb-[10px]">
 <div class="voucher-ribbon">
 <i data-lucide="globe" class="w-4 h-4"></i>
 <span>${t('websiteLabel')}</span>
