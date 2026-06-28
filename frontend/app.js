@@ -877,7 +877,7 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
 
 <div>
 
-<img src="${window.CLOUD_LOGO}" class="h-8 w-auto">
+src="${window.CLOUD_LOGO}"
 
 <div class="border-b border-brand/20 mt-2 mb-3"></div>
 
