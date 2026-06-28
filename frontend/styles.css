@@ -155,40 +155,45 @@ border-bottom-right-radius:0;
 }
 
 /*Voucher logo*/
-.voucher-export-logo{
+.voucher-export-header{
     display:flex;
     align-items:center;
     gap:10px;
-    margin-bottom:8px;
+    margin-bottom:10px;
 }
 
-.voucher-export-radio{
-    width:20px;
-    height:20px;
+.voucher-export-icon{
+    width:22px;
+    height:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex:0 0 22px;
+}
+
+.voucher-export-icon svg{
+    width:22px;
+    height:22px;
+
     color:#1A1525;
     stroke-width:2.4;
-    flex:0 0 auto;
 }
 
-.voucher-export-word{
-    display:flex;
-    align-items:flex-end;
-    gap:0;
+.voucher-export-text{
+    display:block;
+
     font-family:'Outfit',sans-serif;
-    font-size:36px;
-    font-weight:800;
-    line-height:1;
-    letter-spacing:-1px;
-    color:#2C187A;
-}
+    font-size:31px;
+    font-weight:600;
 
-.voucher-export-cloud{
-    width:28px;
-    height:28px;
-    margin:0 -2px 2px;
-    color:#2C187A;
-    stroke-width:2.2;
-    flex:0 0 auto;
+    line-height:1;
+    letter-spacing:-0.5px;
+
+    color:#2B1778;
+
+    white-space:nowrap;
 }
 
 .voucher-export-dot{
