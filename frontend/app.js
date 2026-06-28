@@ -1371,8 +1371,21 @@ async function sendVoucher(code) {
 
   // 1. Generate voucher image
   const cardEl = document.getElementById('voucher-card-sell-card');
-  await fillVoucherQRs(document.getElementById('modal-root'));
-  await new Promise(r => setTimeout(r, 80)); // let img paint
+  await fillVoucherQRs(cardEl.parentElement);
+
+// Wait until every image inside the voucher has loaded
+await Promise.all(
+  [...cardEl.querySelectorAll("img")].map(img => {
+    if (img.complete) return Promise.resolve();
+
+    return new Promise(resolve => {
+      img.onload = resolve;
+      img.onerror = resolve;
+    });
+  })
+);
+
+await new Promise(r => setTimeout(r, 50));
   const dataURL = await htmlToImage.toPng(cardEl, {
     pixelRatio: 4,
     backgroundColor: "#ffffff",
@@ -1664,7 +1677,20 @@ async function downloadVoucherImage(code, idSuffix) {
   const cardEl = document.getElementById('voucher-card-' + idSuffix);
   if (!cardEl) return;
   await fillVoucherQRs(cardEl.parentElement);
-  await new Promise(r => setTimeout(r, 80));
+
+// Wait until every image inside the voucher has loaded
+await Promise.all(
+  [...cardEl.querySelectorAll("img")].map(img => {
+    if (img.complete) return Promise.resolve();
+
+    return new Promise(resolve => {
+      img.onload = resolve;
+      img.onerror = resolve;
+    });
+  })
+);
+
+await new Promise(r => setTimeout(r, 50));
   const dataURL = await htmlToImage.toPng(cardEl, {
     pixelRatio: 4,
     backgroundColor: "#ffffff",
