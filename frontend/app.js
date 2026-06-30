@@ -23,7 +23,7 @@ const I18N = {
     cekVoucherDesc: 'View voucher information and validity',
     backToHome: 'Back',
     scanToConnect: 'Scan to connect, valid for',
-    userLabel: 'User',
+    buyerLabel: 'Buyer',
     purchasedAtLabel: 'Purchased At',
     remainingTime: 'Remaining Time',
     days: 'Days',
@@ -54,7 +54,7 @@ const I18N = {
     voucher: 'Voucher',
     periode: 'Period',
     status: 'Status',
-    user: 'User',
+    buyer: 'Buyer',
     purchasedAt: 'Timestamp',
     qrCode: 'QR',
     checkout: 'Action',
@@ -102,7 +102,7 @@ const I18N = {
     customCode: 'Custom Code (optional, for 1 voucher)',
     // Import
     importTitle: 'Import Vouchers from Excel',
-    importDesc: 'Excel must have columns: code, period (1H/1M/1B), user, phone, purchasedAt (ISO, optional)',
+    importDesc: 'Excel must have columns: code, period (1H/1M/1B), buyer, phone, purchasedAt (ISO, optional)',
     chooseFile: 'Choose Excel file',
     importResult: 'Imported',
     skipped: 'skipped',
@@ -153,7 +153,7 @@ const I18N = {
     cekVoucherDesc: 'Lihat informasi dan masa berlaku voucher',
     backToHome: 'Kembali',
     scanToConnect: 'Scan untuk terhubung, berlaku untuk',
-    userLabel: 'User',
+    buyerLabel: 'Pembeli',
     purchasedAtLabel: 'Purchased At',
     remainingTime: 'Sisa Waktu',
     days: 'Hari',
@@ -183,7 +183,7 @@ const I18N = {
     voucher: 'Voucher',
     periode: 'Periode',
     status: 'Status',
-    user: 'User',
+    buyer: 'Pembeli',
     purchasedAt: 'Pranala',
     qrCode: 'QR',
     checkout: 'Checkout',
@@ -226,7 +226,7 @@ const I18N = {
     vouchersCreated: 'voucher dibuat',
     customCode: 'Kode Kustom (opsional, untuk 1 voucher)',
     importTitle: 'Impor Voucher dari Excel',
-    importDesc: 'Excel harus memiliki kolom: code, period (1H/1M/1B), user, phone, purchasedAt (ISO, opsional)',
+    importDesc: 'Excel harus memiliki kolom: code, period (1H/1M/1B), buyer, phone, purchasedAt (ISO, opsional)',
     chooseFile: 'Pilih file Excel',
     importResult: 'Berhasil impor',
     skipped: 'dilewati',
@@ -273,7 +273,7 @@ const I18N = {
     cekVoucherDesc: 'Ndelok info lan suwene voucher',
     backToHome: 'Mbalik',
     scanToConnect: 'Scan gawe nyambung, iso kanggo',
-    userLabel: 'Pangguno',
+    buyerLabel: 'Pangguno',
     purchasedAtLabel: 'Tuku Tanggal',
     remainingTime: 'Sisa Wektu',
     days: 'Dino',
@@ -303,7 +303,7 @@ const I18N = {
     voucher: 'Voucher',
     periode: 'Periode',
     status: 'Status',
-    user: 'Pangguno',
+    buyer: 'Pangguno',
     purchasedAt: 'Pranolo',
     qrCode: 'QR',
     checkout: 'Aksi',
@@ -346,7 +346,7 @@ const I18N = {
     vouchersCreated: 'voucher digawe',
     customCode: 'Kode Custom (opsional, kanggo 1 voucher)',
     importTitle: 'Impor Voucher saka Excel',
-    importDesc: 'Excel kudu duwe kolom: code, period (1H/1M/1B), user, phone, purchasedAt (ISO, opsional)',
+    importDesc: 'Excel kudu duwe kolom: code, period (1H/1M/1B), buyer, phone, purchasedAt (ISO, opsional)',
     chooseFile: 'Pilih file Excel',
     importResult: 'Sukses impor',
     skipped: 'dilewati',
@@ -578,11 +578,11 @@ async function seedIfEmpty() {
   // Seed a few demo vouchers
   const now = Date.now();
   const demo = [
-    { period: '1M', code: '1M' + 'yxj5', user: 'Andi',  phone: '628123456701', daysAgo: 2, msg: 'Demo' },
-    { period: '1M', code: '1M' + 'igv2', user: 'Budi',  phone: '628123456702', daysAgo: 4, msg: 'Demo' },
-    { period: '1B', code: '1B' + 'i5nd', user: 'Citra', phone: '628123456703', daysAgo: 6, msg: 'Demo' },
-    { period: '1B', code: '1B' + 'ym9v', user: 'Dewi',  phone: '628123456704', daysAgo: 12, msg: 'Demo' },
-    { period: '1B', code: '1B' + 'bhvj', user: 'Adit',  phone: '628123456705', daysAgo: 45, msg: 'Demo' }, // expired
+    { period: '1M', code: '1M' + 'yxj5', buyer: 'Andi',  phone: '628123456701', daysAgo: 2, msg: 'Demo' },
+    { period: '1M', code: '1M' + 'igv2', buyer: 'Budi',  phone: '628123456702', daysAgo: 4, msg: 'Demo' },
+    { period: '1B', code: '1B' + 'i5nd', buyer: 'Citra', phone: '628123456703', daysAgo: 6, msg: 'Demo' },
+    { period: '1B', code: '1B' + 'ym9v', buyer: 'Dewi',  phone: '628123456704', daysAgo: 12, msg: 'Demo' },
+    { period: '1B', code: '1B' + 'bhvj', buyer: 'Adit',  phone: '628123456705', daysAgo: 45, msg: 'Demo' }, // expired
   ];
   // Plus some available ones
   const available = [
@@ -600,12 +600,12 @@ async function seedIfEmpty() {
     await DB.putVoucher({
       code: d.code, period: d.period,
       purchasedAt: new Date(now - d.daysAgo * 86400000).toISOString(),
-      userName: d.user, userPhone: d.phone, message: d.msg,
+      buyerName: d.buyer, buyerPhone: d.phone, message: d.msg,
       createdAt: new Date(now - (d.daysAgo + 1) * 86400000).toISOString(),
     });
   }
   for (const a of available) {
-    await DB.putVoucher({ code: a.code, period: a.period, purchasedAt: null, userName: '', userPhone: '', createdAt: new Date(now).toISOString() });
+    await DB.putVoucher({ code: a.code, period: a.period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date(now).toISOString() });
   }
 }
 
@@ -812,7 +812,7 @@ function viewCheckResult() {
       </div>
 
       ${[
-        { icon: 'user', label: t('userLabel'), value: v.userName || t('notSoldYet') },
+        { icon: 'buyer', label: t('buyerLabel'), value: v.buyerName || t('notSoldYet') },
         { icon: 'calendar', label: t('purchasedAtLabel'), value: v.purchasedAt ? formatDateID(v.purchasedAt) : '-' },
       ].map(row => `
         <div class="card p-4 sm:p-5 mb-3 flex items-center gap-4">
@@ -1067,7 +1067,7 @@ function viewDashboard() {
                 <span class="inline-flex items-center gap-1">${t('periode')} <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5"></i></span>
               </th>
               <th>${t('status')}</th>
-              <th>${t('user')}</th>
+              <th>${t('buyer')}</th>
               <th>${t('purchasedAt')}</th>
               <th>${t('qrCode')}</th>
               <th class="text-right pr-4">${t('checkout')}</th>
@@ -1165,7 +1165,7 @@ flex-col">
 function applyFilters(list) {
   let arr = list.slice();
   const q = state.search.trim().toLowerCase();
-  if (q) arr = arr.filter(v => v.code.toLowerCase().includes(q) || (v.userName || '').toLowerCase().includes(q));
+  if (q) arr = arr.filter(v => v.code.toLowerCase().includes(q) || (v.buyerName || '').toLowerCase().includes(q));
   if (state.filterPeriod !== 'all') arr = arr.filter(v => v.period === state.filterPeriod);
   if (state.filterStatus !== 'all') arr = arr.filter(v => computeStatus(v) === state.filterStatus);
   // sort by period if requested, else by createdAt desc
@@ -1191,7 +1191,7 @@ function rowHTML(v, no) {
     <td><span class="font-display font-bold text-ink">${escapeHtml(v.code)}</span></td>
     <td><span class="pill ${periodInfo.pillClass}">${t(periodInfo.labelKey)}</span></td>
     <td><span class="pill pill-${status}">${statusLabel}</span></td>
-    <td class="text-ink">${escapeHtml(v.userName || '-')}</td>
+    <td class="text-ink">${escapeHtml(v.buyerName || '-')}</td>
     <td class="text-ink-soft text-xs">${v.purchasedAt ? formatDateID(v.purchasedAt) : '-'}</td>
     <td><div class="w-12 h-12 bg-white border border-brand/10 rounded-lg p-1 cursor-pointer hover:scale-110 transition-transform" onclick="openCheckPreview('${escapeHtml(v.code)}')"><img data-qr-text="${escapeHtml(v.code)}" alt="qr" class="w-full h-full"/></div></td>
     <td class="text-right pr-2">
@@ -1317,7 +1317,7 @@ async function saveNewVouchers() {
   const created = [];
   if (custom && count === 1) {
     if (await DB.getVoucher(custom)) { toast('Code exists', 'error'); return; }
-    await DB.putVoucher({ code: custom, period, purchasedAt: null, userName: '', userPhone: '', createdAt: new Date().toISOString() });
+    await DB.putVoucher({ code: custom, period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
     created.push(custom);
   } else {
     let tries = 0;
@@ -1325,7 +1325,7 @@ async function saveNewVouchers() {
       tries++;
       const code = randCode(period, 4);
       if (await DB.getVoucher(code)) continue;
-      await DB.putVoucher({ code, period, purchasedAt: null, userName: '', userPhone: '', createdAt: new Date().toISOString() });
+      await DB.putVoucher({ code, period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
       created.push(code);
     }
   }
@@ -1406,8 +1406,8 @@ await new Promise(r => setTimeout(r, 50));
   
   // 2. Save sale to DB
   v.purchasedAt = new Date().toISOString();
-  v.userName = name;
-  v.userPhone = phone;
+  v.buyerName = name;
+  v.buyerPhone = phone;
   v.message = msg;
   await DB.putVoucher(v);
   await refreshVouchers();
@@ -1450,11 +1450,11 @@ function openEditModal(code) {
         </div>
         <div>
           <label class="block text-sm font-semibold text-ink mb-1.5">${t('name')}</label>
-          <input id="edit-name" data-testid="edit-name" value="${escapeHtml(v.userName||'')}" class="input"/>
+          <input id="edit-name" data-testid="edit-name" value="${escapeHtml(v.buyerName||'')}" class="input"/>
         </div>
         <div>
           <label class="block text-sm font-semibold text-ink mb-1.5">${t('phoneNumber')}</label>
-          <input id="edit-phone" data-testid="edit-phone" value="${escapeHtml(v.userPhone||'')}" class="input"/>
+          <input id="edit-phone" data-testid="edit-phone" value="${escapeHtml(v.buyerPhone||'')}" class="input"/>
         </div>
         <label class="flex items-center gap-2 cursor-pointer pt-2">
           <input id="edit-reset" data-testid="edit-reset" type="checkbox" class="w-4 h-4 accent-brand"/>
@@ -1475,9 +1475,9 @@ async function saveEdit(code) {
   const v = state.vouchers.find(x => x.code === code);
   if (!v) return;
   v.period = document.getElementById('edit-period').value;
-  v.userName = document.getElementById('edit-name').value.trim();
-  v.userPhone = document.getElementById('edit-phone').value.trim();
-  if (document.getElementById('edit-reset').checked) { v.purchasedAt = null; v.userName = ''; v.userPhone = ''; v.message = ''; }
+  v.buyerName = document.getElementById('edit-name').value.trim();
+  v.buyerPhone = document.getElementById('edit-phone').value.trim();
+  if (document.getElementById('edit-reset').checked) { v.purchasedAt = null; v.buyerName = ''; v.buyerPhone = ''; v.message = ''; }
   await DB.putVoucher(v);
   await refreshVouchers();
   closeModal();
@@ -1512,8 +1512,8 @@ function openImportModal() {
 
 function downloadTemplate() {
   const ws = XLSX.utils.json_to_sheet([
-    { code: '1M-example', period: '1M', user: '', phone: '', purchasedAt: '' },
-    { code: '', period: '1H', user: '', phone: '', purchasedAt: '' },
+    { code: '1M-example', period: '1M', buyer: '', phone: '', purchasedAt: '' },
+    { code: '', period: '1H', buyer: '', phone: '', purchasedAt: '' },
   ]);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'vouchers');
@@ -1538,8 +1538,8 @@ async function handleImportFile(ev) {
     const purchasedAt = (r.purchasedAt || r.PurchasedAt || '') ? new Date(r.purchasedAt || r.PurchasedAt).toISOString() : null;
     await DB.putVoucher({
       code, period,
-      userName: (r.user || r.User || r.name || '').toString(),
-      userPhone: (r.phone || r.Phone || '').toString(),
+      buyerName: (r.buyer || r.Buyer || r.name || '').toString(),
+      buyerPhone: (r.phone || r.Phone || '').toString(),
       purchasedAt,
       createdAt: new Date().toISOString(),
     });
@@ -1559,7 +1559,7 @@ async function downloadJSON() {
 
 function downloadExcel() {
   const rows = state.vouchers.map(v => ({
-    code: v.code, period: v.period, status: computeStatus(v), user: v.userName || '', phone: v.userPhone || '',
+    code: v.code, period: v.period, status: computeStatus(v), buyer: v.buyerName || '', phone: v.buyerPhone || '',
     purchasedAt: v.purchasedAt || '', createdAt: v.createdAt || '',
   }));
   const ws = XLSX.utils.json_to_sheet(rows);
@@ -1670,8 +1670,8 @@ async function openCheckPreview(code) {
       ${voucherCardHTML(v, status, days, 'preview-modal')}
       <div class="grid grid-cols-2 gap-3 mt-5">
         <div class="bg-surface-bg rounded-xl p-3">
-          <div class="text-xs text-ink-soft font-semibold uppercase tracking-wider">${t('userLabel')}</div>
-          <div class="font-bold text-ink truncate">${escapeHtml(v.userName || t('notSoldYet'))}</div>
+          <div class="text-xs text-ink-soft font-semibold uppercase tracking-wider">${t('buyerLabel')}</div>
+          <div class="font-bold text-ink truncate">${escapeHtml(v.buyerName || t('notSoldYet'))}</div>
         </div>
         <div class="bg-surface-bg rounded-xl p-3">
           <div class="text-xs text-ink-soft font-semibold uppercase tracking-wider">${t('purchasedAtLabel')}</div>
