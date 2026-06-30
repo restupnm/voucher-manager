@@ -1493,7 +1493,7 @@ function openEditModal(code) {
 async function saveEdit(code) {
   const v = state.vouchers.find(x => x.code === code);
   if (!v) return;
-  v.username = document.getElementById("edit-username").value.trim(); if (!voucher.username)voucher.username = voucher.code;
+  v.username = document.getElementById("edit-username").value.trim(); if (!v.username)v.username = v.code;
   v.password = document.getElementById("edit-password").value.trim();
   v.period = document.getElementById('edit-period').value;
   v.buyerName = document.getElementById('edit-name').value.trim();
