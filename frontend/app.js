@@ -873,15 +873,14 @@ function startCountdown() {
 }
 
 function voucherCardHTML(v,status,days,idSuffix=''){return`
-<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card">
+<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full">
 
-  <div class="left">
+  <div class="left flex flex-col w-[64%]">
 
     <div class="voucher-export-header">
       <div class="voucher-export-icon">
         <i data-lucide="radio-tower"></i>
       </div>
-
       <div class="voucher-export-text">
         cloud<span class="voucher-export-dot">.</span>spot
       </div>
@@ -893,16 +892,15 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
       ${t('voucherCode')}
     </div>
 
-    <div class="voucher-code-box">
+    <div class="voucher-code-box mt-2">
       ${escapeHtml(v.code)}
     </div>
 
     ${v.password?`
-      <div class="voucher-password">
-        <span class="voucher-password-label">${t('password')}</span>
-        <span class="voucher-password-value">${escapeHtml(v.password)}</span>
-      </div>
-    `:''}
+    <div class="voucher-password">
+      <span class="voucher-password-label">${t('password')}</span>
+      <span class="voucher-password-value">${escapeHtml(v.password)}</span>
+    </div>`:''}
 
   </div>
 
@@ -914,7 +912,7 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
       <img
         id="qr-${escapeHtml(idSuffix)}"
         data-qr-text="${escapeHtml(v.code)}"
-        class="w-32 h-32">
+        class="w-32 h-32"/>
     </div>
 
     <div class="mt-2 flex flex-col items-center">
