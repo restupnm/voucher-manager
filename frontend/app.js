@@ -954,10 +954,14 @@ async function fillVoucherQRs(scope = document) {
   for (const img of imgs) {
     const code = img.getAttribute("data-qr-text");
 
-    // username=password voucher
-    const qrText =
-      `${routerUrl}?username=${encodeURIComponent(code)}&password=${encodeURIComponent(code)}`;
+    // username+password voucher
+const v = await DB.getVoucher(code);
 
+const username = v?.username || code;
+const password = v?.password || "";
+
+const qrText =
+  `${routerUrl}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
     const url = await makeQR(qrText, 256);
 
     img.src = url;
