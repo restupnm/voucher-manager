@@ -598,14 +598,16 @@ async function seedIfEmpty() {
   ];
   for (const d of demo) {
     await DB.putVoucher({
-      code: d.code, period: d.period,
+      code: d.code,
+      username: d.code, password: '',
+      period: d.period,
       purchasedAt: new Date(now - d.daysAgo * 86400000).toISOString(),
       buyerName: d.buyer, buyerPhone: d.phone, message: d.msg,
       createdAt: new Date(now - (d.daysAgo + 1) * 86400000).toISOString(),
     });
   }
   for (const a of available) {
-    await DB.putVoucher({ code: a.code, period: a.period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date(now).toISOString() });
+    await DB.putVoucher({ code: a.code, username: a.code, password: '', period: a.period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date(now).toISOString() });
   }
 }
 
@@ -1317,7 +1319,7 @@ async function saveNewVouchers() {
   const created = [];
   if (custom && count === 1) {
     if (await DB.getVoucher(custom)) { toast('Code exists', 'error'); return; }
-    await DB.putVoucher({ code: custom, period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
+    await DB.putVoucher({ code: custom, username: code, password: '', period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
     created.push(custom);
   } else {
     let tries = 0;
@@ -1325,7 +1327,7 @@ async function saveNewVouchers() {
       tries++;
       const code = randCode(period, 4);
       if (await DB.getVoucher(code)) continue;
-      await DB.putVoucher({ code, period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
+      await DB.putVoucher({ code, username: code, password: '', period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
       created.push(code);
     }
   }
