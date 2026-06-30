@@ -1444,14 +1444,8 @@ function openEditModal(code) {
           <label class="block text-sm font-semibold text-ink mb-1.5">${t('voucherCode')}</label>
           <input value="${escapeHtml(v.code)}" disabled class="input opacity-70"/>
         </div>
-        <div>
-          <label class="block text-sm font-semibold text-ink mb-1.5">${t('periodLabel')}</label>
-          <select id="edit-period" data-testid="edit-period" class="input cursor-pointer">
-            ${PERIOD_ORDER.map(p => `<option value="${p}" ${v.period===p?'selected':''}>${t(PERIODS[p].labelKey)}</option>`).join('')}
-          </select>
-        </div>
 
-<div class="space-y-2">
+  <div class="space-y-2">
   <label class="text-sm font-semibold">Username</label>
   <input
       id="edit-username"
@@ -1467,6 +1461,12 @@ function openEditModal(code) {
       value="${escapeHtml(v.password || '')}">
 </div>
         
+        <div>
+          <label class="block text-sm font-semibold text-ink mb-1.5">${t('periodLabel')}</label>
+          <select id="edit-period" data-testid="edit-period" class="input cursor-pointer">
+            ${PERIOD_ORDER.map(p => `<option value="${p}" ${v.period===p?'selected':''}>${t(PERIODS[p].labelKey)}</option>`).join('')}
+          </select>
+        </div>
         <div>
           <label class="block text-sm font-semibold text-ink mb-1.5">${t('name')}</label>
           <input id="edit-name" data-testid="edit-name" value="${escapeHtml(v.buyerName||'')}" class="input"/>
