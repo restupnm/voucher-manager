@@ -1450,6 +1450,23 @@ function openEditModal(code) {
             ${PERIOD_ORDER.map(p => `<option value="${p}" ${v.period===p?'selected':''}>${t(PERIODS[p].labelKey)}</option>`).join('')}
           </select>
         </div>
+
+<div class="space-y-2">
+  <label class="text-sm font-semibold">Username</label>
+  <input
+      id="edit-username"
+      class="input"
+      value="${escapeHtml(v.username || v.code)}">
+</div>
+
+<div class="space-y-2 mt-4">
+  <label class="text-sm font-semibold">Password</label>
+  <input
+      id="edit-password"
+      class="input"
+      value="${escapeHtml(v.password || '')}">
+</div>
+        
         <div>
           <label class="block text-sm font-semibold text-ink mb-1.5">${t('name')}</label>
           <input id="edit-name" data-testid="edit-name" value="${escapeHtml(v.buyerName||'')}" class="input"/>
@@ -1480,6 +1497,8 @@ async function saveEdit(code) {
   v.buyerName = document.getElementById('edit-name').value.trim();
   v.buyerPhone = document.getElementById('edit-phone').value.trim();
   if (document.getElementById('edit-reset').checked) { v.purchasedAt = null; v.buyerName = ''; v.buyerPhone = ''; v.message = ''; }
+  voucher.username = document.getElementById("edit-username").value.trim(); if (!voucher.username)voucher.username = voucher.code;
+  voucher.password = document.getElementById("edit-password").value.trim();
   await DB.putVoucher(v);
   await refreshVouchers();
   closeModal();
