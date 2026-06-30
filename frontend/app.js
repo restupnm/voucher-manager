@@ -958,7 +958,7 @@ async function fillVoucherQRs(scope = document) {
 const v = await DB.getVoucher(code);
 
 const username = v?.username || code;
-const password = v?.password || "";
+const password = v?.password || code;
 
 const qrText =
   `${routerUrl}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
