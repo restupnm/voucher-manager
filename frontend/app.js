@@ -1319,7 +1319,7 @@ async function saveNewVouchers() {
   const created = [];
   if (custom && count === 1) {
     if (await DB.getVoucher(custom)) { toast('Code exists', 'error'); return; }
-    await DB.putVoucher({ code: custom, username: code, password: '', period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
+    await DB.putVoucher({ code: custom, username: custom, password: '', period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
     created.push(custom);
   } else {
     let tries = 0;
@@ -1496,9 +1496,9 @@ async function saveEdit(code) {
   v.period = document.getElementById('edit-period').value;
   v.buyerName = document.getElementById('edit-name').value.trim();
   v.buyerPhone = document.getElementById('edit-phone').value.trim();
+  v.username = document.getElementById("edit-username").value.trim(); if (!voucher.username)voucher.username = voucher.code;
+  v.password = document.getElementById("edit-password").value.trim();
   if (document.getElementById('edit-reset').checked) { v.purchasedAt = null; v.buyerName = ''; v.buyerPhone = ''; v.message = ''; }
-  voucher.username = document.getElementById("edit-username").value.trim(); if (!voucher.username)voucher.username = voucher.code;
-  voucher.password = document.getElementById("edit-password").value.trim();
   await DB.putVoucher(v);
   await refreshVouchers();
   closeModal();
