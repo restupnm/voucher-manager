@@ -901,6 +901,13 @@ ${t('voucherCode')}
 ${escapeHtml(v.code)}
 </div>
 
+${v.password ? `
+<div class="voucher-password">
+    <span class="voucher-password-label">Password</span>
+    <span class="voucher-password-value">${escapeHtml(v.password)}</span>
+</div>
+` : ""}
+
 <div class="mt-4 relative">
 <div class="voucher-ribbon">
 <i data-lucide="globe" class="w-4 h-4"></i>
