@@ -873,73 +873,66 @@ function startCountdown() {
 }
 
 function voucherCardHTML(v,status,days,idSuffix=''){return`
-<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full bg-white rounded-[24px] px-6 py-4">
+<div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card">
 
-<div class="flex flex-col justify-between w-[64%]">
+  <div class="left">
 
-<div>
-
-<div class="voucher-export-header">
-
-    <div class="voucher-export-icon">
+    <div class="voucher-export-header">
+      <div class="voucher-export-icon">
         <i data-lucide="radio-tower"></i>
-    </div>
+      </div>
 
-    <div class="voucher-export-text">
+      <div class="voucher-export-text">
         cloud<span class="voucher-export-dot">.</span>spot
+      </div>
     </div>
 
-</div>
+    <div class="border-b border-brand/20 mt-2 mb-3"></div>
 
-<div class="border-b border-brand/20 mt-2 mb-3"></div>
+    <div class="text-[10px] tracking-[0.35em] font-bold uppercase text-brand">
+      ${t('voucherCode')}
+    </div>
 
-<div class="text-[10px] tracking-[0.35em] font-bold uppercase text-brand">
-${t('voucherCode')}
-</div>
+    <div class="voucher-code-box">
+      ${escapeHtml(v.code)}
+    </div>
 
-<div class="voucher-code-box mt-2">
-${escapeHtml(v.code)}
-</div>
+    ${v.password?`
+      <div class="voucher-password">
+        <span class="voucher-password-label">${t('password')}</span>
+        <span class="voucher-password-value">${escapeHtml(v.password)}</span>
+      </div>
+    `:''}
 
-${v.password ? `
-<div class="voucher-password">
-    <span class="voucher-password-label">Password</span>
-    <span class="voucher-password-value">${escapeHtml(v.password)}</span>
-</div>
-` : ""}
+  </div>
 
-<div class="mt-4 relative">
-<div class="voucher-ribbon">
-<i data-lucide="globe" class="w-4 h-4"></i>
-<span>${t('websiteLabel')}</span>
-</div>
-</div>
+  <div class="divider"></div>
 
-</div>
+  <div class="right">
 
-</div>
+    <div class="border-2 border-brand rounded-2xl p-2">
+      <img
+        id="qr-${escapeHtml(idSuffix)}"
+        data-qr-text="${escapeHtml(v.code)}"
+        class="w-32 h-32">
+    </div>
 
-<div class="self-stretch border-l-2 border-dashed border-brand/20"></div>
-
-<div class="flex flex-col items-center justify-start pt-2 w-[36%]">
-
-<div class="border-2 border-brand rounded-2xl p-2">
-<img id="qr-${escapeHtml(idSuffix)}"
-data-qr-text="${escapeHtml(v.code)}"
-class="w-32 h-32"/>
-</div>
-
-<div class="mt-2 flex flex-col items-center">
-    <div class="text-[8px] leading-none whitespace-nowrap">
+    <div class="mt-2 flex flex-col items-center">
+      <div class="text-[8px] leading-none whitespace-nowrap">
         ${t('scanToConnect')}
-    </div>
+      </div>
 
-    <div class="text-[12px] font-bold text-brand whitespace-nowrap">
+      <div class="text-[12px] font-bold text-brand whitespace-nowrap">
         ${days} ${t('days')}
+      </div>
     </div>
-</div>
 
-</div>
+  </div>
+
+  <div class="voucher-ribbon">
+    <i data-lucide="globe" class="w-4 h-4"></i>
+    <span>${t('websiteLabel')}</span>
+  </div>
 
 </div>`;}
 
