@@ -1493,11 +1493,12 @@ function openEditModal(code) {
 async function saveEdit(code) {
   const v = state.vouchers.find(x => x.code === code);
   if (!v) return;
+  v.username = document.getElementById("edit-username").value.trim(); if (!voucher.username)voucher.username = voucher.code;
+  v.password = document.getElementById("edit-password").value.trim();
   v.period = document.getElementById('edit-period').value;
   v.buyerName = document.getElementById('edit-name').value.trim();
   v.buyerPhone = document.getElementById('edit-phone').value.trim();
-  v.username = document.getElementById("edit-username").value.trim(); if (!voucher.username)voucher.username = voucher.code;
-  v.password = document.getElementById("edit-password").value.trim();
+
   if (document.getElementById('edit-reset').checked) { v.purchasedAt = null; v.buyerName = ''; v.buyerPhone = ''; v.message = ''; }
   await DB.putVoucher(v);
   await refreshVouchers();
