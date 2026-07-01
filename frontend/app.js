@@ -886,7 +886,7 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
       </div>
     </div>
 
-    <div class="voucher-logo-divider"></div>
+<div class="border-b border-brand/20 mt-2 mb-3"></div>
 
     <div class="text-[10px] tracking-[0.35em] font-bold uppercase text-brand">
       ${t('voucherCode')}
