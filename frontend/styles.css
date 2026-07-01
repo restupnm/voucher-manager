@@ -110,7 +110,7 @@ html, body { background: var(--bg); }
 }
 
 .right{
-width:150px;
+width:0px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -125,6 +125,8 @@ justify-content:center;
     height:60px;
     margin-top:0px;
     margin-bottom:2px;
+    width:520px;
+    max-width:calc(100% - 200px);
 
     border:2px solid rgba(87,68,200,.16);
     border-radius:18px;
