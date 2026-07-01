@@ -1385,6 +1385,18 @@ async function sendVoucher(code) {
   if (!name) { toast(t('nameRequired'), 'error'); return; }
   if (!phone) { toast(t('phoneRequired'), 'error'); return; }
 
+ // 0. Open WhatsApp
+  const days = PERIODS[v.period]?.days || 0;
+
+  const defaultMsg = msg || (state.lang === 'en'
+  ? `Hi ${name}! Thank you for buying a cloud.spot voucher.\nCode: *${v.code}*\nValid: ${days} days\nScan the QR code attached to connect.`
+  : state.lang === 'jw'
+  ? `Halo ${name}! Matur nuwun wis tuku voucher cloud.spot.\nKode: *${v.code}*\nSah: ${days} dino\nMonggo scan QR code sing dilampirno kanggo nyambung.`
+  : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.\nKode: *${v.code}*\nBerlaku: ${days} hari\nSilakan scan QR code terlampir untuk terhubung.`);
+
+  const url = `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
+  window.open(url, "_blank");
+
   const v = state.vouchers.find(x => x.code === code);
   if (!v) return;
 
@@ -1419,16 +1431,6 @@ await new Promise(r => setTimeout(r, 50));
   v.message = msg;
   await DB.putVoucher(v);
   await refreshVouchers();
-
-  // 3. Open WhatsApp
-  const days = PERIODS[v.period]?.days || 0;
-  const defaultMsg = msg || (state.lang === 'en'
-    ? `Hi ${name}! Thank you for buying a cloud.spot voucher.\nCode: *${v.code}*\nValid: ${days} days\nScan the QR code attached to connect.`
-    : state.lang === 'jw'
-    ? `Halo ${name}! Matur nuwun wis tuku voucher cloud.spot.\nKode: *${v.code}*\nSah: ${days} dino\nMonggo scan QR code sing dilampirno kanggo nyambung.`
-    : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.\nKode: *${v.code}*\nBerlaku: ${days} hari\nSilakan scan QR code terlampir untuk terhubung.`);
-  const url = `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
-  window.open(url, '_blank');
 
   closeModal();
   toast(t('voucherSent'), 'success');
