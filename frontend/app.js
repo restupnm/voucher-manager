@@ -1423,7 +1423,7 @@ await new Promise(r => setTimeout(r, 50));
     cacheBust: true
   });
   downloadDataURL(dataURL, `voucher-${v.code}.png`);
-  
+  setTimeout(openWA, 300);
   // 2. Save sale to DB
   v.purchasedAt = new Date().toISOString();
   v.buyerName = name;
