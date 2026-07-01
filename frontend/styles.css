@@ -142,7 +142,7 @@ justify-content:center;
 width:0;
 align-self:stretch;
 border-left:2px dashed rgba(61,31,184,.15);
-margin:0 32px;
+margin:0 64px;
 }
 
 .voucher-ribbon{
@@ -154,7 +154,8 @@ margin:0 32px;
     align-items:center;
     gap:10px;
 
-    width:380px;
+    width:520px;
+    max-width:calc(100% - 250px);
     height:54px;
 
     padding:0 32px;
