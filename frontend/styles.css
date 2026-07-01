@@ -104,8 +104,8 @@ html, body { background: var(--bg); }
     display:flex;
     flex-direction:column;
 
-    padding:18px 28px 54px;   /* reserve space for ribbon */
-    height:100%;
+    padding:24px 28px 70px;   /* reserve space for ribbon */
+    flex:1;
     box-sizing:border-box;
 }
 
@@ -142,7 +142,7 @@ justify-content:center;
 width:0;
 align-self:stretch;
 border-left:2px dashed rgba(61,31,184,.15);
-margin:0 32px;
+margin:22px 12px;
 }
 
 .voucher-ribbon{
@@ -154,7 +154,7 @@ margin:0 32px;
     align-items:center;
     gap:10px;
 
-    width:114%;
+    width:430px;
     height:54px;
 
     padding:0 32px;
@@ -180,7 +180,7 @@ margin:0 32px;
     display:flex;
     align-items:center;
     gap:10px;
-    margin-top:-44px;
+    margin-top:4px;
     margin-bottom:10px;
 }
 
