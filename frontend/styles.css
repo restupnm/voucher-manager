@@ -104,7 +104,7 @@ html, body { background: var(--bg); }
     display:flex;
     flex-direction:column;
 
-    padding:24px 28px 70px;   /* reserve space for ribbon */
+    padding:18px 28px 70px;   /* reserve space for ribbon */
     flex:1;
     box-sizing:border-box;
 }
@@ -168,7 +168,7 @@ margin:0 32px;
     overflow:hidden;
 
     border-top-left-radius:0;
-    border-bottom-left-radius:28px;
+    border-bottom-left-radius:26px;
     border-top-right-radius:64px;
     border-bottom-right-radius:0;
 
