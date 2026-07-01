@@ -88,7 +88,7 @@ html, body { background: var(--bg); }
 .voucher-card{
     position: relative;
     width: 760px;
-    height: 260px;
+    min-height: 260px;
     background: #fff;
     border: 2px solid #fff;
     border-radius: 24px;
@@ -110,14 +110,17 @@ html, body { background: var(--bg); }
 }
 
 .right{
-width:320px;
+width:250px;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
+flex-shrink:0;
 }
 
 .voucher-code-box{
+    width:100%;
+    max-width:320px;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -142,37 +145,40 @@ justify-content:center;
 width:0;
 align-self:stretch;
 border-left:2px dashed rgba(61,31,184,.15);
-margin:0 32px;
+margin-left:48px;
+margin-right:18px;
+}
+
+.voucher-logo-divider{
+    height:1px;
+    background:rgba(61,31,184,.18);
+    width:100%;
+    margin:10px 0 16px;
 }
 
 .voucher-ribbon{
     position:absolute;
-    left:0px;
-    bottom:0px;
+    left:0;
+    bottom:0;
+
+    width:68%;
+    max-width:420px;
+    min-width:340px;
+
+    height:54px;
 
     display:flex;
     align-items:center;
     gap:10px;
 
-    width:380px;
-    height:54px;
+    padding:0 28px;
 
-    padding:0 32px;
+    background:linear-gradient(90deg,#311B92,#4F2DD6);
 
-    background:linear-gradient(90deg,#311B92 0%,#4F2DD6 100%);
+    border-top-right-radius:70px;
+    border-bottom-left-radius:24px;
+
     color:#fff;
-
-    font-size:15px;
-    font-weight:600;
-
-    overflow:hidden;
-
-    border-top-left-radius:0;
-    border-bottom-left-radius:26px;
-    border-top-right-radius:64px;
-    border-bottom-right-radius:0;
-
-    box-sizing:border-box;
 }
 
 /*Voucher logo*/
