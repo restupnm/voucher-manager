@@ -456,6 +456,7 @@ const state = {
   vouchers: [],
   search: '',
   pendingWhatsAppUrl: '',
+  statusFilter: 'all',
   filterPeriod: 'all',
   filterStatus: 'all',
   sortPeriod: 0,          // 0 none, 1 asc, -1 desc
@@ -522,6 +523,12 @@ function normalizePhone(p) {
   if (s.startsWith('+')) s = s.slice(1);
   if (s.startsWith('0')) s = '62' + s.slice(1);   // Indonesian convention
   return s;
+}
+
+function toggleStatusFilter(filter) {
+  state.statusFilter =
+  state.statusFilter === filter ? 'all' : filter;
+  render();
 }
 
 async function makeQR(text, size = 256) {
@@ -1040,10 +1047,10 @@ function viewDashboard() {
 
       <!-- Stats -->
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7 fade-in">
-        ${statCardHTML('tickets',  '#EFEBFF', '#3D1FB8', t('totalVoucher'), stats.total, t('allVouchers'), 'stat-total')}
-        ${statCardHTML('check-circle', '#DCFCE7', '#15803D', t('available'), stats.available, t('readyToUse'), 'stat-available')}
-        ${statCardHTML('check-circle-2', '#FEF3C7', '#B45309', t('used'), stats.used, t('alreadyUsed'), 'stat-used')}
-        ${statCardHTML('clock', '#FEE2E2', '#B91C1C', t('expired'), stats.expired, t('expiredDesc'), 'stat-expired')}
+        ${statCardHTML('tickets',  '#EFEBFF', '#3D1FB8', t('totalVoucher'), stats.total, t('allVouchers'), 'stat-total', 'all')}
+        ${statCardHTML('check-circle', '#DCFCE7', '#15803D', t('available'), stats.available, t('readyToUse'), 'stat-available', 'available')}
+        ${statCardHTML('check-circle-2', '#FEF3C7', '#B45309', t('used'), stats.used, t('alreadyUsed'), 'stat-used', 'used')}
+        ${statCardHTML('clock', '#FEE2E2', '#B91C1C', t('expired'), stats.expired, t('expiredDesc'), 'stat-expired', 'expired')}
       </section>
 
       <!-- Filters -->
@@ -1100,15 +1107,28 @@ function viewDashboard() {
   </div>`;
 }
 
-function statCardHTML(icon, bgColor, fgColor, title, value, sub, testid) {
-  return `<div class="stat-card" data-testid="${testid}">
-    <div class="stat-icon" style="background:${bgColor};color:${fgColor};"><i data-lucide="${icon}" class="w-6 h-6"></i></div>
-    <div class="min-w-0 flex-1">
-      <div class="text-xs text-ink-soft font-semibold uppercase tracking-wider">${title}</div>
-      <div class="font-display font-bold text-3xl text-ink leading-none my-1">${value}</div>
-      <div class="text-xs text-ink-soft">${sub}</div>
+function statCardHTML(icon, bgColor, fgColor, title, value, sub, testid, filter) {
+return `
+<divclass="stat-card cursor-pointer transition-all duration-200 ${
+    state.statusFilter === filter? 'ring-2 ring-brand shadow-lg': 'hover:shadow-md'}"
+    data-testid="${testid}"
+    onclick="toggleStatusFilter('${filter}')">
+
+  <div class="stat-icon" style="background:${bgColor};color:${fgColor};">
+    <i data-lucide="${icon}" class="w-6 h-6"></i>
+  </div>
+  <div class="min-w-0 flex-1">
+    <div class="text-xs text-ink-soft font-semibold uppercase tracking-wider">
+      ${title}
     </div>
-  </div>`;
+    <div class="font-display font-bold text-3xl text-ink leading-none my-1">
+      ${value}
+    </div>
+    <div class="text-xs text-ink-soft">
+      ${sub}
+    </div>
+  </div>
+</div>`;
 }
 
 function sidebarHTML() {
