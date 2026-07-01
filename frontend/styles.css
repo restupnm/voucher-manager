@@ -110,7 +110,7 @@ html, body { background: var(--bg); }
 }
 
 .right{
-flex:0 0 210px;
+flex:0 0 180px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -143,7 +143,7 @@ justify-content:center;
 width:0;
 align-self:stretch;
 border-left:2px dashed rgba(61,31,184,.15);
-margin:0 16px;
+margin:0 4px;
 }
 
 .voucher-divider{
