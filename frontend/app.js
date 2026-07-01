@@ -908,6 +908,10 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
 
   <div class="right">
 
+  <div class="voucher-status ${computeStatus(v)}">
+    ${t(computeStatus(v))}
+  </div>
+
     <div class="border-2 border-brand rounded-2xl p-2">
       <img
         id="qr-${escapeHtml(idSuffix)}"
