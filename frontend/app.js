@@ -1466,7 +1466,7 @@ Silakan scan QR code terlampir untuk terhubung.`
   downloadDataURL(dataURL, `voucher-${v.code}.png`);
 
   // Open WhatsApp after download starts
-  setTimeout(openWhatsApp, 800);
+  setTimeout(openWhatsApp, 400);
 
   // Save voucher
   v.purchasedAt = new Date().toISOString();
