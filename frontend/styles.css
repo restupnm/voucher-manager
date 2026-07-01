@@ -1,0 +1,353 @@
+/* cloud.spot — custom styles */
+
+:root {
+  --brand: #3D1FB8;
+  --brand-hover: #311894;
+  --brand-light: #EFEBFF;
+  --brand-accent: #5A3BE8;
+  --ink: #1A1525;
+  --ink-soft: #6A6577;
+  --ink-faint: #B4B0C0;
+  --bg: #F8F7FB;
+}
+
+html, body { background: var(--bg); }
+::selection { background: rgba(61,31,184,0.18); color: var(--ink); }
+
+/* Soft animated blobs on landing */
+.bg-blobs {
+  position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+}
+.bg-blobs::before, .bg-blobs::after {
+  content: ''; position: absolute; width: 520px; height: 520px; border-radius: 50%;
+  filter: blur(80px); opacity: .35; animation: floaty 18s ease-in-out infinite;
+}
+.bg-blobs::before { background: radial-gradient(circle, #C7B8FF 0%, transparent 70%); top: -160px; left: -160px; }
+.bg-blobs::after  { background: radial-gradient(circle, #E7DAFF 0%, transparent 70%); bottom: -160px; right: -160px; animation-delay: -9s; }
+@keyframes floaty {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(40px,-30px) scale(1.05); }
+}
+
+/* Card */
+.card { background: #fff; border-radius: 1.75rem; box-shadow: 0 8px 30px rgba(61,31,184,0.08); border: 1px solid rgba(61,31,184,0.05); }
+
+/* Buttons */
+.btn-primary {
+  background: var(--brand); color:#fff; border-radius: 0.875rem;
+  padding: 0.85rem 1.25rem; font-weight: 600; font-family: 'Outfit', sans-serif;
+  transition: all .2s ease; display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+  border: 1px solid transparent;
+}
+.btn-primary:hover { background: var(--brand-hover); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(61,31,184,0.32); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.btn-secondary {
+  background:#fff; color: var(--brand); border-radius:.875rem; padding: .85rem 1.25rem; font-weight:600;
+  border: 1px solid rgba(61,31,184,0.18); transition: all .2s ease; display:inline-flex; align-items:center; gap:.55rem;
+  font-family: 'Outfit', sans-serif;
+}
+.btn-secondary:hover { background: var(--brand-light); }
+
+.btn-ghost { color: var(--ink-soft); padding: .55rem .85rem; border-radius:.75rem; transition: all .15s ease; }
+.btn-ghost:hover { background: var(--brand-light); color: var(--brand); }
+
+/* Inputs */
+.input {
+  background: var(--bg); border: 1px solid transparent; border-radius: .875rem;
+  padding: .85rem 1rem; color: var(--ink); width: 100%; transition: all .15s ease; outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.input::placeholder { color: var(--ink-faint); }
+.input:focus { background:#fff; border-color: rgba(61,31,184,0.3); box-shadow: 0 0 0 4px rgba(61,31,184,0.10); }
+.input-lg { padding: 1.05rem 1.1rem; font-size: 1rem; }
+
+/* Status pills */
+.pill { display:inline-flex; align-items:center; gap:.35rem; padding:.3rem .75rem; border-radius: 9999px; font-size: .78rem; font-weight: 600; font-family:'Outfit',sans-serif; }
+.pill-available { background:#DCFCE7; color:#15803D; }
+.pill-used      { background:#FEF3C7; color:#B45309; }
+.pill-expired   { background:#FEE2E2; color:#B91C1C; }
+.pill-period-1H { background:#FCE7F3; color:#9D174D; }
+.pill-period-1M { background:#E0E7FF; color:#3730A3; }
+.pill-period-1B { background:#DBEAFE; color:#1D4ED8; }
+
+/* Table */
+.tbl { width:100%; border-collapse: collapse; }
+.tbl thead th { font-family:'Outfit',sans-serif; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); padding: 1rem .75rem; border-bottom: 1px solid var(--bg); text-align:left; }
+.tbl tbody td { padding: .9rem .75rem; border-bottom: 1px solid var(--bg); color: var(--ink); font-size: .92rem; vertical-align: middle; }
+.tbl tbody tr { transition: background .15s ease; }
+.tbl tbody tr:hover { background: rgba(239,235,255,0.45); }
+
+/* Modal */
+.modal-backdrop { position:fixed; inset:0; background: rgba(26,21,37,0.45); backdrop-filter: blur(8px); z-index: 50; display:flex; align-items:center; justify-content:center; padding: 1rem; }
+.modal { background:#fff; border-radius: 1.75rem; box-shadow: 0 24px 60px rgba(26,21,37,0.25); width: 100%; max-width: 560px; max-height: 92vh; overflow:auto; }
+.modal-lg { max-width: 760px; }
+
+/* Voucher Card preview */
+.voucher-card{
+    position: relative;
+    width: 760px;
+    height: 260px;
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 24px;
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.08),
+        0 20px 50px rgba(0,0,0,.14),
+        0 40px 90px rgba(0,0,0,.18);
+}
+
+.left{
+    display:flex;
+    flex-direction:column;
+
+    padding:18px 28px 70px;   /* reserve space for ribbon */
+    flex:1;
+    box-sizing:border-box;
+}
+
+.right{
+width:320px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.voucher-code-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:60px;
+    margin-top:0px;
+    margin-bottom:2px;
+
+    border:2px solid rgba(87,68,200,.16);
+    border-radius:18px;
+    background:#FAF9FF;
+
+    font-family:'Outfit',sans-serif;
+    font-size:2.15rem;
+    font-weight:700;
+    line-height:1;
+    letter-spacing:-0.02em;
+    color:#1A1525;
+}
+
+.divider{
+width:0;
+align-self:stretch;
+border-left:2px dashed rgba(61,31,184,.15);
+margin:0 32px;
+}
+
+.voucher-ribbon{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    width:380px;
+    height:54px;
+
+    padding:0 32px;
+
+    background:linear-gradient(90deg,#311B92 0%,#4F2DD6 100%);
+    color:#fff;
+
+    font-size:15px;
+    font-weight:600;
+
+    overflow:hidden;
+
+    border-top-left-radius:0;
+    border-bottom-left-radius:26px;
+    border-top-right-radius:64px;
+    border-bottom-right-radius:0;
+
+    box-sizing:border-box;
+}
+
+/*Voucher logo*/
+.voucher-export-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:-20px;
+    margin-bottom:0px;
+}
+
+.voucher-export-icon{
+    width:22px;
+    height:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex:0 0 22px;
+}
+
+.voucher-export-icon svg{
+    width:22px;
+    height:22px;
+
+    color:#1A1525;
+    stroke-width:2.4;
+}
+
+.voucher-export-text{
+    display:block;
+
+    font-family:'Outfit',sans-serif;
+    font-size:31px;
+    font-weight:600;
+
+    line-height:1;
+    letter-spacing:-0.5px;
+
+    color:#2B1778;
+
+    white-space:nowrap;
+}
+
+.voucher-export-dot{
+    color:#6A38F2;
+}
+
+/*voucher password*/
+.voucher-password{
+    margin-top:2px;
+    display:flex;
+    justify-content:center;
+    gap:2px;
+    align-items:center;
+}
+
+.voucher-password-label{
+    font-size:9px;
+    color:#777;
+    font-weight:500;
+}
+
+.voucher-password-value{
+    font-size:14px;
+    font-weight:700;
+    color:#1A1525;
+}
+
+/* Stat card */
+.stat-card { background:#fff; border-radius: 1.5rem; padding: 1.35rem 1.5rem; box-shadow: 0 4px 20px rgba(61,31,184,0.05); border: 1px solid rgba(61,31,184,0.04); display:flex; align-items:center; gap: 1rem; }
+.stat-icon { width: 52px; height: 52px; border-radius: 1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+/* Sidebar nav item */
+.nav-item { display:flex; align-items:center; gap:.75rem; padding: .8rem 1rem; border-radius: .9rem; color: var(--ink-soft); font-weight: 500; transition: all .15s ease; cursor:pointer; }
+.nav-item:hover { background: var(--brand-light); color: var(--brand); }
+.nav-item.active { background: var(--brand-light); color: var(--brand); font-weight: 600; }
+
+/* Animations */
+.fade-in { animation: fadeIn .35s ease both; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+.scale-in { animation: scaleIn .25s cubic-bezier(.2,.9,.3,1.2) both; }
+@keyframes scaleIn { from { opacity:0; transform: scale(.92); } to { opacity:1; transform: scale(1); } }
+
+/* Toast */
+.toast { background: #fff; border-radius: .9rem; padding: .85rem 1.1rem; box-shadow: 0 12px 32px rgba(26,21,37,0.18); border-left: 4px solid var(--brand); display:flex; align-items:center; gap:.6rem; min-width: 240px; animation: slideIn .25s ease both; }
+.toast.success { border-left-color:#10B981; }
+.toast.error   { border-left-color:#EF4444; }
+.toast.warn    { border-left-color:#F59E0B; }
+@keyframes slideIn { from { opacity:0; transform: translateX(20px); } to { opacity:1; transform: translateX(0); } }
+
+/* Countdown big numbers */
+.countdown { font-family:'Outfit',sans-serif; font-weight:800; color: var(--brand); font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1; letter-spacing:.02em; }
+.countdown .label { font-size:.78rem; font-weight:500; color: var(--ink-soft); letter-spacing:.18em; text-transform:uppercase; }
+
+/* Logo */
+.cloud-logo { display:inline-flex; align-items:center; gap:.5rem; font-family:'Outfit',sans-serif; font-weight: 800; color: var(--brand); font-size: 1.35rem; letter-spacing: -0.02em; }
+
+/* Pagination */
+.page-btn { width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:.65rem; font-weight:600; color:var(--ink-soft); border:1px solid rgba(61,31,184,0.08); background:#fff; transition: all .15s ease; font-family:'Outfit',sans-serif; }
+.page-btn:hover { background: var(--brand-light); color: var(--brand); }
+.page-btn.active { background: var(--brand); color:#fff; border-color: var(--brand); }
+.page-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(61,31,184,.18); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(61,31,184,.32); }
+
+/* Hide on mobile */
+@media (max-width: 1023px) {
+  .sidebar-mobile-hidden { display: none; }
+}
+
+@media (max-width: 420px) {
+  [data-testid="lang-switcher"] {
+    transform: scale(.85);
+    transform-origin: top right;
+  }
+}
+/* ==========================================================
+   Tablet Desktop Layout (768px - 1199px)
+   ========================================================== */
+
+@media (min-width:768px) and (max-width:1199px){
+
+  /* Sidebar */
+  aside{
+    width:220px !important;
+  }
+
+  /* Main content */
+  main{
+    padding:20px !important;
+  }
+
+  /* Cards */
+  .card{
+    border-radius:20px;
+  }
+
+  /* Stats */
+  .stat-card{
+    padding:16px;
+  }
+
+  .stat-icon{
+    width:46px;
+    height:46px;
+  }
+
+  /* Table */
+  .tbl th,
+  .tbl td{
+    padding:12px 8px;
+    white-space:nowrap;
+  }
+
+  .tbl{
+    width:100%;
+  }
+
+  /* Filters */
+  .input{
+    padding:.75rem .9rem;
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .btn-secondary{
+    padding:.75rem 1rem;
+  }
+
+}
+
+/*checkpoint*/
