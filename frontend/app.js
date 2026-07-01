@@ -455,6 +455,7 @@ const state = {
   currentVoucher: null,   // for check-result
   vouchers: [],
   search: '',
+  pendingWhatsAppUrl: '',
   filterPeriod: 'all',
   filterStatus: 'all',
   sortPeriod: 0,          // 0 none, 1 asc, -1 desc
@@ -1436,8 +1437,9 @@ Silakan scan QR code terlampir untuk terhubung.`
   const url =
     `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
 
-  const waTab = window.open("about:blank", "_blank");
-//  const openWhatsApp = () => window.open(url, "_blank");
+  state.pendingWhatsAppUrl = url;
+// const waTab = window.open("about:blank", "_blank");
+
 
   // Generate voucher image
   const cardEl = document.getElementById('voucher-card-sell-card');
@@ -1463,13 +1465,7 @@ Silakan scan QR code terlampir untuk terhubung.`
     cacheBust: true
   });
 
-  // Download voucher
-  downloadDataURL(dataURL, `voucher-${v.code}.png`);
-
-  // Open WhatsApp after download starts
-  if (waTab) { waTab.location.replace(url);}
-
-  // Save voucher
+    // Save voucher
   v.purchasedAt = new Date().toISOString();
   v.buyerName = name;
   v.buyerPhone = phone;
@@ -1477,6 +1473,14 @@ Silakan scan QR code terlampir untuk terhubung.`
 
   await DB.putVoucher(v);
   await refreshVouchers();
+
+  // Download voucher
+  downloadDataURL(dataURL, `voucher-${v.code}.png`);
+
+  // Open WhatsApp after download starts
+  //if (waTab) { waTab.location.replace(url);}
+  openWhatsAppModal();
+  return;
 
   closeModal();
   toast(t('voucherSent'), 'success');
@@ -1761,6 +1765,57 @@ async function openCheckPreview(code) {
     </div>
   `);
   fillVoucherQRs(document.getElementById('modal-root'));
+}
+
+function openWhatsAppModal() {
+  openModal(`
+    <div class="p-7 sm:p-8 text-center">
+
+      <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
+        <i data-lucide="badge-check" class="w-9 h-9 text-emerald-600"></i>
+      </div>
+
+      <h2 class="font-display font-bold text-2xl text-ink">
+        Voucher Ready
+      </h2>
+
+      <p class="text-ink-soft mt-2">
+        Voucher downloaded successfully.
+      </p>
+
+      <div class="mt-7 flex gap-3">
+
+        <button
+          onclick="openPendingWhatsApp()"
+          class="btn-primary flex-1">
+
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          Open WhatsApp
+
+        </button>
+
+        <button
+          onclick="closeModal()"
+          class="btn-secondary">
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+  `);
+}
+
+function openPendingWhatsApp() {
+  if (!state.pendingWhatsAppUrl) return;
+
+  window.open(state.pendingWhatsAppUrl, "_blank");
+
+  state.pendingWhatsAppUrl = "";
+
+  closeModal();
 }
 
 async function downloadVoucherImage(code, idSuffix) {
