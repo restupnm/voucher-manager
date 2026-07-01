@@ -1477,14 +1477,14 @@ Silakan scan QR code terlampir untuk terhubung.`
   // Download voucher
   downloadDataURL(dataURL, `voucher-${v.code}.png`);
 
+  closeModal();
+  toast(t('voucherSent'), 'success');
+  render();
+
   // Open WhatsApp after download starts
   //if (waTab) { waTab.location.replace(url);}
   openWhatsAppModal();
   return;
-
-  closeModal();
-  toast(t('voucherSent'), 'success');
-  render();
 }
 
 /* --- Edit voucher --- */
