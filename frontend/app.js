@@ -1790,7 +1790,7 @@ function openWhatsAppModal() {
           class="btn-primary flex-1">
 
           <i data-lucide="message-circle" class="w-5 h-5"></i>
-          Open WhatsApp
+          Send voucher
 
         </button>
 
