@@ -1411,26 +1411,19 @@ async function sendVoucher(code) {
   const defaultMsg = msg || (
     state.lang === 'en'
       ? `Hi ${name}! Thank you for buying a cloud.spot voucher.
-
 ${loginText}
-
-Valid: ${days} days
-
+Valid for: ${days} days
 Scan the QR code attached to connect.`
+    
       : state.lang === 'jw'
       ? `Halo ${name}! Matur nuwun wis tuku voucher cloud.spot.
-
 ${loginText}
-
-Sah: ${days} dino
-
+Kanggo: ${days} dino
 Monggo scan QR code sing dilampirno kanggo nyambung.`
+    
       : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.
-
 ${loginText}
-
 Berlaku: ${days} hari
-
 Silakan scan QR code terlampir untuk terhubung.`
   );
 
