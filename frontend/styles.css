@@ -110,7 +110,7 @@ html, body { background: var(--bg); }
 }
 
 .right{
-width:320px;
+width:220px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -144,6 +144,15 @@ align-self:stretch;
 border-left:2px dashed rgba(61,31,184,.15);
 margin:0 32px;
 }
+
+.voucher-logo-divider{
+    height:1px;
+    background:rgba(61,31,184,.18);
+
+    width:calc(100% + 24px);
+    margin:8px -12px 16px 0;
+}
+
 
 .voucher-ribbon{
     position:absolute;
