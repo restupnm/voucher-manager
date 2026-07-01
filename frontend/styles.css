@@ -110,7 +110,7 @@ html, body { background: var(--bg); }
 }
 
 .right{
-flex:0 0 520px;
+flex:0 0 180px;
 display:flex;
 flex-direction:column;
 align-items:center;
