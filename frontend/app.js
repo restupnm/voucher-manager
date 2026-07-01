@@ -875,7 +875,7 @@ function startCountdown() {
 function voucherCardHTML(v,status,days,idSuffix=''){return`
 <div id="voucher-card-${escapeHtml(idSuffix)}" class="voucher-card mx-auto flex items-center gap-6 w-[610px] max-w-full">
 
-  <div class="left flex flex-col w-[64%]">
+  <div class="left flex flex-col flex-1">
 
     <div class="voucher-export-header">
       <div class="voucher-export-icon">
@@ -886,7 +886,7 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
       </div>
     </div>
 
-    <div class="border-b border-brand/20 mt-2 mb-3"></div>
+    <div class="voucher-logo-divider"></div>
 
     <div class="text-[10px] tracking-[0.35em] font-bold uppercase text-brand">
       ${t('voucherCode')}
