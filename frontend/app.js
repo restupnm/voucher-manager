@@ -1436,7 +1436,8 @@ Silakan scan QR code terlampir untuk terhubung.`
   const url =
     `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
 
-  const openWhatsApp = () => window.open(url, "_blank");
+  const waTab = window.open("about:blank", "_blank");
+//  const openWhatsApp = () => window.open(url, "_blank");
 
   // Generate voucher image
   const cardEl = document.getElementById('voucher-card-sell-card');
@@ -1466,7 +1467,7 @@ Silakan scan QR code terlampir untuk terhubung.`
   downloadDataURL(dataURL, `voucher-${v.code}.png`);
 
   // Open WhatsApp after download starts
-  setTimeout(openWhatsApp, 0);
+  if (waTab) { waTab.location.replace(url);}
 
   // Save voucher
   v.purchasedAt = new Date().toISOString();
