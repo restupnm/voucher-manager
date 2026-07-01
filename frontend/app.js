@@ -1583,7 +1583,7 @@ async function downloadJSON() {
 
 function downloadExcel() {
   const rows = state.vouchers.map(v => ({
-    code: v.code, period: v.period, status: computeStatus(v), buyer: v.buyerName || '', phone: v.buyerPhone || '',
+    code: v.code, username: v.username || v.code, password: v.password || "", period: v.period, status: computeStatus(v), buyer: v.buyerName || '', phone: v.buyerPhone || '',
     purchasedAt: v.purchasedAt || '', createdAt: v.createdAt || '',
   }));
   const ws = XLSX.utils.json_to_sheet(rows);
