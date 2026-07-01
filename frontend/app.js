@@ -1382,53 +1382,98 @@ async function sendVoucher(code) {
   const name = (document.getElementById('sell-name').value || '').trim();
   const phone = (document.getElementById('sell-phone').value || '').trim();
   const msg = (document.getElementById('sell-msg').value || '').trim();
-  if (!name) { toast(t('nameRequired'), 'error'); return; }
-  if (!phone) { toast(t('phoneRequired'), 'error'); return; }
+
+  if (!name) {
+    toast(t('nameRequired'), 'error');
+    return;
+  }
+
+  if (!phone) {
+    toast(t('phoneRequired'), 'error');
+    return;
+  }
 
   const v = state.vouchers.find(x => x.code === code);
   if (!v) return;
 
- // 0. Open WhatsApp
+  // Login credentials
+  const username = v.username || v.code;
+  const password = v.password || "";
+
+  const loginText = password
+    ? `Username: *${username}*\nPassword: *${password}*`
+    : `Voucher: *${username}*`;
+
   const days = PERIODS[v.period]?.days || 0;
 
-  const defaultMsg = msg || (state.lang === 'en'
-  ? `Hi ${name}! Thank you for buying a cloud.spot voucher.\nCode: *${v.code}*\nValid: ${days} days\nScan the QR code attached to connect.`
-  : state.lang === 'jw'
-  ? `Halo ${name}! Matur nuwun wis tuku voucher cloud.spot.\nKode: *${v.code}*\nSah: ${days} dino\nMonggo scan QR code sing dilampirno kanggo nyambung.`
-  : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.\nKode: *${v.code}*\nBerlaku: ${days} hari\nSilakan scan QR code terlampir untuk terhubung.`);
+  // WhatsApp message
+  const defaultMsg = msg || (
+    state.lang === 'en'
+      ? `Hi ${name}! Thank you for buying a cloud.spot voucher.
 
-  const url = `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
-  window.open(url, "_blank");
+${loginText}
 
-  // 1. Generate voucher image
+Valid: ${days} days
+
+Scan the QR code attached to connect.`
+      : state.lang === 'jw'
+      ? `Halo ${name}! Matur nuwun wis tuku voucher cloud.spot.
+
+${loginText}
+
+Sah: ${days} dino
+
+Monggo scan QR code sing dilampirno kanggo nyambung.`
+      : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.
+
+${loginText}
+
+Berlaku: ${days} hari
+
+Silakan scan QR code terlampir untuk terhubung.`
+  );
+
+  const url =
+    `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
+
+  const openWhatsApp = () => window.open(url, "_blank");
+
+  // Generate voucher image
   const cardEl = document.getElementById('voucher-card-sell-card');
+
   await fillVoucherQRs(cardEl.parentElement);
 
-// Wait until every image inside the voucher has loaded
-await Promise.all(
-  [...cardEl.querySelectorAll("img")].map(img => {
-    if (img.complete) return Promise.resolve();
+  await Promise.all(
+    [...cardEl.querySelectorAll("img")].map(img => {
+      if (img.complete) return Promise.resolve();
 
-    return new Promise(resolve => {
-      img.onload = resolve;
-      img.onerror = resolve;
-    });
-  })
-);
+      return new Promise(resolve => {
+        img.onload = resolve;
+        img.onerror = resolve;
+      });
+    })
+  );
 
-await new Promise(r => setTimeout(r, 50));
+  await new Promise(r => setTimeout(r, 50));
+
   const dataURL = await htmlToImage.toPng(cardEl, {
     pixelRatio: 4,
     backgroundColor: null,
     cacheBust: true
   });
+
+  // Download voucher
   downloadDataURL(dataURL, `voucher-${v.code}.png`);
-  setTimeout(openWA, 444);
-  // 2. Save sale to DB
+
+  // Open WhatsApp after download starts
+  setTimeout(openWhatsApp, 800);
+
+  // Save voucher
   v.purchasedAt = new Date().toISOString();
   v.buyerName = name;
   v.buyerPhone = phone;
   v.message = msg;
+
   await DB.putVoucher(v);
   await refreshVouchers();
 
