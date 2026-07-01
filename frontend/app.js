@@ -1385,6 +1385,9 @@ async function sendVoucher(code) {
   if (!name) { toast(t('nameRequired'), 'error'); return; }
   if (!phone) { toast(t('phoneRequired'), 'error'); return; }
 
+  const v = state.vouchers.find(x => x.code === code);
+  if (!v) return;
+
  // 0. Open WhatsApp
   const days = PERIODS[v.period]?.days || 0;
 
@@ -1395,10 +1398,7 @@ async function sendVoucher(code) {
   : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.\nKode: *${v.code}*\nBerlaku: ${days} hari\nSilakan scan QR code terlampir untuk terhubung.`);
 
   const url = `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
-  window.location.href=url;
-
-  const v = state.vouchers.find(x => x.code === code);
-  if (!v) return;
+  window.open(url, "_blank");
 
   // 1. Generate voucher image
   const cardEl = document.getElementById('voucher-card-sell-card');
