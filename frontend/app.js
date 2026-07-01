@@ -1561,11 +1561,14 @@ async function handleImportFile(ev) {
     if (await DB.getVoucher(code)) { skipped++; continue; }
     const purchasedAt = (r.purchasedAt || r.PurchasedAt || '') ? new Date(r.purchasedAt || r.PurchasedAt).toISOString() : null;
     await DB.putVoucher({
-      code, period,
+      code, 
+      username: (r.username || r.Username || code).toString().trim(),
+      password: (r.password || r.Password || '').toString().trim(),
+      period,
       buyerName: (r.buyer || r.Buyer || r.name || '').toString(),
       buyerPhone: (r.phone || r.Phone || '').toString(),
       purchasedAt,
-      createdAt: new Date().toISOString(),
+      createdAt: (r.createdAt || r.CreatedAt || new Date().toISOString()),
     });
     added++;
   }
