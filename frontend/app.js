@@ -1395,7 +1395,7 @@ async function sendVoucher(code) {
   : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.\nKode: *${v.code}*\nBerlaku: ${days} hari\nSilakan scan QR code terlampir untuk terhubung.`);
 
   const url = `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(defaultMsg)}`;
-  window.open(url, "_blank");
+  window.location.href=url;
 
   const v = state.vouchers.find(x => x.code === code);
   if (!v) return;
