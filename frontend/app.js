@@ -1058,7 +1058,7 @@ function viewDashboard() {
         <div class="relative md:col-span-1">
           <i data-lucide="search" class="w-5 h-5 text-ink-soft absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
           <input data-testid="filter-search" class="input pl-10" placeholder="${t('searchPlaceholder')}" value="${escapeHtml(state.search)}"
-            oninput="state.search=this.value;state.page=1;render();" />
+                oninput="searchVoucher(this)"
         </div>
         <select data-testid="filter-period" class="input cursor-pointer" onchange="state.filterPeriod=this.value;state.page=1;render();">
           <option value="all" ${state.filterPeriod==='all'?'selected':''}>${t('allPeriods')}</option>
@@ -1254,6 +1254,19 @@ function paginationHTML(total, totalPages) {
       <button data-testid="page-next" class="page-btn" ${p===totalPages?'disabled':''} onclick="state.page=Math.min(${totalPages},state.page+1);render();"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
     </div>
   </div>`;
+}
+
+function searchVoucher(input) {
+  state.search = input.value;
+  state.page = 1;
+
+  render();
+
+  const el = document.querySelector('[data-testid="filter-search"]');
+  if (el) {
+    el.focus();
+    el.setSelectionRange(el.value.length, el.value.length);
+  }
 }
 
 async function renderQRThumbnails() {
