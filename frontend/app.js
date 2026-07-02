@@ -1109,7 +1109,7 @@ function viewDashboard() {
 
 function statCardHTML(icon, bgColor, fgColor, title, value, sub, testid, filter) {
 return `
-<divclass="stat-card cursor-pointer transition-all duration-200 ${
+<div class="stat-card cursor-pointer transition-all duration-200 ${
     state.statusFilter === filter? 'ring-2 ring-brand shadow-lg': 'hover:shadow-md'}"
     data-testid="${testid}"
     onclick="toggleStatusFilter('${filter}')">
@@ -1197,6 +1197,7 @@ function applyFilters(list) {
   if (q) arr = arr.filter(v => v.code.toLowerCase().includes(q) || (v.buyerName || '').toLowerCase().includes(q));
   if (state.filterPeriod !== 'all') arr = arr.filter(v => v.period === state.filterPeriod);
   if (state.filterStatus !== 'all') arr = arr.filter(v => computeStatus(v) === state.filterStatus);
+  if (state.statusFilter !== 'all') arr = arr.filter(v => computeStatus(v) === state.statusFilter);
   // sort by period if requested, else by createdAt desc
   if (state.sortPeriod !== 0) {
     arr.sort((a, b) => state.sortPeriod * (PERIOD_ORDER.indexOf(a.period) - PERIOD_ORDER.indexOf(b.period)));
