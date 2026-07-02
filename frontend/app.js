@@ -1058,7 +1058,7 @@ function viewDashboard() {
         <div class="relative md:col-span-1">
           <i data-lucide="search" class="w-5 h-5 text-ink-soft absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
           <input data-testid="filter-search" class="input pl-10" placeholder="${t('searchPlaceholder')}" value="${escapeHtml(state.search)}"
-                oninput="searchVoucher(this)"
+                oninput="searchVoucher(this)" />
         </div>
         <select data-testid="filter-period" class="input cursor-pointer" onchange="state.filterPeriod=this.value;state.page=1;render();">
           <option value="all" ${state.filterPeriod==='all'?'selected':''}>${t('allPeriods')}</option>
