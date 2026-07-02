@@ -1623,8 +1623,8 @@ function openImportModal() {
 
 function downloadTemplate() {
   const ws = XLSX.utils.json_to_sheet([
-    { code: '1M-example', period: '1M', buyer: '', phone: '', purchasedAt: '' },
-    { code: '', period: '1H', buyer: '', phone: '', purchasedAt: '' },
+    { code: '1M-example', username: '', password: '', period: '1M', buyer: '', phone: '', purchasedAt: '' },
+    { code: '', username: '', password: '', period: '1H', buyer: '', phone: '', purchasedAt: '' },
   ]);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'vouchers');
@@ -1639,28 +1639,31 @@ async function handleImportFile(ev) {
   const wb = XLSX.read(buf, { type: 'array' });
   const ws = wb.Sheets[wb.SheetNames[0]];
   const rows = XLSX.utils.sheet_to_json(ws);
-  let added = 0, skipped = 0;
+  let added = 0, updated = 0;
   for (const r of rows) {
     const period = (r.period || r.Period || r.PERIOD || '').toString().trim().toUpperCase();
     if (!PERIODS[period]) { skipped++; continue; }
     let code = (r.code || r.Code || r.CODE || '').toString().trim();
     if (!code) code = randCode(period, 4);
-    if (await DB.getVoucher(code)) { skipped++; continue; }
+    const existing = await DB.getVoucher(code);
     const purchasedAt = (r.purchasedAt || r.PurchasedAt || '') ? new Date(r.purchasedAt || r.PurchasedAt).toISOString() : null;
-    await DB.putVoucher({
-      code, 
-      username: (r.username || r.Username || code).toString().trim(),
-      password: (r.password || r.Password || '').toString().trim(),
-      period,
-      buyerName: (r.buyer || r.Buyer || r.name || '').toString(),
-      buyerPhone: (r.phone || r.Phone || '').toString(),
-      purchasedAt,
-      createdAt: (r.createdAt || r.CreatedAt || new Date().toISOString()),
-    });
-    added++;
+await DB.putVoucher({
+  ...(existing || {}),
+  code,
+  username: (r.username || r.Username || existing?.username || code).toString().trim(),
+  password: (r.password || r.Password || existing?.password || "").toString().trim(),
+  period,
+  buyerName: (r.buyer || r.Buyer || r.name || existing?.buyerName || "").toString(),
+  buyerPhone: (r.phone || r.Phone || existing?.buyerPhone || "").toString(),
+  purchasedAt,
+  createdAt: existing?.createdAt || (r.createdAt || r.CreatedAt || new Date().toISOString())
+  });
+    if (existing) updated++;
+    else  
+      added++;
   }
   await refreshVouchers();
-  document.getElementById('import-result').innerHTML = `<div class="p-3 bg-emerald-50 text-emerald-700 rounded-xl">${t('importResult')}: <b>${added}</b> • ${t('skipped')}: <b>${skipped}</b></div>`;
+  document.getElementById('import-result').innerHTML = `<div class="p-3 bg-emerald-50 text-emerald-700 rounded-xl">Added: <b>${added}</b> • Updated: <b>${updated}</b></div>`;
   render();
 }
 
