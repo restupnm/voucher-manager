@@ -583,6 +583,10 @@ async function seedIfEmpty() {
   const pwd = await DB.getSetting('adminPassword');
   if (!pwd) await DB.setSetting('adminPassword', DEFAULT_ADMIN_PASSWORD);
   if (all.length > 0) return;
+
+  // disable demo
+  return;
+  
   // Seed a few demo vouchers
   const now = Date.now();
   const demo = [
