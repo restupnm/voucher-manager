@@ -557,8 +557,20 @@ function sortArrow(sort){
 
   return `<i data-lucide="${
     sort===1?'chevron-up':'chevron-down'
-  }" class="w-3.5 h-3.5"></i>`;
+  }" class="w-3.5 h-3.5 shrink-0"></i>`;
 }
+
+function sortableHeader(label, field) {
+  return `
+    <th class="cursor-pointer select-none" onclick="toggleSort('${field}')">
+      <span class="inline-flex items-center gap-1 whitespace-nowrap">
+        ${label}
+        ${sortArrow(state[`sort${field[0].toUpperCase()}${field.slice(1)}`])}
+      </span>
+    </th>
+  `;
+}
+
 
 async function makeQR(text, size = 256) {
   const cacheKey = `${text}@${size}`;
@@ -1112,25 +1124,10 @@ function viewDashboard() {
             <tr>
               <th class="w-12">${t('no')}</th>
               
-<th onclick="toggleSort('voucher')">
-  ${t('voucher')}
-  ${sortArrow(state.sortVoucher)}
-</th>
-
-<th onclick="toggleSort('period')">
-  ${t('period')}
-  ${sortArrow(state.sortPeriod)}
-</th>
-              
-<th onclick="toggleSort('status')">
-  ${t('status')}
-  ${sortArrow(state.sortStatus)}
-</th>
-              
-<th onclick="toggleSort('buyer')">
-  ${t('buyer')}
-  ${sortArrow(state.sortBuyer)}
-</th>
+${sortableHeader(t('voucher'), 'voucher')}
+${sortableHeader(t('period'), 'period')}
+${sortableHeader(t('buyer'), 'buyer')}
+${sortableHeader(t('status'), 'status')}
 
               <th>${t('purchasedAt')}</th>
               <th>${t('qrCode')}</th>
