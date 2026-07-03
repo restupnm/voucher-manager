@@ -74,7 +74,7 @@ html, body { background: var(--bg); }
 
 /* Table */
 .tbl { width:100%; border-collapse: collapse; }
-.tbl thead th { font-family:'Outfit',sans-serif; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); padding: 1rem .75rem; border-bottom: 1px solid var(--bg); text-align:left; }
+.tbl thead th { font-family:'Outfit',sans-serif; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); padding: 1rem .75rem; border-bottom: 1px solid var(--bg); text-align:center; }
 .tbl tbody td { padding: .9rem .75rem; border-bottom: 1px solid var(--bg); color: var(--ink); font-size: .92rem; vertical-align: middle; }
 .tbl tbody tr { transition: background .15s ease; }
 .tbl tbody tr:hover { background: rgba(239,235,255,0.45); }
