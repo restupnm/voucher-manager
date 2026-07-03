@@ -333,6 +333,12 @@ margin:0 0px;
   .sidebar-mobile-hidden { display: none; }
 }
 
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
 @media (max-width: 420px) {
   [data-testid="lang-switcher"] {
     transform: scale(.85);
