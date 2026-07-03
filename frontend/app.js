@@ -460,6 +460,9 @@ const state = {
   filterPeriod: 'all',
   filterStatus: 'all',
   sortPeriod: 0,          // 0 none, 1 asc, -1 desc
+  sortVoucher: 0,
+  sortStatus: 0,
+  sortBuyer: 0,
   page: 1,
   sidebarView: 'dashboard', // 'dashboard' | 'backup'
   countdownTimerId: null,
@@ -528,6 +531,17 @@ function normalizePhone(p) {
 function toggleStatusFilter(filter) {
   state.statusFilter =
   state.statusFilter === filter ? 'all' : filter;
+  render();
+}
+
+function toggleVoucherSort() {
+  state.sortVoucher = state.sortVoucher === 1 ? -1 :
+                      state.sortVoucher === -1 ? 0 : 1;
+
+  state.sortBuyer = 0;
+  state.sortStatus = 0;
+  state.sortPeriod = 0;
+
   render();
 }
 
@@ -1082,7 +1096,17 @@ function viewDashboard() {
           <thead>
             <tr>
               <th class="w-12">${t('no')}</th>
-              <th>${t('voucher')}</th>
+              
+<th class="cursor-pointer select-none" onclick="toggleVoucherSort()">
+  <span class="inline-flex items-center gap-1">
+    ${t('voucher')}
+    ${
+      state.sortVoucher !== 0
+      ? `<i data-lucide="${state.sortVoucher===1?'chevron-up':'chevron-down'}" class="w-3.5 h-3.5"></i>`
+      : ''
+    }
+  </span>
+</th>
               <th class="cursor-pointer select-none" onclick="togglePeriodSort()">
                 <span class="inline-flex items-center gap-1">${t('periode')} <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5"></i></span>
               </th>
@@ -1207,6 +1231,15 @@ function applyFilters(list) {
     arr.sort((a, b) => state.sortPeriod * (PERIOD_ORDER.indexOf(a.period) - PERIOD_ORDER.indexOf(b.period)));
   } else {
     arr.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+  }
+  if (state.sortVoucher !== 0) {
+  arr.sort((a, b) =>
+    state.sortVoucher *
+    a.code.localeCompare(b.code, undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    })
+  );
   }
   return arr;
 }
