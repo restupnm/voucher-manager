@@ -560,9 +560,9 @@ function sortArrow(sort){
   }" class="w-3.5 h-3.5 shrink-0"></i>`;
 }
 
-function sortableHeader(label, field) {
+function sortableHeader(label, field, extraClass = '') {
   return `
-    <th class="cursor-pointer select-none" onclick="toggleSort('${field}')">
+    <th class="cursor-pointer select-none ${extraClass}" onclick="toggleSort('${field}')">
       <span class="inline-flex items-center gap-1 whitespace-nowrap">
         ${label}
         ${sortArrow(state[`sort${field[0].toUpperCase()}${field.slice(1)}`])}
@@ -1125,12 +1125,12 @@ function viewDashboard() {
               <th class="w-12">${t('no')}</th>
               
 ${sortableHeader(t('voucher'), 'voucher')}
-${sortableHeader(t('period'), 'period')}
+${sortableHeader(t('period'), 'period', 'hide-mobile')}
 ${sortableHeader(t('status'), 'status')}
-${sortableHeader(t('buyer'), 'buyer')}
+${sortableHeader(t('buyer'), 'buyer', 'hide-mobile')}
 
-              <th>${t('purchasedAt')}</th>
-              <th>${t('qrCode')}</th>
+              <th class="hide-mobile">${t('purchasedAt')}</th>
+              <th class="hide-mobile">${t('qrCode')}</th>
               <th class="text-right pr-4">${t('checkout')}</th>
             </tr>
           </thead>
@@ -1295,11 +1295,11 @@ function rowHTML(v, no) {
   return `<tr data-testid="row-${escapeHtml(v.code)}">
     <td class="text-ink-soft">${no}</td>
     <td><span class="font-display font-bold text-ink">${escapeHtml(v.code)}</span></td>
-    <td><span class="pill ${periodInfo.pillClass}">${t(periodInfo.labelKey)}</span></td>
+    <td class="hide-mobile"><span class="pill ${periodInfo.pillClass}">${t(periodInfo.labelKey)}</span></td>
     <td><span class="pill pill-${status}">${statusLabel}</span></td>
-    <td class="text-ink">${escapeHtml(v.buyerName || '-')}</td>
-    <td class="text-ink-soft text-xs">${v.purchasedAt ? formatDateID(v.purchasedAt) : '-'}</td>
-    <td><div class="w-12 h-12 bg-white border border-brand/10 rounded-lg p-1 cursor-pointer hover:scale-110 transition-transform" onclick="openCheckPreview('${escapeHtml(v.code)}')"><img data-qr-text="${escapeHtml(v.code)}" alt="qr" class="w-full h-full"/></div></td>
+    <td class="hide-mobile text-ink">${escapeHtml(v.buyerName || '-')}</td>
+    <td class="hide-mobile text-ink-soft text-xs">${v.purchasedAt ? formatDateID(v.purchasedAt) : '-'}</td>
+    <td class="hide-mobile"><div class="w-12 h-12 bg-white border border-brand/10 rounded-lg p-1 cursor-pointer hover:scale-110 transition-transform" onclick="openCheckPreview('${escapeHtml(v.code)}')"><img data-qr-text="${escapeHtml(v.code)}" alt="qr" class="w-full h-full"/></div></td>
     <td class="text-right pr-2">
       ${status === 'available'
         ? `<button data-testid="sell-${escapeHtml(v.code)}" onclick="openSellModal('${escapeHtml(v.code)}')" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-100 text-emerald-700 hover:bg-emerald-200 transition-all font-semibold text-sm"><i data-lucide="shopping-cart" class="w-4 h-4"></i> ${t('sell')}</button>`
