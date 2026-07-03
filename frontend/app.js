@@ -1259,17 +1259,6 @@ function applyFilters(list) {
   );
   }
 
-if (state.sortBuyer !== 0) {
-  arr.sort((a, b) =>
-    state.sortBuyer *
-    (a.buyerName || '').localeCompare(
-      b.buyerName || '',
-      undefined,
-      { sensitivity: 'base' }
-    )
-  );
-}
-
 if (state.sortStatus !== 0) {
 
   const order = {
@@ -1283,6 +1272,17 @@ if (state.sortStatus !== 0) {
     (order[computeStatus(a)] - order[computeStatus(b)])
   );
 
+}
+
+if (state.sortBuyer !== 0) {
+  arr.sort((a, b) =>
+    state.sortBuyer *
+    (a.buyerName || '').localeCompare(
+      b.buyerName || '',
+      undefined,
+      { sensitivity: 'base' }
+    )
+  );
 }
   
   return arr;
