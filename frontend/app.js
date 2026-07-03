@@ -556,6 +556,17 @@ function toggleBuyerSort() {
   render();
 }
 
+function toggleStatusSort() {
+  state.sortStatus = state.sortStatus === 1 ? -1 :
+                     state.sortStatus === -1 ? 0 : 1;
+
+  state.sortVoucher = 0;
+  state.sortBuyer = 0;
+  state.sortPeriod = 0;
+
+  render();
+}
+
 async function makeQR(text, size = 256) {
   const cacheKey = `${text}@${size}`;
 
@@ -1121,7 +1132,17 @@ function viewDashboard() {
               <th class="cursor-pointer select-none" onclick="togglePeriodSort()">
                 <span class="inline-flex items-center gap-1">${t('periode')} <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5"></i></span>
               </th>
-              <th>${t('status')}</th>
+              
+<th class="cursor-pointer select-none" onclick="toggleStatusSort()">
+  <span class="inline-flex items-center gap-1">
+    ${t('status')}
+    ${
+      state.sortStatus !== 0
+      ? `<i data-lucide="${state.sortStatus===1?'chevron-up':'chevron-down'}" class="w-3.5 h-3.5"></i>`
+      : ''
+    }
+  </span>
+</th>
               
 <th class="cursor-pointer select-none" onclick="toggleBuyerSort()">
   <span class="inline-flex items-center gap-1">
@@ -1273,6 +1294,21 @@ if (state.sortBuyer !== 0) {
       { sensitivity: 'base' }
     )
   );
+}
+
+if (state.sortStatus !== 0) {
+
+  const order = {
+    available: 0,
+    used: 1,
+    expired: 2
+  };
+
+  arr.sort((a, b) =>
+    state.sortStatus *
+    (order[computeStatus(a)] - order[computeStatus(b)])
+  );
+
 }
   
   return arr;
