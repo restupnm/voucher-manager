@@ -534,48 +534,30 @@ function toggleStatusFilter(filter) {
   render();
 }
 
-function toggleVoucherSort() {
-  state.sortVoucher = state.sortVoucher === 1 ? -1 :
-                      state.sortVoucher === -1 ? 0 : 1;
+function toggleSort(type) {
 
-  state.sortBuyer = 0;
-  state.sortStatus = 0;
+  const key = `sort${type[0].toUpperCase()}${type.slice(1)}`;
+
+  const value = state[key];
+
   state.sortPeriod = 0;
-
-  render();
-}
-
-function toggleBuyerSort() {
-  state.sortBuyer = state.sortBuyer === 1 ? -1 :
-                    state.sortBuyer === -1 ? 0 : 1;
-
-  state.sortVoucher = 0;
-  state.sortStatus = 0;
-  state.sortPeriod = 0;
-
-  render();
-}
-
-function toggleStatusSort() {
-  state.sortStatus = state.sortStatus === 1 ? -1 :
-                     state.sortStatus === -1 ? 0 : 1;
-
-  state.sortVoucher = 0;
-  state.sortBuyer = 0;
-  state.sortPeriod = 0;
-
-  render();
-}
-
-function togglePeriodSort() {
-  state.sortPeriod = state.sortPeriod === 1 ? -1 :
-                     state.sortPeriod === -1 ? 0 : 1;
-
   state.sortVoucher = 0;
   state.sortBuyer = 0;
   state.sortStatus = 0;
 
+  state[key] =
+    value === 1 ? -1 :
+    value === -1 ? 0 : 1;
+
   render();
+}
+
+function sortArrow(sort){
+  if(!sort) return '';
+
+  return `<i data-lucide="${
+    sort===1?'chevron-up':'chevron-down'
+  }" class="w-3.5 h-3.5"></i>`;
 }
 
 async function makeQR(text, size = 256) {
@@ -1130,40 +1112,24 @@ function viewDashboard() {
             <tr>
               <th class="w-12">${t('no')}</th>
               
-<th class="cursor-pointer select-none" onclick="toggleVoucherSort()">
-  <span class="inline-flex items-center gap-1">
-    ${t('voucher')}
-    ${
-      state.sortVoucher !== 0
-      ? `<i data-lucide="${state.sortVoucher===1?'chevron-up':'chevron-down'}" class="w-3.5 h-3.5"></i>`
-      : ''
-    }
-  </span>
+<th onclick="toggleSort('voucher')">
+  ${t('voucher')}
+  ${sortArrow(state.sortVoucher)}
 </th>
-              <th class="cursor-pointer select-none" onclick="togglePeriodSort()">
-                <span class="inline-flex items-center gap-1">${t('periode')} <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5"></i></span>
-              </th>
-              
-<th class="cursor-pointer select-none" onclick="toggleStatusSort()">
-  <span class="inline-flex items-center gap-1">
-    ${t('status')}
-    ${
-      state.sortStatus !== 0
-      ? `<i data-lucide="${state.sortStatus===1?'chevron-up':'chevron-down'}" class="w-3.5 h-3.5"></i>`
-      : ''
-    }
-  </span>
+
+<th onclick="toggleSort('period')">
+  ${t('period')}
+  ${sortArrow(state.sortPeriod)}
 </th>
               
-<th class="cursor-pointer select-none" onclick="toggleBuyerSort()">
-  <span class="inline-flex items-center gap-1">
-    ${t('buyer')}
-    ${
-      state.sortBuyer !== 0
-      ? `<i data-lucide="${state.sortBuyer===1?'chevron-up':'chevron-down'}" class="w-3.5 h-3.5"></i>`
-      : ''
-    }
-  </span>
+<th onclick="toggleSort('status')">
+  ${t('status')}
+  ${sortArrow(state.sortStatus)}
+</th>
+              
+<th onclick="toggleSort('buyer')">
+  ${t('buyer')}
+  ${sortArrow(state.sortBuyer)}
 </th>
 
               <th>${t('purchasedAt')}</th>
