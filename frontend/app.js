@@ -545,6 +545,17 @@ function toggleVoucherSort() {
   render();
 }
 
+function toggleBuyerSort() {
+  state.sortBuyer = state.sortBuyer === 1 ? -1 :
+                    state.sortBuyer === -1 ? 0 : 1;
+
+  state.sortVoucher = 0;
+  state.sortStatus = 0;
+  state.sortPeriod = 0;
+
+  render();
+}
+
 async function makeQR(text, size = 256) {
   const cacheKey = `${text}@${size}`;
 
@@ -1111,7 +1122,18 @@ function viewDashboard() {
                 <span class="inline-flex items-center gap-1">${t('periode')} <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5"></i></span>
               </th>
               <th>${t('status')}</th>
-              <th>${t('buyer')}</th>
+              
+<th class="cursor-pointer select-none" onclick="toggleBuyerSort()">
+  <span class="inline-flex items-center gap-1">
+    ${t('buyer')}
+    ${
+      state.sortBuyer !== 0
+      ? `<i data-lucide="${state.sortBuyer===1?'chevron-up':'chevron-down'}" class="w-3.5 h-3.5"></i>`
+      : ''
+    }
+  </span>
+</th>
+
               <th>${t('purchasedAt')}</th>
               <th>${t('qrCode')}</th>
               <th class="text-right pr-4">${t('checkout')}</th>
@@ -1241,6 +1263,18 @@ function applyFilters(list) {
     })
   );
   }
+
+if (state.sortBuyer !== 0) {
+  arr.sort((a, b) =>
+    state.sortBuyer *
+    (a.buyerName || '').localeCompare(
+      b.buyerName || '',
+      undefined,
+      { sensitivity: 'base' }
+    )
+  );
+}
+  
   return arr;
 }
 
