@@ -64,7 +64,7 @@ html, body { background: var(--bg); }
 .input-lg { padding: 1.05rem 1.1rem; font-size: 1rem; }
 
 /* Status pills */
-.pill { display:inline-flex; align-items:center; gap:.35rem; padding:.3rem .75rem; border-radius: 9999px; font-size: .78rem; font-weight: 600; font-family:'Outfit',sans-serif; white-space: nowrap; }
+.pill { display:inline-flex; align-items:center; gap:.35rem; padding:.3rem .75rem; border-radius: 9999px; font-size: .78rem; font-weight: 600; font-family:'Outfit',sans-serif; min-width: 90px; justify-content:center; }
 .pill-available { background:#DCFCE7; color:#15803D; }
 .pill-used      { background:#FEF3C7; color:#B45309; }
 .pill-expired   { background:#FEE2E2; color:#B91C1C; }
