@@ -1084,7 +1084,16 @@ function viewDashboard() {
   ${state.sidebarView==='dashboard'?`
   <div class="flex items-center gap-3">
     <button data-testid="import-btn" onclick="openImportModal()" class="btn-secondary min-w-[180px] justify-center"><i data-lucide="upload" class="w-4 h-4"></i> ${t('importVoucher')}</button>
-    <button data-testid="add-voucher-btn" onclick="openAddModal()" class="btn-primary min-w-[180px] justify-center"><i data-lucide="plus" class="w-4 h-4"></i> ${t('addVoucher')}</button>
+<button
+  data-testid="add-voucher-btn"
+  onclick="openAddModal()"
+  title="${t('addVoucher')}"
+  aria-label="${t('addVoucher')}"
+  class="btn-primary w-11 h-11 sm:w-auto sm:h-auto sm:min-w-[180px] justify-center px-0 sm:px-4"
+>
+  <i data-lucide="plus" class="w-4 h-4"></i>
+  <span class="hidden sm:inline ml-2">${t('addVoucher')}</span>
+</button>
   </div>`:''}
 </div>
 
