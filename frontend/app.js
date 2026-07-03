@@ -1126,8 +1126,8 @@ function viewDashboard() {
               
 ${sortableHeader(t('voucher'), 'voucher')}
 ${sortableHeader(t('period'), 'period')}
-${sortableHeader(t('buyer'), 'buyer')}
 ${sortableHeader(t('status'), 'status')}
+${sortableHeader(t('buyer'), 'buyer')}
 
               <th>${t('purchasedAt')}</th>
               <th>${t('qrCode')}</th>
