@@ -567,6 +567,17 @@ function toggleStatusSort() {
   render();
 }
 
+function togglePeriodSort() {
+  state.sortPeriod = state.sortPeriod === 1 ? -1 :
+                     state.sortPeriod === -1 ? 0 : 1;
+
+  state.sortVoucher = 0;
+  state.sortBuyer = 0;
+  state.sortStatus = 0;
+
+  render();
+}
+
 async function makeQR(text, size = 256) {
   const cacheKey = `${text}@${size}`;
 
@@ -1312,11 +1323,6 @@ if (state.sortStatus !== 0) {
 }
   
   return arr;
-}
-
-function togglePeriodSort() {
-  state.sortPeriod = state.sortPeriod === 0 ? 1 : state.sortPeriod === 1 ? -1 : 0;
-  render();
 }
 
 function rowHTML(v, no) {
