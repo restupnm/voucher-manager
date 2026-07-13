@@ -68,6 +68,8 @@ const I18N = {
     // Sidebar
     dashboard: 'Dashboard',
     backup: 'Backup',
+    locations:"Locations",
+    addLocation:"Add Location",
     cloudSpotHotspot: 'Cloud Spot Hotspot',
     routerLabel: 'Router',
     uptime: 'Uptime',
@@ -196,6 +198,8 @@ const I18N = {
     vouchers: 'voucher',
     dashboard: 'Dashboard',
     backup: 'Backup',
+    locations:"Lokasi",
+    addLocation:"Tambah Lokasi",
     cloudSpotHotspot: 'Cloud Spot Hotspot',
     routerLabel: 'Router',
     uptime: 'Uptime',
@@ -316,6 +320,8 @@ const I18N = {
     vouchers: 'voucher',
     dashboard: 'Dashboard',
     backup: 'Backup',
+    locations:"Lokasi",
+    addLocation:"Tambah Lokasi",
     cloudSpotHotspot: 'Cloud Spot Hotspot',
     routerLabel: 'Router',
     uptime: 'Urip Suwe',
@@ -1404,13 +1410,31 @@ function backupViewHTML() {
   </section>`;
 }
 
-function settingsViewHTML(){
-  return `
-  <section class="card p-6 fade-in">
-    <h2 class="font-display text-2xl font-bold mb-2">${t('settings')}</h2>
-    <p class="text-ink-soft">Settings coming soon...</p>
-  </section>`;
-}
+function settingsViewHTML(){return`
+<section class="space-y-5 fade-in">
+
+<div class="card p-6">
+<h2 class="font-display text-2xl font-bold mb-5">${t('locations')}</h2>
+
+<div class="rounded-xl border border-brand/10 p-4 flex items-center justify-between">
+<div>
+<div class="font-semibold text-ink">All</div>
+<div class="text-sm text-ink-soft">Super Administrator</div>
+</div>
+<span class="pill pill-available">System</span>
+</div>
+
+<div class="mt-4">
+<button class="btn-primary opacity-50 cursor-not-allowed" disabled>
+<i data-lucide="plus" class="w-4 h-4"></i>
+${t('addLocation')}
+</button>
+</div>
+
+</div>
+
+</section>`;
+}a
 
 /* ================================================================== *
  *  Modals
