@@ -641,6 +641,8 @@ function downloadDataURL(dataURL, filename) {
  *  Initial seed (only if DB is empty)
  * ================================================================== */
 async function seedIfEmpty() {
+  if(!state.locations.length) await DB.putLocation({id:'all',name:'All',type:'super'});
+  await refreshLocations();
   const all = await DB.getAllVouchers();
   const pwd = await DB.getSetting('adminPassword');
   if (!pwd) await DB.setSetting('adminPassword', DEFAULT_ADMIN_PASSWORD);
@@ -2023,6 +2025,7 @@ function bindEvents() { /* mostly inline onclick; nothing extra for now */ }
  * ================================================================== */
 (async function boot() {
   await seedIfEmpty();
+  await refreshLocations();
   await refreshVouchers();
   render();
 })();
