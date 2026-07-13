@@ -456,6 +456,9 @@ const DB = (() => {
     async clearVouchers() { const s = await tx('vouchers', 'readwrite'); return reqP(s.clear()); },
     async getSetting(key) { const s = await tx('settings'); const r = await reqP(s.get(key)); return r ? r.value : null; },
     async setSetting(key, value) { const s = await tx('settings', 'readwrite'); return reqP(s.put({ key, value })); },
+    async getLocations() { const db = await this.open(); return new Promise((resolve, reject) => { const tx = db.transaction('locations', 'readonly'); const req = tx.objectStore('locations').getAll(); req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); }); },
+    async putLocation(location) { const db = await this.open(); return new Promise((resolve, reject) => { const tx = db.transaction('locations', 'readwrite'); tx.objectStore('locations').put(location); tx.oncomplete = resolve; tx.onerror = () => reject(tx.error);  }); },
+    async deleteLocation(id) { const db = await this.open(); return new Promise((resolve, reject) => { const tx = db.transaction('locations', 'readwrite'); tx.objectStore('locations').delete(id); tx.oncomplete = resolve; tx.onerror = () => reject(tx.error); }); },
   };
 })();
 
