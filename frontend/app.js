@@ -1762,7 +1762,7 @@ await DB.putVoucher({
 /* --- Backup / Restore --- */
 async function downloadJSON() {
   const data = { exportedAt: new Date().toISOString(), vouchers: state.vouchers, adminPassword: await DB.getSetting('adminPassword') };
-  downloadBlob(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), `cloudspot-backup-${new Date().toISOString().slice(0,10)}.json`);
+  downloadBlob(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), `${DB_NAME}_bak-${new Date().toISOString().slice(0,10)}.json`);
   toast(t('saved'), 'success');
 }
 
@@ -1775,7 +1775,7 @@ function downloadExcel() {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'vouchers');
   const buf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-  downloadBlob(new Blob([buf], { type: 'application/octet-stream' }), `cloudspot-vouchers-${new Date().toISOString().slice(0,10)}.xlsx`);
+  downloadBlob(new Blob([buf], { type: 'application/octet-stream' }), `${DB_NAME}-${new Date().toISOString().slice(0,10)}.xlsx`);
 }
 
 async function restoreJSON(ev) {
