@@ -1379,7 +1379,7 @@ async function renderQRThumbnails() {
 }
 
 /* ================================================================== *
- *  Backup view
+ *  Backup & settings view
  * ================================================================== */
 function backupViewHTML() {
   return `
@@ -1401,6 +1401,14 @@ function backupViewHTML() {
       <div class="font-semibold text-ink mb-2 flex items-center gap-2"><i data-lucide="upload-cloud" class="w-5 h-5 text-brand"></i>${t('restoreJson')}</div>
       <input data-testid="restore-input" type="file" accept="application/json" onchange="restoreJSON(event)" class="block w-full text-sm text-ink-soft file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:font-semibold file:bg-brand file:text-white hover:file:bg-brand-hover transition-colors cursor-pointer"/>
     </div>
+  </section>`;
+}
+
+function settingsViewHTML(){
+  return `
+  <section class="card p-6 fade-in">
+    <h2 class="font-display text-2xl font-bold mb-2">${t('settings')}</h2>
+    <p class="text-ink-soft">Settings coming soon...</p>
   </section>`;
 }
 
