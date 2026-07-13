@@ -413,7 +413,7 @@ const BRAND = {
     labelNameZ: 'NET',
   footerName: 'visioNET Hotspot',
   copyrightYear: '2026',
-  company: 'visio.NET'
+  companyName: 'visio.NET'
 };
 
 /* ================================================================== *
@@ -830,7 +830,7 @@ ${cloudLogoHTML()}
 
 </div>`;}
 
-function cloudLogoHTML(){return`<div class="flex justify-center items-center w-full py-2"><img src="assets/logo.png" alt="cloud.spot" style="width:160px;height:auto"></div>`;}
+function cloudLogoHTML(){return`<div class="flex justify-center items-center w-full py-2"><img src="assets/logo.png" alt=${BRAND.appName} style="width:160px;height:auto"></div>`;}
 
 function langSwitcherHTML() {
   const langs = ['en', 'id', 'jw'];
@@ -997,7 +997,7 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
 
   <div class="voucher-ribbon">
     <i data-lucide="globe" class="w-4 h-4"></i>
-    <span>${t('websiteLabel')}</span>
+    <span>${BRAND.labelName}</span>
   </div>
 
 </div>`;}
@@ -1166,7 +1166,7 @@ ${sortableHeader(t('buyer'), 'buyer', 'hide-mobile')}
       `}
 
       <footer class="text-center text-ink-soft text-sm mt-10 pb-4">
-        © ${new Date().getFullYear()} <span class="font-bold text-brand">cloud.spot</span>. All rights reserved.
+        © ${BRAND.copyrightYear} <span class="font-bold text-brand">${BRAND.companyName}</span>. All rights reserved.
       </footer>
     </main>
   </div>`;
@@ -1233,7 +1233,7 @@ flex-col">
     </nav>
 
     <div class="bg-brand-light rounded-2xl p-4 mb-4 text-sm">
-      <div class="flex items-center gap-2 font-semibold text-brand mb-2"><i data-lucide="wifi" class="w-4 h-4"></i> ${t('cloudSpotHotspot')}</div>
+      <div class="flex items-center gap-2 font-semibold text-brand mb-2"><i data-lucide="wifi" class="w-4 h-4"></i> ${BRAND.footerName}</div>
       <div class="text-ink-soft text-xs leading-relaxed">
         <div>${t('routerLabel')}: <span class="font-semibold text-ink">MikroTik hEX</span></div>
         <div>${t('uptime')}: <span class="font-semibold text-ink">2d 14h 32m</span></div>
@@ -1540,18 +1540,18 @@ async function sendVoucher(code) {
   // WhatsApp message
   const defaultMsg = msg || (
     state.lang === 'en'
-      ? `Hi ${name}! Thank you for buying a cloud.spot voucher.
+      ? `Hi ${name}! Thank you for buying a ${BRAND.labelName} voucher.
 ${loginText}
 Valid for: ${days} days
 Scan the QR code attached to connect.`
     
       : state.lang === 'jw'
-      ? `Halo ${name}! Matur nuwun wis tuku voucher cloud.spot.
+      ? `Halo ${name}! Matur nuwun wis tuku voucher ${BRAND.labelName}.
 ${loginText}
 Kanggo: ${days} dino
 Monggo scan QR code sing dilampirno kanggo nyambung.`
     
-      : `Halo ${name}! Terima kasih sudah membeli voucher cloud.spot.
+      : `Halo ${name}! Terima kasih sudah membeli voucher ${BRAND.labelName}.
 ${loginText}
 Berlaku: ${days} hari
 Silakan scan QR code terlampir untuk terhubung.`
