@@ -409,6 +409,8 @@ const BRAND = {
   appName: 'cloud.spot',
   subtitle: 'Voucher Manager',
   labelName: 'cloud.spot',
+    labelNameX: 'cloud',
+    labelNameZ: 'spot',
   footerName: 'Cloud spot Hotspot',
   copyrightYear: '2026',
   company: 'cloud.spot'
@@ -944,7 +946,7 @@ function voucherCardHTML(v,status,days,idSuffix=''){return`
         <i data-lucide="radio-tower"></i>
       </div>
       <div class="voucher-export-text">
-        cloud<span class="voucher-export-dot">.</span>spot
+        ${BRAND.labelNameX}<span class="voucher-export-dot">.</span>${BRAND.labelNameZ}
       </div>
     </div>
 
