@@ -1459,7 +1459,7 @@ function settingsViewHTML(){return`
 </div>
 
 <div class="mt-4">
-<button class="btn-primary opacity-50 cursor-not-allowed" disabled>
+<button class="btn-primary" onclick="openLocationModal()">
 <i data-lucide="plus" class="w-4 h-4"></i>
 ${t('addLocation')}
 </button>
@@ -2089,6 +2089,7 @@ window.changeLang = changeLang;
 window.openAddModal = openAddModal;
 window.openImportModal = openImportModal;
 window.openSettingsModal = openSettingsModal;
+window.openLocationModal = openLocationModal;
 window.openSellModal = openSellModal;
 window.openEditModal = openEditModal;
 window.openCheckPreview = openCheckPreview;
