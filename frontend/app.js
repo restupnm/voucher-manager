@@ -1543,6 +1543,25 @@ async function saveNewVouchers() {
   render();
 }
 
+async function saveLocation(){
+  const name=document.getElementById('location-name').value.trim();
+  if(!name)return toast(t('required'),'error');
+
+  const id=name.toLowerCase().replace(/\s+/g,'-');
+
+  await DB.putLocation({
+    id,
+    name,
+    host:'',
+    password:'',
+    active:true
+  });
+
+  await refreshLocations();
+  closeModal();
+  render();
+}
+
 /* --- Sell voucher (WhatsApp send) --- */
 function openSellModal(code) {
   const v = state.vouchers.find(x => x.code === code);
@@ -2094,6 +2113,7 @@ window.openSellModal = openSellModal;
 window.openEditModal = openEditModal;
 window.openCheckPreview = openCheckPreview;
 window.saveNewVouchers = saveNewVouchers;
+window.saveLocation=saveLocation;
 window.sendVoucher = sendVoucher;
 window.saveEdit = saveEdit;
 window.deleteVoucher = deleteVoucher;
