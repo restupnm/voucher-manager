@@ -407,13 +407,12 @@ const DB_VERSION = 1;
 
 const BRAND = {
   appName: 'cloud.spot',
-  subtitle: 'Voucher Manacrt',
   labelName: 'visio.NET',
     labelNameX: 'visio',
     labelNameZ: 'NET',
   footerName: 'visioNET Hotspot',
-  copyrightYear: '2026',
-  companyName: 'visio.NET'
+  yearName: '2026',
+  companyName: 'visioNET.Inc'
 };
 
 /* ================================================================== *
@@ -1166,7 +1165,7 @@ ${sortableHeader(t('buyer'), 'buyer', 'hide-mobile')}
       `}
 
       <footer class="text-center text-ink-soft text-sm mt-10 pb-4">
-        © ${BRAND.copyrightYear} <span class="font-bold text-brand">${BRAND.companyName}</span>. All rights reserved.
+        © ${BRAND.yearName} <span class="font-bold text-brand">${BRAND.companyName}</span>. All rights reserved.
       </footer>
     </main>
   </div>`;
