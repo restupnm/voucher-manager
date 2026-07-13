@@ -68,8 +68,8 @@ const I18N = {
     // Sidebar
     dashboard: 'Dashboard',
     backup: 'Backup',
-    locations:"Locations",
-    addLocation:"Add Location",
+    locations:'Locations',
+    addLocation:'Add Location',
     cloudSpotHotspot: 'Cloud Spot Hotspot',
     routerLabel: 'Router',
     uptime: 'Uptime',
@@ -198,8 +198,8 @@ const I18N = {
     vouchers: 'voucher',
     dashboard: 'Dashboard',
     backup: 'Backup',
-    locations:"Lokasi",
-    addLocation:"Tambah Lokasi",
+    locations:'Lokasi',
+    addLocation:'Tambah Lokasi',
     cloudSpotHotspot: 'Cloud Spot Hotspot',
     routerLabel: 'Router',
     uptime: 'Uptime',
@@ -320,8 +320,8 @@ const I18N = {
     vouchers: 'voucher',
     dashboard: 'Dashboard',
     backup: 'Backup',
-    locations:"Lokasi",
-    addLocation:"Tambah Lokasi",
+    locations:'Lokasi',
+    addLocation:'Tambah Lokasi',
     cloudSpotHotspot: 'Cloud Spot Hotspot',
     routerLabel: 'Router',
     uptime: 'Urip Suwe',
@@ -1434,7 +1434,7 @@ ${t('addLocation')}
 </div>
 
 </section>`;
-}a
+}
 
 /* ================================================================== *
  *  Modals
