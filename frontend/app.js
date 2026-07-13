@@ -636,6 +636,12 @@ function downloadDataURL(dataURL, filename) {
  *  Initial seed (only if DB is empty)
  * ================================================================== */
 async function seedIfEmpty() {
+  let locs=await DB.getLocations();
+  if(!locs.length){
+   await DB.putLocation({id:"all",name:"All",active:true});
+   await DB.putLocation({id:"humas",name:"Humas",active:true});
+   await DB.putLocation({id:"logistik",name:"Logistik",active:true});
+  }
   const all = await DB.getAllVouchers();
   const pwd = await DB.getSetting('adminPassword');
   if (!pwd) await DB.setSetting('adminPassword', DEFAULT_ADMIN_PASSWORD);
