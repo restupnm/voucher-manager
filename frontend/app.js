@@ -402,8 +402,16 @@ const PERIOD_ORDER = ['1H', '1M', '1B'];
 
 const DEFAULT_ADMIN_PASSWORD = 'zzzz';
 const PER_PAGE = 10;
-const DB_NAME = 'cloudspot';
+const DB_NAME = 'vouchers';
 const DB_VERSION = 1;
+
+const BRAND = {
+  appName: "cloud.spot",
+  subtitle: "Voucher Manager",
+  footerName: "cloud.spot",
+  copyrightYear: "2026",
+  company: "cloud.spot"
+};
 
 /* ================================================================== *
  *  IndexedDB wrapper
