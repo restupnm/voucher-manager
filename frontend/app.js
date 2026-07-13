@@ -403,7 +403,7 @@ const PERIOD_ORDER = ['1H', '1M', '1B'];
 const DEFAULT_ADMIN_PASSWORD = 'zzzz';
 const PER_PAGE = 10;
 const DB_NAME = 'cloudvch';
-const DB_VERSION = 1;
+const DB_VERSION = 1.1;
 
 const BRAND = {
   appName: 'cloud.spot',
@@ -433,6 +433,9 @@ const DB = (() => {
         }
         if (!db.objectStoreNames.contains('settings')) {
           db.createObjectStore('settings', { keyPath: 'key' });
+        }
+        if (!db.objectStoreNames.contains('locations')) {
+          db.createObjectStore('locations', { keyPath: 'id' });
         }
       };
       req.onsuccess = () => { _db = req.result; resolve(_db); };
