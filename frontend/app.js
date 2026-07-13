@@ -1107,9 +1107,19 @@ function viewDashboard() {
   </div>`:''}
 </div>
 
-      ${state.sidebarView === 'backup' ? backupViewHTML() : `
+      ${dashboardContentHTML(stats,pageItems,filtered,totalPages,pageStart)}
 
-      <!-- Stats -->
+      <footer class="text-center text-ink-soft text-sm mt-10 pb-4">
+        © ${BRAND.yearName} <span class="font-bold text-brand">${BRAND.companyName}</span>. All rights reserved.
+      </footer>
+    </main>
+  </div>`;
+}
+
+function dashboardContentHTML(stats,pageItems,filtered,totalPages,pageStart){
+if(state.sidebarView==='backup')return backupViewHTML();
+if(state.sidebarView==='settings')return settingsViewHTML();
+return `      <!-- Stats -->
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7 fade-in">
         ${statCardHTML('tickets',  '#EFEBFF', '#3D1FB8', t('totalVoucher'), stats.total, t('allVouchers'), 'stat-total', 'all')}
         ${statCardHTML('check-circle', '#DCFCE7', '#15803D', t('available'), stats.available, t('readyToUse'), 'stat-available', 'available')}
@@ -1155,20 +1165,14 @@ ${sortableHeader(t('buyer'), 'buyer', 'hide-mobile')}
           </thead>
           <tbody>
             ${pageItems.length === 0
-              ? `<tr><td colspan="8" class="text-center text-ink-soft py-12">${list.length === 0 ? t('empty') : t('noResults')}</td></tr>`
+              ? `<tr><td colspan="8" class="text-center text-ink-soft py-12">${state.vouchers.length === 0 ? t('empty') : t('noResults')}</td></tr>`
               : pageItems.map((v, i) => rowHTML(v, pageStart + i + 1)).join('')}
           </tbody>
         </table>
 
         ${pageItems.length > 0 ? paginationHTML(filtered.length, totalPages) : ''}
       </section>
-      `}
-
-      <footer class="text-center text-ink-soft text-sm mt-10 pb-4">
-        © ${BRAND.yearName} <span class="font-bold text-brand">${BRAND.companyName}</span>. All rights reserved.
-      </footer>
-    </main>
-  </div>`;
+      `;
 }
 
 function statCardHTML(icon, bgColor, fgColor, title, value, sub, testid, filter) {
