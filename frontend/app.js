@@ -474,6 +474,7 @@ const state = {
   lang: localStorage.getItem('cs_lang') || 'id',
   currentVoucher: null,   // for check-result
   vouchers: [],
+  locations:[],
   search: '',
   pendingWhatsAppUrl: '',
   statusFilter: 'all',
@@ -727,9 +728,8 @@ function toggleSidebar() {
 /* ================================================================== *
  *  Main render dispatcher
  * ================================================================== */
-async function refreshVouchers() {
-  state.vouchers = await DB.getAllVouchers();
-}
+async function refreshVouchers() { state.vouchers = await DB.getAllVouchers();}
+async function refreshLocations(){state.locations=await DB.getLocations();}
 
 function render() {
   // Sync html lang
