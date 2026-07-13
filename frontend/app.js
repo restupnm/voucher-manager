@@ -407,13 +407,13 @@ const DB_VERSION = 1;
 
 const BRAND = {
   appName: 'cloud.spot',
-  subtitle: 'Voucher Manager',
-  labelName: 'cloud.spot',
-    labelNameX: 'cloud',
-    labelNameZ: 'spot',
-  footerName: 'Cloud spot Hotspot',
+  subtitle: 'Voucher Manacrt',
+  labelName: 'visio.NET',
+    labelNameX: 'visio',
+    labelNameZ: 'NET',
+  footerName: 'visioNET Hotspot',
   copyrightYear: '2026',
-  company: 'cloud.spot'
+  company: 'visio.NET'
 };
 
 /* ================================================================== *
