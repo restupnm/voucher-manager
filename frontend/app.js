@@ -409,7 +409,7 @@ const PERIOD_ORDER = ['1H', '1M', '1B'];
 const DEFAULT_ADMIN_PASSWORD = 'zzzz';
 const PER_PAGE = 10;
 const DB_NAME = 'cloudvch';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 const BRAND = {
   appName: 'cloud.spot',
@@ -440,7 +440,9 @@ const DB = (() => {
         if (!db.objectStoreNames.contains('settings')) {
           db.createObjectStore('settings', { keyPath: 'key' });
         }
-      };
+        if(!db.objectStoreNames.contains('locations'))
+          db.createObjectStore('locations',{keyPath:'id'});
+        };
       req.onsuccess = () => { _db = req.result; resolve(_db); };
       req.onerror = () => reject(req.error);
     });
@@ -459,6 +461,8 @@ const DB = (() => {
     async clearVouchers() { const s = await tx('vouchers', 'readwrite'); return reqP(s.clear()); },
     async getSetting(key) { const s = await tx('settings'); const r = await reqP(s.get(key)); return r ? r.value : null; },
     async setSetting(key, value) { const s = await tx('settings', 'readwrite'); return reqP(s.put({ key, value })); },
+    async getLocations(){const s=await tx('locations');return reqP(s.getAll());},
+    async putLocation(v){const s=await tx('locations','readwrite');return reqP(s.put(v));},
   };
 })();
 
