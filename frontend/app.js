@@ -35,6 +35,9 @@ const I18N = {
     statusUsed: 'Used',
     statusExpired: 'Expired',
     // Dashboard
+    brand:'Brand',
+    appName:'Application Name',
+    copyright:'Copyright',
     voucherManager: 'Voucher Manager',
     voucherManagerDesc: 'Manage and monitor all your hotspot vouchers.',
     importVoucher: 'Import Voucher',
@@ -166,6 +169,9 @@ const I18N = {
     statusAvailable: 'Available',
     statusUsed: 'Used',
     statusExpired: 'Expired',
+    brand:'Merek',
+    appName:'Nama Aplikasi',
+    copyright:'Hak Cipta',
     voucherManager: 'Voucher Manager',
     voucherManagerDesc: 'Kelola dan pantau semua voucher hotspot Anda.',
     importVoucher: 'Import Voucher',
@@ -288,6 +294,9 @@ const I18N = {
     statusAvailable: 'Siap',
     statusUsed: 'Wis Nganggo',
     statusExpired: 'Wis Entek',
+    brand:'Merek',
+    appName:'Jenenge Aplikasi',
+    copyright:'Hak Cipto',
     voucherManager: 'Voucher Manager',
     voucherManagerDesc: 'Atur lan awasi kabeh voucher hotspot panjenengan.',
     importVoucher: 'Impor Voucher',
@@ -1420,13 +1429,32 @@ function settingsViewHTML(){return`
 <section class="space-y-5 fade-in">
 
 <div class="card p-6">
-<h2 class="font-display text-2xl font-bold mb-5">${t('locations')}</h2>
+<h2 class="font-display text-xl font-bold mb-4">${t('brand')}</h2>
+
+<div class="space-y-4">
+
+<div>
+<label class="text-sm text-ink-soft">${t('appName')}</label>
+<input class="input mt-1" value="${escapeHtml(BRAND.appName)}" disabled>
+</div>
+
+<div>
+<label class="text-sm text-ink-soft">${t('copyright')}</label>
+<input class="input mt-1" value="${escapeHtml(BRAND.companyName)}" disabled>
+</div>
+
+</div>
+</div>
+
+<div class="card p-6">
+<h2 class="font-display text-xl font-bold mb-4">${t('locations')}</h2>
 
 <div class="rounded-xl border border-brand/10 p-4 flex items-center justify-between">
 <div>
 <div class="font-semibold text-ink">All</div>
 <div class="text-sm text-ink-soft">Super Administrator</div>
 </div>
+
 <span class="pill pill-available">System</span>
 </div>
 
