@@ -474,7 +474,7 @@ const state = {
   sortStatus: 0,
   sortBuyer: 0,
   page: 1,
-  sidebarView: 'dashboard', // 'dashboard' | 'backup'
+  sidebarView: 'dashboard', // 'dashboard' | 'backup' | 'settings'
   countdownTimerId: null,
   qrCache: {},            // code -> dataURL
 };
@@ -1226,7 +1226,7 @@ flex-col">
       <a data-testid="nav-backup" class="nav-item ${state.sidebarView==='backup'?'active':''}" onclick="setState({sidebarView:'backup'}); if (window.innerWidth < 1024) toggleSidebar();">
         <i data-lucide="cloud-download" class="w-5 h-5"></i> ${t('backup')}
       </a>
-      <a data-testid="nav-settings" class="nav-item" onclick="openSettingsModal(); if (window.innerWidth < 1024) toggleSidebar();">
+      <a data-testid="nav-settings" class="nav-item ${state.sidebarView==='settings'?'active':''}" onclick="setState({sidebarView:'settings'});if(window.innerWidth<1024)toggleSidebar();">
         <i data-lucide="settings" class="w-5 h-5"></i> ${t('settings')}
       </a>
     </nav>
