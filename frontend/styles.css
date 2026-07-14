@@ -52,7 +52,7 @@ html, body { background: var(--bg); }
 
 /* Buttons */
 .btn-content{
-    position:absolute;
+    position:relative;
     inset:0;
 
     display:flex;
