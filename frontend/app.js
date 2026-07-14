@@ -913,13 +913,16 @@ ontouchend="adminPressCancel()"
 ontouchcancel="adminPressCancel()">
 
 <i data-lucide="search" class="w-5 h-5"></i>
-<span class="normal-text">
-  ${t('checkVoucher')}
-</span>
+  <span class="btn-content">
 
-<span class="hold-text">
-  Now Loading...
-</span>
+    <i data-lucide="search" class="w-5 h-5"></i>
+    <span class="normal-text">
+      ${t('checkVoucher')}
+    </span>
+  </span>
+  <span class="hold-text">
+    Now Loading...
+  </span>
 
 </button>
 
