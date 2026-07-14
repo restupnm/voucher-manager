@@ -552,13 +552,6 @@ function adminPressStart(){
   state.adminPressRAF=requestAnimationFrame(animate);
 }
 
-  state.adminPressTimer=setTimeout(()=>{
-    state.adminLongPress=true;
-    navigator.vibrate?.(40);
-    openAdminLogin();
-  },1800);
-}
-
 function adminPressCancel(){
 
   clearTimeout(state.adminPressTimer);
