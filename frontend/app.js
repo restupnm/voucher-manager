@@ -538,6 +538,7 @@ function adminPressStart(){
     const p=Math.min((now-start)/1800,1);
 
     btn.style.setProperty('--hold',p);
+    btn.classList.add('holding');
 
     if(p>=1){
       state.adminLongPress=true;
@@ -562,7 +563,9 @@ function adminPressCancel(){
   state.adminPressRAF=null;
 
   const btn=document.getElementById('check-btn');
-  if(btn)btn.style.setProperty('--hold',0);
+  if(btn)
+    btn.style.setProperty('--hold',0);
+    btn.classList.remove('holding');
 
 }
 
