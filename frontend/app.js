@@ -484,6 +484,7 @@ const state = {
   currentVoucher: null,   // for check-result
   vouchers: [],
   locations:[],
+  selectedLocation:'all',
   search: '',
   pendingWhatsAppUrl: '',
   statusFilter: 'all',
