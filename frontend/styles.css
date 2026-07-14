@@ -47,26 +47,37 @@ html, body { background: var(--bg); }
     position:relative;
     overflow:hidden;
 
-    background:#fff;
-    color:var(--brand);
-
     user-select:none;
     -webkit-user-select:none;
     -webkit-touch-callout:none;
     -webkit-tap-highlight-color:transparent;
-    touch-action:manipulation;
 }
+
+.btn-hold-admin::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:#fff;
+    opacity:0;
+    transition:opacity .15s;
+}
+
 .btn-hold-admin::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:var(--brand);
-  transform-origin:left;
-  transform:scaleX(var(--hold,0));
-  transition:transform .02s linear;
-  pointer-events:none;
+    content:"";
+    position:absolute;
+    inset:0;
+    background:var(--brand);
+    transform-origin:left;
+    transform:scaleX(var(--hold,0));
+    z-index:1;
 }
-.btn-hold-admin>*{ position:relative; z-index:2; }
+.btn-hold-admin.holding::after{
+    opacity:1;
+}
+
+.btn-hold-admin.holding::before{
+    z-index:2;
+}
 
 .btn-secondary {
   background:#fff; color: var(--brand); border-radius:.875rem; padding: .85rem 1.25rem; font-weight:600;
