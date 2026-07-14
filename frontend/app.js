@@ -713,7 +713,11 @@ async function seedIfEmpty() {
  *  Auth / Routing
  * ================================================================== */
 async function handleEntry(input) {
-  const value = (input || '').trim();
+const value=(input||'').trim();
+  if(value.toLowerCase()==='/admin'){
+  openAdminLogin();
+  return;
+}
   if (!value) return;
   const adminPwd = (await DB.getSetting('adminPassword')) || DEFAULT_ADMIN_PASSWORD;
   if (value === adminPwd) {
@@ -1562,6 +1566,10 @@ async function saveNewVouchers() {
   render();
 }
 
+function openAdminLogin(){
+  toast('Admin login coming soon','info');
+}
+
 async function saveLocation(){
   const name=document.getElementById('location-name').value.trim();
   if(!name)return toast(t('required'),'error');
@@ -2180,6 +2188,7 @@ window.openAddModal = openAddModal;
 window.openImportModal = openImportModal;
 window.openSettingsModal = openSettingsModal;
 window.openLocationModal = openLocationModal;
+window.openAdminLogin=openAdminLogin;
 window.openLocationEdit = openLocationEdit;
 window.openSellModal = openSellModal;
 window.openEditModal = openEditModal;
