@@ -44,13 +44,13 @@ html, body { background: var(--bg); }
 .btn-primary:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .btn-hold-admin{
-    position:relative;
-    overflow:hidden;
-
-    user-select:none;
-    -webkit-user-select:none;
-    -webkit-touch-callout:none;
-    -webkit-tap-highlight-color:transparent;
+  position:relative;
+  overflow:hidden;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .15s,color .15s;
 }
 
 .btn-hold-admin::after{
@@ -63,20 +63,27 @@ html, body { background: var(--bg); }
 }
 
 .btn-hold-admin::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:var(--brand);
-    transform-origin:left;
-    transform:scaleX(var(--hold,0));
-    z-index:1;
-}
-.btn-hold-admin.holding::after{
-    opacity:1;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--brand);
+  transform-origin:left;
+  transform:scaleX(var(--hold,0));
+  z-index:0;
 }
 
+.btn-hold-admin.holding{
+  background:#fff !important;
+  color:var(--brand);
+}
+/*
 .btn-hold-admin.holding::before{
     z-index:2;
+}
+*/
+.btn-hold-admin>*{
+  position:relative;
+  z-index:1;
 }
 
 .btn-secondary {
