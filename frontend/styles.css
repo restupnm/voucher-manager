@@ -88,10 +88,12 @@ html, body { background: var(--bg); }
 }
 
 .btn-hold-admin::after{
-    content:"Now Loading...";
+    content:"";
     position:absolute;
-    right:20px;
-    top:50%;
+    inset:0;
+    background:#fff;
+    opacity:0;
+    transition:opacity .15s;
     transform:translateY(-50%);
 }
 
