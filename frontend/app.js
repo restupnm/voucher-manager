@@ -482,6 +482,7 @@ const state = {
   view: 'landing',        // 'landing' | 'check-result' | 'dashboard'
   lang: localStorage.getItem('cs_lang') || 'id',
   currentVoucher: null,   // for check-result
+  adminPressTimer:null,
   vouchers: [],
   locations:[],
   selectedLocation:'all',
@@ -518,6 +519,22 @@ function computeStatus(v) {
   const durationMs = (PERIODS[v.period]?.days || 0) * 24 * 60 * 60 * 1000;
   if (Date.now() < purchasedMs + durationMs) return 'used';
   return 'expired';
+}
+
+function adminPressStart(){
+  adminPressCancel();
+  state.adminPressTimer=setTimeout(()=>{
+    state.adminPressTimer=null;
+    navigator.vibrate?.(50);
+    openAdminLogin();
+  },2000);
+}
+
+function adminPressCancel(){
+  if(state.adminPressTimer){
+    clearTimeout(state.adminPressTimer);
+    state.adminPressTimer=null;
+  }
 }
 
 function remainingMs(v) {
@@ -842,7 +859,13 @@ onkeydown="if(event.key==='Enter'){event.preventDefault();document.querySelector
 <button
 data-testid="cek-voucher-btn"
 class="btn-primary w-full mt-5 text-lg py-4"
-onclick="handleEntry(document.getElementById('voucher-input').value)">
+onclick="handleEntry(document.getElementById('voucher-input').value)"
+onmousedown="adminPressStart()"
+ontouchstart="adminPressStart()"
+onmouseup="adminPressCancel()"
+onmouseleave="adminPressCancel()"
+ontouchend="adminPressCancel()"
+ontouchcancel="adminPressCancel()">
 
 <i data-lucide="search" class="w-5 h-5"></i>
 <span>${t('checkVoucher')}</span>
