@@ -569,7 +569,9 @@ function adminPressCancel(){
   const btn=document.getElementById('check-btn');
   if(btn)
     btn.style.setProperty('--hold',0);
+setTimeout(()=>{
     btn.classList.remove('holding');
+},150);
 
 }
 
