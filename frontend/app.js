@@ -558,6 +558,18 @@ function normalizePhone(p) {
   return s;
 }
 
+function normalizeHost(host){
+  return host.trim()
+    .replace(/^https?:\/\//i,'')
+    .replace(/\/login$/i,'')
+    .replace(/\/$/,'');
+}
+
+function routerURL(host){
+  host=normalizeHost(host);
+  return host?`http://${host}/login`:'';
+}
+
 function toggleStatusFilter(filter) {
   state.statusFilter =
   state.statusFilter === filter ? 'all' : filter;
@@ -1573,7 +1585,7 @@ async function saveLocationEdit(id){
   if(!l)return;
 
   l.name=document.getElementById('edit-location-name').value.trim()||l.name;
-  l.host=document.getElementById('edit-location-host').value.trim();
+  l.host=normalizeHost(document.getElementById('edit-location-host').value);
 
   await DB.putLocation(l);
   await refreshLocations();
