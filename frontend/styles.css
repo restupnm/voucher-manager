@@ -40,7 +40,6 @@ html, body { background: var(--bg); }
 .hold-text{
     position:absolute;
     top:50%;
-    align-items:right;
     transform:translateY(-50%);
     color:#fff;
     opacity:0;
