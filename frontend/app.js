@@ -483,6 +483,7 @@ const state = {
   lang: localStorage.getItem('cs_lang') || 'id',
   currentVoucher: null,   // for check-result
   adminPressTimer: null,
+  adminPressRAF:null,
   adminLongPress:false,
   adminPressProgress:0,
   vouchers: [],
@@ -524,16 +525,32 @@ function computeStatus(v) {
 }
 
 function adminPressStart(){
-  state.adminLongPress=false;
   adminPressCancel();
 
+  state.adminLongPress=false;
+
   const btn=document.getElementById('check-btn');
-  if(btn){
-    btn.style.transition='background-size 1.8s linear';
-    btn.style.backgroundImage='linear-gradient(var(--brand),var(--brand))';
-    btn.style.backgroundRepeat='no-repeat';
-    btn.style.backgroundSize='100% 100%';
+  if(!btn)return;
+
+  const start=performance.now();
+
+  function animate(now){
+    const p=Math.min((now-start)/1800,1);
+
+    btn.style.setProperty('--hold',p);
+
+    if(p>=1){
+      state.adminLongPress=true;
+      navigator.vibrate?.(40);
+      openAdminLogin();
+      return;
+    }
+
+    state.adminPressRAF=requestAnimationFrame(animate);
   }
+
+  state.adminPressRAF=requestAnimationFrame(animate);
+}
 
   state.adminPressTimer=setTimeout(()=>{
     state.adminLongPress=true;
@@ -543,14 +560,17 @@ function adminPressStart(){
 }
 
 function adminPressCancel(){
+
   clearTimeout(state.adminPressTimer);
+
+  cancelAnimationFrame(state.adminPressRAF);
+
   state.adminPressTimer=null;
+  state.adminPressRAF=null;
 
   const btn=document.getElementById('check-btn');
-  if(btn){
-    btn.style.transition='background-size .2s';
-    btn.style.backgroundSize='0% 100%';
-  }
+  if(btn)btn.style.setProperty('--hold',0);
+
 }
 
 function adminButtonClick(){
