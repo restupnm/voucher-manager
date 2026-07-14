@@ -912,9 +912,7 @@ onmouseleave="adminPressCancel()"
 ontouchend="adminPressCancel()"
 ontouchcancel="adminPressCancel()">
 
-<i data-lucide="search" class="w-5 h-5"></i>
   <span class="btn-content">
-
     <i data-lucide="search" class="w-5 h-5"></i>
     <span class="normal-text">
       ${t('checkVoucher')}
