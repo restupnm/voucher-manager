@@ -74,11 +74,12 @@ html, body { background: var(--bg); }
 .btn-primary:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .btn-hold-admin{
-    display:inline-flex;
+/*    display:inline-flex;  */
     position:relative;
     overflow:hidden;
-    align-items:center;
-    justify-content:center;
+    right:1.25rem;
+/*    align-items:center; 
+      justify-content:center;  */
     user-select:none;
     -webkit-user-select:none;
     -webkit-touch-callout:none;
