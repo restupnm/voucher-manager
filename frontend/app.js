@@ -525,8 +525,8 @@ function computeStatus(v) {
 }
 
 function adminPressStart(){
-  const HOLD_DELAY=120;
-  const HOLD_TIME=1800;
+  const HOLD_DELAY=300;
+  const HOLD_TIME=1500;
   
   adminPressCancel();
 
