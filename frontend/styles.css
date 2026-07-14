@@ -47,7 +47,7 @@ html, body { background: var(--bg); }
     pointer-events:none;
     white-space:nowrap;
     z-index:3;
-    transition:opacity .25s ease .30s;
+    transition:opacity .18s ease;
 }
 
 /* Buttons */
@@ -60,7 +60,7 @@ html, body { background: var(--bg); }
     justify-content:center;
     gap:.55rem;
 
-    transition:opacity .15s ease;
+    transition:opacity .35s ease;
 }
 
 .btn-primary {
@@ -118,9 +118,10 @@ html, body { background: var(--bg); }
 */
 .btn-hold-admin>*{ position:relative; z-index:1; }
 .btn-hold-admin.holding .normal-text{ opacity:0; }
-.btn-hold-admin.holding .hold-text{ opacity:1; transition:opacity .15s ease .12s; }
+.btn-hold-admin.holding .hold-text{ opacity:1; transition:opacity .55s; }
 .btn-hold-admin.holding i{ opacity:0; }
 .btn-hold-admin.holding .btn-content{ opacity:0; }
+.btn-hold-admin:not(.holding) .btn-content{ transition-delay:.18s; }
 
 .btn-secondary {
   background:#fff; color: var(--brand); border-radius:.875rem; padding: .85rem 1.25rem; font-weight:600;
