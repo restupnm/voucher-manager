@@ -1449,16 +1449,18 @@ function settingsViewHTML(){return`
 <div class="card p-6">
 <h2 class="font-display text-xl font-bold mb-4">${t('locations')}</h2>
 
+
 ${state.locations.map(l=>`
-<div class="rounded-xl border border-brand/10 p-4 flex items-center justify-between mb-3">
+<div onclick="openLocationEdit('${l.id}')" class="rounded-xl border border-brand/10 p-4 flex items-center justify-between mb-3 cursor-pointer hover:bg-brand-light/30 transition">
   <div>
     <div class="font-semibold text-ink">${escapeHtml(l.name)}</div>
     <div class="text-sm text-ink-soft">${l.id==='all'?'Super Administrator':'Location'}</div>
   </div>
 
-  <span class="pill ${l.id==='all'?'pill-available':'pill-1M'}">
-    ${l.id==='all'?'System':'Active'}
-  </span>
+<div class="flex items-center gap-3">
+<span class="pill ${l.id==='all'?'pill-available':'pill-1M'}"> ${l.id==='all'?'System':'Active'} </span>
+<i data-lucide="chevron-right" class="w-5 h-5 text-ink-soft"></i>
+</div>
 </div>
 `).join('')}
 
@@ -1564,6 +1566,10 @@ async function saveLocation(){
   await refreshLocations();
   closeModal();
   render();
+}
+
+function openLocationEdit(id){
+  toast('Coming soon','info');
 }
 
 /* --- Sell voucher (WhatsApp send) --- */
@@ -2113,6 +2119,7 @@ window.openAddModal = openAddModal;
 window.openImportModal = openImportModal;
 window.openSettingsModal = openSettingsModal;
 window.openLocationModal = openLocationModal;
+window.openLocationEdit = openLocationEdit;
 window.openSellModal = openSellModal;
 window.openEditModal = openEditModal;
 window.openCheckPreview = openCheckPreview;
