@@ -75,7 +75,7 @@ html, body { background: var(--bg); }
 
 .btn-hold-admin{
 /*    display:inline-flex;  */
-    position:relative;
+    position:absolute;
     overflow:hidden;
     right:1.25rem;
 /*    align-items:center; 
