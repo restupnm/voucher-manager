@@ -915,7 +915,7 @@ ontouchend="adminPressCancel()"
 ontouchcancel="adminPressCancel()">
 
   <span class="btn-content">
-    <i data-lucide="search" class="w-5 h-5"></i>
+    <i data-lucide="search" class="btn-icon w-5 h-5"></i>
     <span class="normal-text">
       ${t('checkVoucher')}
     </span>
