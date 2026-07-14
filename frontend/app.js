@@ -1569,7 +1569,39 @@ async function saveLocation(){
 }
 
 function openLocationEdit(id){
-  toast('Coming soon','info');
+  const l=state.locations.find(x=>x.id===id);
+  if(!l)return;
+
+  openModal(`
+  <div class="p-6 sm:p-8">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="font-display font-bold text-2xl">${escapeHtml(l.name)}</h2>
+      <button class="btn-ghost" onclick="closeModal()">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <div class="space-y-4">
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">${t('locationName')}</label>
+        <input id="edit-location-name" class="input" value="${escapeHtml(l.name)}">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Router Address</label>
+        <input id="edit-location-host" class="input"
+        placeholder="192.168.88.1"
+        value="${escapeHtml(l.host||'')}">
+      </div>
+
+      <div class="flex justify-end gap-3 mt-6">
+        <button class="btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+        <button class="btn-primary" onclick="saveLocationEdit('${l.id}')">${t('save')}</button>
+      </div>
+
+    </div>
+  </div>`);
 }
 
 /* --- Sell voucher (WhatsApp send) --- */
