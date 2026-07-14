@@ -43,18 +43,30 @@ html, body { background: var(--bg); }
 .btn-primary:active { transform: translateY(0); }
 .btn-primary:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
 
-.btn-hold-admin{ position:relative; overflow:hidden; }
+.btn-hold-admin{
+    position:relative;
+    overflow:hidden;
+
+    background:#fff;
+    color:var(--brand);
+
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-touch-callout:none;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+}
 .btn-hold-admin::before{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(255,255,255,.12);
+  background:var(--brand);
   transform-origin:left;
   transform:scaleX(var(--hold,0));
   transition:transform .02s linear;
   pointer-events:none;
 }
-.btn-hold-admin>*{ position:relative; z-index:1; }
+.btn-hold-admin>*{ position:relative; z-index:2; }
 
 .btn-secondary {
   background:#fff; color: var(--brand); border-radius:.875rem; padding: .85rem 1.25rem; font-weight:600;
