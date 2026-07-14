@@ -903,7 +903,7 @@ onkeydown="if(event.key==='Enter'){event.preventDefault();document.querySelector
 <button
 id="check-btn"
 data-testid="cek-voucher-btn"
-class="btn-primary w-full mt-5 text-lg py-4"
+class="btn-primary btn-hold-admin w-full mt-5 text-lg py-4"
 onclick="adminButtonClick()"
 onmousedown="adminPressStart()"
 ontouchstart="adminPressStart()"
