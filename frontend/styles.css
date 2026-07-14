@@ -51,11 +51,15 @@ html, body { background: var(--bg); }
 
 /* Buttons */
 .btn-content{
-    display:inline-flex;
+    position:absolute;
+    inset:0;
+
+    display:flex;
     align-items:center;
     justify-content:center;
     gap:.55rem;
 }
+
 .btn-primary {
   background: var(--brand); color:#fff; border-radius: 0.875rem;
   padding: 0.85rem 1.25rem; font-weight: 600; font-family: 'Outfit', sans-serif;
@@ -106,7 +110,7 @@ html, body { background: var(--bg); }
 */
 .btn-hold-admin>*{ position:relative; z-index:1; }
 .btn-hold-admin.holding .normal-text{ opacity:0; }
-.btn-hold-admin.holding .hold-text{ opacity:1; }
+.btn-hold-admin.holding .hold-text{ opacity:1; transition:opacity .15s ease .12s; }
 .btn-hold-admin.holding i{ opacity:0; }
 .btn-hold-admin.holding .btn-content{ opacity:0; }
 
