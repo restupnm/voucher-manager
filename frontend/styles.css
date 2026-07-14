@@ -83,7 +83,7 @@ html, body { background: var(--bg); }
     -webkit-touch-callout:none;
     -webkit-tap-highlight-color:transparent;
 
-    transition:background-color .15s,color .15s;
+    transition:background-color .15s,color .20s;
 }
 
 .btn-hold-admin::after{
