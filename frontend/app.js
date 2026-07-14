@@ -484,6 +484,7 @@ const state = {
   currentVoucher: null,   // for check-result
   adminPressTimer: null,
   adminLongPress:false,
+  adminPressProgress:0,
   vouchers: [],
   locations:[],
   selectedLocation:'all',
@@ -525,6 +526,15 @@ function computeStatus(v) {
 function adminPressStart(){
   state.adminLongPress=false;
   adminPressCancel();
+
+  const btn=document.getElementById('check-btn');
+  if(btn){
+    btn.style.transition='background-size 1.8s linear';
+    btn.style.backgroundImage='linear-gradient(var(--brand),var(--brand))';
+    btn.style.backgroundRepeat='no-repeat';
+    btn.style.backgroundSize='100% 100%';
+  }
+
   state.adminPressTimer=setTimeout(()=>{
     state.adminLongPress=true;
     navigator.vibrate?.(40);
@@ -535,6 +545,12 @@ function adminPressStart(){
 function adminPressCancel(){
   clearTimeout(state.adminPressTimer);
   state.adminPressTimer=null;
+
+  const btn=document.getElementById('check-btn');
+  if(btn){
+    btn.style.transition='background-size .2s';
+    btn.style.backgroundSize='0% 100%';
+  }
 }
 
 function adminButtonClick(){
@@ -865,6 +881,7 @@ onkeydown="if(event.key==='Enter'){event.preventDefault();document.querySelector
 </div>
 
 <button
+id="check-btn"
 data-testid="cek-voucher-btn"
 class="btn-primary w-full mt-5 text-lg py-4"
 onclick="adminButtonClick()"
