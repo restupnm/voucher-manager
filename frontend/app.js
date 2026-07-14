@@ -919,6 +919,9 @@ ontouchcancel="adminPressCancel()">
     <span class="normal-text">
       ${t('checkVoucher')}
     </span>
+      <span class="hold-text">
+    Now Loading...
+  </span>
   </span>
 
 </button>
