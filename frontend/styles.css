@@ -43,7 +43,7 @@ html, body { background: var(--bg); }
     display:flex;
     align-items:center;
     justify-content:flex-end;
-    padding-right:1.25rem;
+    padding-right:20px;
     color:#fff;
     opacity:0;
     pointer-events:none;
@@ -75,6 +75,7 @@ html, body { background: var(--bg); }
 .btn-primary:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .btn-hold-admin{
+  display:block;
   position:relative;
   overflow:hidden;
   user-select:none;
