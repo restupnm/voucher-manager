@@ -1568,6 +1568,22 @@ async function saveLocation(){
   render();
 }
 
+async function saveLocationEdit(id){
+  const l=state.locations.find(x=>x.id===id);
+  if(!l)return;
+
+  l.name=document.getElementById('edit-location-name').value.trim()||l.name;
+  l.host=document.getElementById('edit-location-host').value.trim();
+
+  await DB.putLocation(l);
+  await refreshLocations();
+
+  closeModal();
+  render();
+
+  toast(t('saved'),'success');
+}
+
 function openLocationEdit(id){
   const l=state.locations.find(x=>x.id===id);
   if(!l)return;
@@ -2157,6 +2173,7 @@ window.openEditModal = openEditModal;
 window.openCheckPreview = openCheckPreview;
 window.saveNewVouchers = saveNewVouchers;
 window.saveLocation=saveLocation;
+window.saveLocationEdit=saveLocationEdit;
 window.sendVoucher = sendVoucher;
 window.saveEdit = saveEdit;
 window.deleteVoucher = deleteVoucher;
