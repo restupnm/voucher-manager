@@ -38,10 +38,27 @@ html, body { background: var(--bg); }
   padding: 0.85rem 1.25rem; font-weight: 600; font-family: 'Outfit', sans-serif;
   transition: all .2s ease; display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
   border: 1px solid transparent;
+  position:relative;
+  overflow:hidden;
 }
 .btn-primary:hover { background: var(--brand-hover); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(61,31,184,0.32); }
 .btn-primary:active { transform: translateY(0); }
 .btn-primary:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-primary::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.12);
+  transform-origin:left;
+  transform:scaleX(var(--hold,0));
+  transition:transform .02s linear;
+  pointer-events:none;
+}
+
+.btn-primary>*{
+  position:relative;
+  z-index:1;
+}
 
 .btn-secondary {
   background:#fff; color: var(--brand); border-radius:.875rem; padding: .85rem 1.25rem; font-weight:600;
