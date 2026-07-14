@@ -525,6 +525,9 @@ function computeStatus(v) {
 }
 
 function adminPressStart(){
+  const HOLD_DELAY=120;
+  const HOLD_TIME=1800;
+  
   adminPressCancel();
 
   state.adminLongPress=false;
@@ -532,12 +535,13 @@ function adminPressStart(){
   const btn=document.getElementById('check-btn');
   if(!btn)return;
 
-  const start=performance.now();
+  const start=performance.now()+HOLD_DELAY;
 
   function animate(now){
-    const p=Math.min((now-start)/1800,1);
+  const p=Math.max(0,Math.min((now-start)/HOLD_TIME,1));
 
     btn.style.setProperty('--hold',p);
+    if(p>0&&!btn.classList.contains('holding'))
     btn.classList.add('holding');
 
     if(p>=1){
