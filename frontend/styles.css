@@ -118,7 +118,7 @@ html, body { background: var(--bg); }
 .btn-hold-admin>*{ position:relative; z-index:1; }
 .btn-hold-admin.holding .normal-text{ opacity:0; }
 .btn-hold-admin.holding .hold-text{ opacity:1; transition:opacity .55s; }
-.btn-hold-admin.holding .btn-content i{ display:none; }
+.btn-hold-admin.holding .btn-icon{ display:none; }
 /*.btn-hold-admin.holding .btn-content{ opacity:0; }*/
 .btn-hold-admin:not(.holding) .btn-content{ transition-delay:.18s; }
 
