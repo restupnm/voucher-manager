@@ -32,6 +32,23 @@ html, body { background: var(--bg); }
 /* Card */
 .card { background: #fff; border-radius: 1.75rem; box-shadow: 0 8px 30px rgba(61,31,184,0.08); border: 1px solid rgba(61,31,184,0.05); }
 
+/* text */
+.normal-text{
+    transition:opacity .15s;
+}
+
+.hold-text{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#fff;
+    opacity:0;
+    pointer-events:none;
+}
+
 /* Buttons */
 .btn-primary {
   background: var(--brand); color:#fff; border-radius: 0.875rem;
@@ -84,6 +101,14 @@ html, body { background: var(--bg); }
 .btn-hold-admin>*{
   position:relative;
   z-index:1;
+}
+
+.btn-hold-admin.holding .normal-text{
+    opacity:0;
+}
+
+.btn-hold-admin.holding .hold-text{
+    opacity:1;
 }
 
 .btn-secondary {
