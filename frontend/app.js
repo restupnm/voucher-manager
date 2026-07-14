@@ -1449,14 +1449,18 @@ function settingsViewHTML(){return`
 <div class="card p-6">
 <h2 class="font-display text-xl font-bold mb-4">${t('locations')}</h2>
 
-<div class="rounded-xl border border-brand/10 p-4 flex items-center justify-between">
-<div>
-<div class="font-semibold text-ink">All</div>
-<div class="text-sm text-ink-soft">Super Administrator</div>
-</div>
+${state.locations.map(l=>`
+<div class="rounded-xl border border-brand/10 p-4 flex items-center justify-between mb-3">
+  <div>
+    <div class="font-semibold text-ink">${escapeHtml(l.name)}</div>
+    <div class="text-sm text-ink-soft">${l.id==='all'?'Super Administrator':'Location'}</div>
+  </div>
 
-<span class="pill pill-available">System</span>
+  <span class="pill ${l.id==='all'?'pill-available':'pill-1M'}">
+    ${l.id==='all'?'System':'Active'}
+  </span>
 </div>
+`).join('')}
 
 <div class="mt-4">
 <button class="btn-primary" onclick="openLocationModal()">
