@@ -571,7 +571,7 @@ function adminPressCancel(){
     btn.style.setProperty('--hold',0);
 setTimeout(()=>{
     btn.classList.remove('holding');
-},150);
+},200);
 
 }
 
