@@ -564,16 +564,16 @@ function normalizeLocation(location){
     return match ? match.id : null;
 }
 
-function findAdmin(location,password){
+function findAdmin(location,adminpassword){
   return DEFAULT_ADMINS.find(admin=>{
     // Super Admin ignores location
     if(admin.role==="superadmin"){
-      return admin.password===password;
+      return admin.password===adminpassword;
     }
     // Normal admin must match both
     return (
       admin.location===location &&
-      admin.password===password
+      admin.password===adminpassword
     );
   });
 }
