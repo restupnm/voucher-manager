@@ -568,6 +568,15 @@ function findAdmin(location,password){
   });
 }
 
+function visibleVouchers(){
+  if(isSuperAdmin()){
+    return state.voucher.list;
+  }
+  return state.voucher.list.filter(v =>
+    v.location===state.currentAdmin.location
+  );
+}
+
 function adminPressStart(){
   const HOLD_DELAY=300;
   const HOLD_TIME=1500;
