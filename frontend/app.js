@@ -555,13 +555,15 @@ function currentLocation(){
 }
 
 function findAdmin(location,password){
-  return DEFAULT_ADMINS.find(admin => {
-    if(admin.role === "superadmin"){
-      return admin.password === password;
+  return DEFAULT_ADMINS.find(admin=>{
+    // Super Admin ignores location
+    if(admin.role==="superadmin"){
+      return admin.password===password;
     }
+    // Normal admin must match both
     return (
-      admin.location === location &&
-      admin.password === password
+      admin.location===location &&
+      admin.password===password
     );
   });
 }
@@ -1711,8 +1713,7 @@ function openAdminLogin(){
 
           <select id="admin-location" class="input">
             ${DEFAULT_ADMINS
-              .map(a=>`<option value="${a.location}">${a.location}</option>`)
-              .join("")}
+              .filter(a=>a.role!=="superadmin") .map(a=>` <option value="${a.location}"> ${a.location} </option> `).join("")}
           </select>
         </div>
 
