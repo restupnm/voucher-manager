@@ -1769,9 +1769,9 @@ function openAdminLogin(){
 async function loginAdmin(){
   const location =
     document.getElementById("admin-location").value;
-  const password =
+  const adminpassword =
     document.getElementById("admin-password").value.trim();
-  const admin = findAdmin(location,password);
+  const admin = findAdmin(location,adminpassword);
   if(!admin){
     toast("Wrong password","error");
     return;
