@@ -570,10 +570,10 @@ function findAdmin(location,password){
 
 function visibleVouchers(){
   if(isSuperAdmin()){
-    return state.voucher.list;
+    return state.vouchers;
   }
-  return state.voucher.list.filter(v =>
-    v.location===state.currentAdmin.location
+  return state.vouchers.filter(v =>
+    v.location === state.currentAdmin.location
   );
 }
 
@@ -1208,7 +1208,7 @@ const qrText =
  *  View: Dashboard
  * ================================================================== */
 function viewDashboard() {
-  const list = state.vouchers;
+  const list = visibleVouchers();
   const stats = {
     total: list.length,
     available: list.filter(v => computeStatus(v) === 'available').length,
