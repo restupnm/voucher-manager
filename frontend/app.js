@@ -2136,16 +2136,16 @@ async function handleImportFile(ev) {
   const wb = XLSX.read(buf, { type: 'array' });
   const ws = wb.Sheets[wb.SheetNames[0]];
   const rows = XLSX.utils.sheet_to_json(ws);
-  let added = 0, updated = 0;
+  let added = 0, updated = 0, skipped = 0;
+  const invalidLocations = [];
   for (const r of rows) {
     const period = (r.period || r.Period || r.PERIOD || '').toString().trim().toUpperCase();
     if (!PERIODS[period]) { skipped++; continue; }
     let code = (r.code || r.Code || r.CODE || '').toString().trim();
     if (!code) code = randCode(period, 4);
-    const location = normalizeLocation( r.location || r.Location || existing?.location || currentLocation() );
-    const invalidLocations = [];
-    if(!location){ invalidLocations.push({ code, location: r.location || r.Location }); skipped++; continue; }
     const existing = await DB.getVoucher(code);
+    const location = normalizeLocation( r.location || r.Location || existing?.location || currentLocation() );
+    if(!location){ invalidLocations.push({ code, location: r.location || r.Location }); skipped++; continue; }
     const purchasedAt = (r.purchasedAt || r.PurchasedAt || '') ? new Date(r.purchasedAt || r.PurchasedAt).toISOString() : null;
 await DB.putVoucher({
   ...(existing || {}),
@@ -2164,7 +2164,7 @@ await DB.putVoucher({
       added++;
   }
   await refreshVouchers();
-  document.getElementById('import-result').innerHTML = `<div class="p-3 bg-emerald-50 text-emerald-700 rounded-xl">Added: <b>${added}</b> • Updated: <b>${updated}</b></div>`;
+  document.getElementById('import-result').innerHTML = `<div class="p-3 bg-emerald-50 text-emerald-700 rounded-xl">Added: <b>${added}</b> • Updated: <b>${updated}</b> • Skipped: <b>${skipped}</b></div>`;
   render();
 }
 
