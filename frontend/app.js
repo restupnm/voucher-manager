@@ -554,6 +554,16 @@ function currentLocation(){
     : state.currentAdmin?.location;
 }
 
+function normalizeLocation(location){
+    if(!location) return currentLocation();
+    const input = location.toString().trim().toLowerCase();
+    const match = state.locations.find(l =>
+        l.id.toLowerCase() === input ||
+        l.name.toLowerCase() === input
+    );
+    return match ? match.id : null;
+}
+
 function findAdmin(location,password){
   return DEFAULT_ADMINS.find(admin=>{
     // Super Admin ignores location
@@ -2132,7 +2142,9 @@ async function handleImportFile(ev) {
     if (!PERIODS[period]) { skipped++; continue; }
     let code = (r.code || r.Code || r.CODE || '').toString().trim();
     if (!code) code = randCode(period, 4);
-    const location = ( r.location || r.Location || existing?.location || currentLocation() ) ?.toString() .trim() .toLowerCase();
+    const location = normalizeLocation( r.location || r.Location || existing?.location || currentLocation() );
+    const invalidLocations = [];
+    if(!location){ invalidLocations.push({ code, location: r.location || r.Location }); skipped++; continue; }
     const existing = await DB.getVoucher(code);
     const purchasedAt = (r.purchasedAt || r.PurchasedAt || '') ? new Date(r.purchasedAt || r.PurchasedAt).toISOString() : null;
 await DB.putVoucher({
