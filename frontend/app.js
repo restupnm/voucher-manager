@@ -417,19 +417,19 @@ const PERIOD_ORDER = ['1H', '1M', '1B'];
 
 const DEFAULT_ADMINS = [
 {
-  username:"Super Admin",
-  password:"1234",
+  displayName:"Super Admin",
+  adminpassword:"1234",
   role:"superadmin"
 },
 {
-  username:"Logistik",
-  password:"1111",
+  displayName:"Logistik",
+  adminpassword:"1111",
   role:"admin",
   location:"logistik"
 },
 {
-  username:"Humas",
-  password:"2222",
+  displayName:"Fani",
+  adminpassword:"2222",
   role:"admin",
   location:"humas"
 }
