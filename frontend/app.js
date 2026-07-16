@@ -1683,7 +1683,61 @@ async function saveNewVouchers() {
 }
 
 function openAdminLogin(){
-  toast('Admin login coming soon','info');
+
+  openModal(`
+    <div class="p-6 sm:p-7">
+
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-display font-bold text-2xl">
+          Admin Login
+        </h2>
+
+        <button class="btn-ghost" onclick="closeModal()">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4">
+
+        <div>
+          <label class="block text-sm font-semibold mb-2">
+            Location
+          </label>
+
+          <select id="admin-location" class="input">
+            ${DEFAULT_ADMINS
+              .map(a=>`<option value="${a.location}">${a.location}</option>`)
+              .join("")}
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-2">
+            Password
+          </label>
+
+          <input
+            id="admin-password"
+            type="password"
+            class="input"
+            placeholder="Password">
+        </div>
+
+        <button
+          class="btn-primary w-full"
+          onclick="loginAdmin()">
+
+          <i data-lucide="log-in" class="w-4 h-4"></i>
+
+          Login
+
+        </button>
+
+      </div>
+
+    </div>
+  `);
+
 }
 
 async function saveLocation(){
@@ -2149,15 +2203,21 @@ Save Router
   `);
 }
 
-async function changePassword() {
-  const oldP = document.getElementById('set-old').value;
-  const newP = document.getElementById('set-new').value;
-  if (!newP) return;
-  const current = (await DB.getSetting('adminPassword')) || DEFAULT_ADMIN_PASSWORD;
-  if (oldP !== current) { toast(t('wrongPassword'), 'error'); return; }
-  await DB.setSetting('adminPassword', newP);
+async function changePassword(){
+  if(!state.currentAdmin){
+    toast("Please login first","error");
+    return;
+  }
+  const oldP=document.getElementById("set-old").value.trim();
+  const newP=document.getElementById("set-new").value.trim();
+  if(!newP)return;
+  if(oldP!==state.currentAdmin.password){
+    toast(t("wrongPassword"),"error");
+    return;
+  }
+  state.currentAdmin.password=newP;
   closeModal();
-  toast(t('passwordChanged'), 'success');
+  toast(t("passwordChanged"),"success");
 }
 
 async function saveRouterSettings(){
