@@ -1740,6 +1740,25 @@ function openAdminLogin(){
 
 }
 
+async function loginAdmin(){
+  const location =
+    document.getElementById("admin-location").value;
+  const password =
+    document.getElementById("admin-password").value.trim();
+  const admin = findAdmin(location,password);
+  if(!admin){
+    toast("Wrong password","error");
+    return;
+  }
+  state.currentAdmin = admin;
+  closeModal();
+  toast(`Welcome ${admin.name}`,"success");
+  setState({
+    view:"dashboard",
+    page:1
+  });
+}
+
 async function saveLocation(){
   const name=document.getElementById('location-name').value.trim();
   if(!name)return toast(t('required'),'error');
@@ -2365,6 +2384,7 @@ window.openImportModal = openImportModal;
 window.openSettingsModal = openSettingsModal;
 window.openLocationModal = openLocationModal;
 window.openAdminLogin=openAdminLogin;
+window.loginAdmin = loginAdmin;
 window.openLocationEdit = openLocationEdit;
 window.openSellModal = openSellModal;
 window.openEditModal = openEditModal;
