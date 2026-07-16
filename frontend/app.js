@@ -2140,7 +2140,11 @@ await DB.putVoucher({
   username: (r.username || r.Username || existing?.username || code).toString().trim(),
   password: (r.password || r.Password || existing?.password || "").toString().trim(),
   period,
-  location: existing?.location || currentLocation(),
+  location:
+    r.location ||
+    r.Location ||
+    existing?.location ||
+    currentLocation(),
   buyerName: (r.buyer || r.Buyer || r.name || existing?.buyerName || "").toString(),
   buyerPhone: (r.phone || r.Phone || existing?.buyerPhone || "").toString(),
   purchasedAt,
