@@ -2132,6 +2132,7 @@ async function handleImportFile(ev) {
     if (!PERIODS[period]) { skipped++; continue; }
     let code = (r.code || r.Code || r.CODE || '').toString().trim();
     if (!code) code = randCode(period, 4);
+    const location = ( r.location || r.Location || existing?.location || currentLocation() ) ?.toString() .trim() .toLowerCase();
     const existing = await DB.getVoucher(code);
     const purchasedAt = (r.purchasedAt || r.PurchasedAt || '') ? new Date(r.purchasedAt || r.PurchasedAt).toISOString() : null;
 await DB.putVoucher({
@@ -2140,11 +2141,7 @@ await DB.putVoucher({
   username: (r.username || r.Username || existing?.username || code).toString().trim(),
   password: (r.password || r.Password || existing?.password || "").toString().trim(),
   period,
-  location:
-    r.location ||
-    r.Location ||
-    existing?.location ||
-    currentLocation(),
+  location,
   buyerName: (r.buyer || r.Buyer || r.name || existing?.buyerName || "").toString(),
   buyerPhone: (r.phone || r.Phone || existing?.buyerPhone || "").toString(),
   purchasedAt,
