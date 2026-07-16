@@ -555,6 +555,13 @@ function currentLocation(){
     : state.currentAdmin?.location;
 }
 
+function findAdmin(location,password){
+  return DEFAULT_ADMINS.find(a =>
+    (a.location||"super")===location &&
+    a.password===password
+  );
+}
+
 function adminPressStart(){
   const HOLD_DELAY=300;
   const HOLD_TIME=1500;
@@ -807,26 +814,31 @@ async function seedIfEmpty() {
  *  Auth / Routing
  * ================================================================== */
 async function handleEntry(input) {
-const value=(input||'').trim();
+  const value=(input||'').trim();
+
   if(value.toLowerCase()==='/admin'){
-  openAdminLogin();
-  return;
-}
-  if (!value) return;
-  const adminPwd = (await DB.getSetting('adminPassword')) || DEFAULT_ADMIN_PASSWORD;
-  if (value === adminPwd) {
-    toast(t('adminEntered'), 'success');
-    setState({ view: 'dashboard', page: 1 });
+    openAdminLogin();
     return;
   }
-  const v = await DB.getVoucher(value);
-  if (!v) {
-    toast(t('voucherInvalid'), 'error');
-    const inputEl = document.querySelector('[data-testid="voucher-input"]');
-    if (inputEl) { inputEl.classList.add('!border-red-400'); setTimeout(() => inputEl.classList.remove('!border-red-400'), 1200); }
+
+  if(!value) return;
+
+  const v=await DB.getVoucher(value);
+
+  if(!v){
+    toast(t('voucherInvalid'),'error');
+    const inputEl=document.querySelector('[data-testid="voucher-input"]');
+    if(inputEl){
+      inputEl.classList.add('!border-red-400');
+      setTimeout(()=>inputEl.classList.remove('!border-red-400'),1200);
+    }
     return;
   }
-  setState({ view: 'check-result', currentVoucher: v });
+
+  setState({
+    view:'check-result',
+    currentVoucher:v
+  });
 }
 
 function logout() {
