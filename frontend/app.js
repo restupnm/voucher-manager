@@ -1300,10 +1300,29 @@ function viewDashboard() {
   ${langSwitcherHTML()}
     </div>
       <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-7 fade-in">
-        <div>
-          <h1 class="font-display font-bold text-3xl sm:text-4xl text-brand">${state.sidebarView === 'backup' ? t('backupTitle') : t('voucherManager')}</h1>
-          <p class="text-ink-soft mt-1">${state.sidebarView === 'backup' ? t('backupDesc') : t('voucherManagerDesc')}</p>
-        </div>
+<div>
+
+  <h1 class="font-display font-bold text-3xl sm:text-4xl text-brand">
+    ${state.sidebarView === 'backup'
+      ? t('backupTitle')
+      : t('voucherManager')}
+  </h1>
+
+  <p class="text-ink-soft mt-1">
+    ${state.sidebarView === 'backup'
+      ? t('backupDesc')
+      : t('voucherManagerDesc')}
+  </p>
+
+  ${
+    state.sidebarView === 'dashboard'
+      ? `<div class="mt-4">
+          ${locationSwitcherHTML()}
+        </div>`
+      : ''
+  }
+
+</div>
 
   ${state.sidebarView==='dashboard'?`
   <div class="flex items-center gap-3">
