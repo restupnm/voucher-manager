@@ -555,10 +555,15 @@ function currentLocation(){
 }
 
 function findAdmin(location,password){
-  return DEFAULT_ADMINS.find(a =>
-    (a.location||"super")===location &&
-    a.password===password
-  );
+  return DEFAULT_ADMINS.find(admin => {
+    if(admin.role === "superadmin"){
+      return admin.password === password;
+    }
+    return (
+      admin.location === location &&
+      admin.password === password
+    );
+  });
 }
 
 function adminPressStart(){
