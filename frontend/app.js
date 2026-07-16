@@ -813,13 +813,14 @@ async function seedIfEmpty() {
       code: d.code,
       username: d.code, password: '',
       period: d.period,
+      location: currentLocation(),
       purchasedAt: new Date(now - d.daysAgo * 86400000).toISOString(),
       buyerName: d.buyer, buyerPhone: d.phone, message: d.msg,
       createdAt: new Date(now - (d.daysAgo + 1) * 86400000).toISOString(),
     });
   }
   for (const a of available) {
-    await DB.putVoucher({ code: a.code, username: a.code, password: '', period: a.period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date(now).toISOString() });
+    await DB.putVoucher({ code: a.code, username: a.code, password: '', period: a.period, location: currentLocation(), purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date(now).toISOString() });
   }
 }
 
