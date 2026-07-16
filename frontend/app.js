@@ -568,12 +568,12 @@ function findAdmin(location,adminpassword){
   return DEFAULT_ADMINS.find(admin=>{
     // Super Admin ignores location
     if(admin.role==="superadmin"){
-      return admin.password===adminpassword;
+      return admin.adminpassword===adminpassword;
     }
     // Normal admin must match both
     return (
       admin.location===location &&
-      admin.password===adminpassword
+      admin.adminpassword===adminpassword
     );
   });
 }
