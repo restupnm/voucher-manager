@@ -415,7 +415,6 @@ const PERIODS = {
 };
 const PERIOD_ORDER = ['1H', '1M', '1B'];
 
-const DEFAULT_ADMIN_PASSWORD = 'zzzz';
 const DEFAULT_ADMINS = [
 {
   username:"Super Admin",
@@ -767,8 +766,6 @@ async function seedIfEmpty() {
   if(!state.locations.length) await DB.putLocation({id:'all',name:'All',type:'super'});
   await refreshLocations();
   const all = await DB.getAllVouchers();
-  const pwd = await DB.getSetting('adminPassword');
-  if (!pwd) await DB.setSetting('adminPassword', DEFAULT_ADMIN_PASSWORD);
   if (all.length > 0) return;
 
   // disable demo
