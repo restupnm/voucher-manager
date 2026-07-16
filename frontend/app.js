@@ -555,31 +555,39 @@ function currentLocation(){
 }
 
 function locationSwitcherHTML(){
-
   if(!isSuperAdmin()){
     return `
-      <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-brand-light text-brand font-semibold">
-        <i data-lucide="map-pin" class="w-4 h-4"></i>
-        ${state.currentAdmin.location}
+      <div class="inline-flex items-center gap-2 mt-3 px-3 py-2 rounded-xl bg-brand-light">
+        <i data-lucide="map-pin" class="w-4 h-4 text-brand"></i>
+        <span class="font-semibold text-brand">
+          ${state.currentAdmin.location}
+        </span>
       </div>
     `;
   }
-
   return `
-    <select
-      id="working-location"
-      class="input"
-      style="max-width:220px"
-      onchange="changeWorkingLocation(this.value)">
-      ${state.locations.map(loc=>`
-        <option
-          value="${loc.id}"
-          ${loc.id===state.selectedLocation?'selected':''}>
-          ${loc.name}
-        </option>
-      `).join("")}
-    </select>
+    <div class="flex items-center gap-3 mt-3">
+      <span class="text-sm text-ink-soft">
+        Working Location
+      </span>
+
+      <select
+        id="working-location"
+        class="input w-52"
+        onchange="changeWorkingLocation(this.value)">
+
+        ${state.locations.map(loc=>`
+          <option
+            value="${loc.id}"
+            ${loc.id===state.selectedLocation?'selected':''}>
+            ${loc.name}
+          </option>
+        `).join("")}
+
+      </select>
+    </div>
   `;
+
 }
 
 function changeWorkingLocation(location){
