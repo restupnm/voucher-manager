@@ -1681,7 +1681,7 @@ async function saveNewVouchers() {
   const created = [];
   if (custom && count === 1) {
     if (await DB.getVoucher(custom)) { toast('Code exists', 'error'); return; }
-    await DB.putVoucher({ code: custom, username: custom, password: '', period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
+    await DB.putVoucher({ code: custom, username: custom, password: '', period, location: currentLocation(), purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
     created.push(custom);
   } else {
     let tries = 0;
@@ -1689,7 +1689,7 @@ async function saveNewVouchers() {
       tries++;
       const code = randCode(period, 4);
       if (await DB.getVoucher(code)) continue;
-      await DB.putVoucher({ code, username: code, password: '', period, purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
+      await DB.putVoucher({ code, username: code, password: '', period, location: currentLocation(), purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date().toISOString() });
       created.push(code);
     }
   }
