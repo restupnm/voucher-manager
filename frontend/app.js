@@ -1778,7 +1778,7 @@ async function loginAdmin(){
   }
   state.currentAdmin = admin;
   closeModal();
-  toast(`Welcome ${admin.name}`,"success");
+  toast(`Welcome ${admin.displayName}`,"success");
   setState({
     view:"dashboard",
     page:1
