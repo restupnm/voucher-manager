@@ -416,6 +416,26 @@ const PERIODS = {
 const PERIOD_ORDER = ['1H', '1M', '1B'];
 
 const DEFAULT_ADMIN_PASSWORD = 'zzzz';
+const DEFAULT_ADMINS = [
+{
+  username:"Super Admin",
+  password:"1234",
+  role:"superadmin"
+},
+{
+  username:"Logistik",
+  password:"1111",
+  role:"admin",
+  location:"logistik"
+},
+{
+  username:"Humas",
+  password:"2222",
+  role:"admin",
+  location:"humas"
+}
+];
+
 const PER_PAGE = 10;
 const DB_NAME = 'cloudvch';
 const DB_VERSION = 2;
@@ -481,6 +501,7 @@ const DB = (() => {
 const state = {
   view: 'landing',        // 'landing' | 'check-result' | 'dashboard'
   lang: localStorage.getItem('cs_lang') || 'id',
+  currentAdmin:null,
   currentVoucher: null,   // for check-result
   adminPressTimer: null,
   adminPressRAF:null,
@@ -522,6 +543,16 @@ function computeStatus(v) {
   const durationMs = (PERIODS[v.period]?.days || 0) * 24 * 60 * 60 * 1000;
   if (Date.now() < purchasedMs + durationMs) return 'used';
   return 'expired';
+}
+
+function isSuperAdmin(){
+  return state.currentAdmin?.role==="superadmin";
+}
+
+function currentLocation(){
+  return isSuperAdmin()
+    ? state.selectedLocation
+    : state.currentAdmin?.location;
 }
 
 function adminPressStart(){
