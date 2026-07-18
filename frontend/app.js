@@ -1407,6 +1407,7 @@ ${isSuperAdmin()?`<button class="btn btn-soft" onclick="openLocationModal()">Loc
 function dashboardContentHTML(stats,pageItems,filtered,totalPages,pageStart){
 if(state.sidebarView==='backup')return backupViewHTML();
 if(state.sidebarView==='settings')return settingsViewHTML();
+if(state.sidebarView==='locations')return locationsViewHTML();
 return `      <!-- Stats -->
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7 fade-in">
         ${statCardHTML('tickets',  '#EFEBFF', '#3D1FB8', t('totalVoucher'), stats.total, t('allVouchers'), 'stat-total', 'all')}
@@ -1732,7 +1733,7 @@ ${state.locations.map(l=>`
 `).join('')}
 
 <div class="mt-4">
-<button class="btn-primary" onclick="openLocationModal()">
+<button class="btn-primary" onclick="state.sidebarView='locations';render();">
 <i data-lucide="plus" class="w-4 h-4"></i>
 ${t('addLocation')}
 </button>
@@ -1741,6 +1742,25 @@ ${t('addLocation')}
 </div>
 
 </section>`;
+}
+
+function locationsViewHTML(){
+  return `
+    <div class="card p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold">Locations</h2>
+
+        <button
+          class="btn-primary"
+          onclick="openLocationModal()">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          Add Location
+        </button>
+      </div>
+
+      <div id="location-list"></div>
+    </div>
+  `;
 }
 
 /* ================================================================== *
