@@ -1910,7 +1910,6 @@ function openAddLocationModal(id=null){
           class="input"
           placeholder="e.g. Mess Logistik"
           value="${editing ? escapeHtml(editing.name) : ''}">
-        >
       </div>
 
       <div class="flex gap-3">
