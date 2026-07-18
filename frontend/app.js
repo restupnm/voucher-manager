@@ -1749,16 +1749,30 @@ function locationsViewHTML(){
     <div class="card p-6">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-bold">Locations</h2>
-
-        <button
-          class="btn-primary"
-          onclick="openLocationModal()">
+        <button class="btn-primary" onclick="openLocationModal()">
           <i data-lucide="plus" class="w-4 h-4"></i>
           Add Location
         </button>
       </div>
 
-      <div id="location-list"></div>
+      <div class="space-y-3">
+        ${state.locations.map(l=>`
+          <div class="flex items-center justify-between rounded-xl border border-brand/15 p-4">
+            <div>
+              <div class="font-semibold">${escapeHtml(l.name)}</div>
+              <div class="text-sm text-ink-soft">${l.id}</div>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn-secondary" onclick="renameLocation('${l.id}')">
+                <i data-lucide="pencil" class="w-4 h-4"></i>
+              </button>
+              <button class="btn-secondary" onclick="deleteLocation('${l.id}')">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
 }
