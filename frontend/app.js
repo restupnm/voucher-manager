@@ -1352,7 +1352,7 @@ function viewDashboard() {
 
 ${isSuperAdmin()?`
 <button
-    onclick="state.sidebarView='locations';render()"
+onclick="openLocationModal()"
     class="
         fixed
         bottom-6
@@ -1759,7 +1759,7 @@ ${state.locations.map(l=>`
 `).join('')}
 
 <div class="mt-4">
-<button class="btn-primary" onclick="state.sidebarView='locations';render();">
+<button class="btn-primary" onclick="openLocationModal()">
 <i data-lucide="plus" class="w-4 h-4"></i>
 ${t('addLocation')}
 </button>
