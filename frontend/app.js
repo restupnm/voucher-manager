@@ -2382,29 +2382,6 @@ function openImportModal() {
   `);
 }
 
-function openLocationModal(){
-  openModal(`
-  <div class="p-6 sm:p-8">
-    <div class="flex items-center justify-between mb-5">
-      <h2 class="font-display font-bold text-2xl">${t('addLocation')}</h2>
-      <button class="btn-ghost" onclick="closeModal()">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-    </div>
-
-    <label class="block text-sm font-semibold mb-2">
-      ${t('locationName')}
-    </label>
-
-    <input id="location-name" class="input" placeholder="${t('locationName')}">
-
-    <div class="flex justify-end gap-3 mt-6">
-      <button class="btn-secondary" onclick="closeModal()">${t('cancel')}</button>
-      <button class="btn-primary" onclick="saveLocation()">${t('save')}</button>
-    </div>
-  </div>`);
-}
-
 function downloadTemplate() {
   const ws = XLSX.utils.json_to_sheet([
     { code: '1M-example', username: '', password: '', period: '1M', buyer: '', phone: '', purchasedAt: '' },
