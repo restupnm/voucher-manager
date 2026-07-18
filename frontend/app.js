@@ -1858,13 +1858,15 @@ function openAddModal() {
 
 function openAddLocationModal(){
   openModal(`
-<div class="flex items-center justify-between">
-
-  <div class="flex items-center gap-2">
-    <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
-    <h2 class="text-xl font-bold">
-      Add Location
-    </h2>
+<div class="p-6 sm:p-7 space-y-5">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
+      <h2 class="text-xl font-bold">Add Location</h2>
+    </div>
+    <button class="btn-ghost" onclick="closeModal()">
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
   </div>
 
   <button class="btn-ghost" onclick="closeModal()">
