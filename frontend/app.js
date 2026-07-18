@@ -1809,6 +1809,10 @@ function locationsViewHTML(){
  *  Modals
  * ================================================================== */
 function openModal(html) {
+  const active = document.activeElement;
+  if (active && typeof active.blur === "function") {
+  active.blur();
+  }
   const root = document.getElementById('modal-root');
   root.innerHTML = `<div class="modal-backdrop fade-in" data-testid="modal-backdrop" onclick="if(event.target===this)closeModal()">
     <div class="modal scale-in" data-testid="modal-content">${html}</div>
