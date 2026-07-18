@@ -1814,7 +1814,7 @@ function openModal(html) {
   active.blur();
   }
   const root = document.getElementById('modal-root');
-  root.innerHTML = `<div class="modal-backdrop fade-in" data-testid="modal-backdrop" onclick="if(event.target===this)closeModal()">
+  root.innerHTML = `<div class="modal-backdrop fade-in" data-testid="modal-backdrop" onclick="document.activeElement?.blur(); if(event.target===this)closeModal();">
     <div class="modal scale-in" data-testid="modal-content">${html}</div>
   </div>`;
   if (window.lucide) lucide.createIcons();
