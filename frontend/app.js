@@ -1967,7 +1967,7 @@ function openLocationModal(){
 
                 <button
                   class="btn-secondary"
-                  onclick="closeModal();openAddLocationModal('${l.id}')"
+                  onclick="closeModal();openAddLocationModal('${l.id}')">
 
                   <i data-lucide="pencil" class="w-4 h-4"></i>
 
