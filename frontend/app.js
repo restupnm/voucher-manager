@@ -491,6 +491,7 @@ const DB = (() => {
     async setSetting(key, value) { const s = await tx('settings', 'readwrite'); return reqP(s.put({ key, value })); },
     async getLocations(){const s=await tx('locations');return reqP(s.getAll());},
     async putLocation(v){const s=await tx('locations','readwrite');return reqP(s.put(v));},
+    async deleteLocation(id){ const s=await tx('locations','readwrite'); return reqP(s.delete(id));},
   };
 })();
 
@@ -929,6 +930,35 @@ function toggleSidebar() {
  * ================================================================== */
 async function refreshVouchers() { state.vouchers = await DB.getAllVouchers();}
 async function refreshLocations(){state.locations=await DB.getLocations();}
+
+async function saveLocation(name){
+  name=name.trim();
+  if(!name)return;
+  const id=name.toLowerCase().replace(/\s+/g,'');
+  if(state.locations.some(l=>l.id===id))
+    return toast("Location already exists","warn");
+
+  await DB.putLocation({id,name,type:'branch'});
+  await refreshLocations();
+  closeModal();
+  render();
+}
+
+async function deleteLocation(id){
+  if(id==='all')
+    return toast("Cannot delete System location","warn");
+  if(state.vouchers.some(v=>v.location===id))
+    return toast("Location contains vouchers","warn");
+  if(DEFAULT_ADMINS.some(a=>a.location===id))
+    return toast("Location has admins","warn");
+  await DB.deleteLocation(id);
+  if(state.selectedLocation===id)
+    state.selectedLocation='all';
+
+  await refreshLocations();
+  closeModal();
+  render();
+}
 
 function render() {
   // Sync html lang
