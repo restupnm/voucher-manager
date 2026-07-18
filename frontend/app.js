@@ -941,6 +941,7 @@ async function saveLocation(name){
   await DB.putLocation({id,name,type:'branch'});
   await refreshLocations();
   closeModal();
+  openLocationModal();
   render();
 }
 
@@ -957,6 +958,7 @@ async function deleteLocation(id){
 
   await refreshLocations();
   closeModal();
+  openLocationModal();
   render();
 }
 
@@ -1850,7 +1852,7 @@ function openAddModal() {
   `);
 }
 
-function openLocationModal(){
+function openAddLocationModal(){
   openModal(`
     <div class="space-y-5">
 
@@ -1880,6 +1882,73 @@ function openLocationModal(){
       <button class="btn-primary w-full" onclick="saveLocation()">
         <i data-lucide="plus" class="w-4 h-4"></i>
         Add Location
+      </button>
+
+    </div>
+  `);
+}
+
+function openLocationModal(){
+  openModal(`
+    <div class="space-y-5">
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
+          <h2 class="text-xl font-bold">Manage Locations</h2>
+        </div>
+      </div>
+
+      <div class="max-h-80 overflow-y-auto space-y-2">
+
+        ${
+          state.locations.length
+          ? state.locations.map(l=>`
+            <div class="flex items-center justify-between rounded-xl border border-brand/10 px-4 py-3">
+
+              <div>
+                <div class="font-semibold">${escapeHtml(l.name)}</div>
+              </div>
+
+              <div class="flex gap-2">
+
+                <button
+                  class="btn-secondary"
+                  onclick="renameLocation('${l.id}')">
+
+                  <i data-lucide="pencil" class="w-4 h-4"></i>
+
+                </button>
+
+                <button
+                  class="btn-secondary"
+                  onclick="deleteLocation('${l.id}')">
+
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+
+                </button>
+
+              </div>
+
+            </div>
+          `).join('')
+          : `
+            <div class="text-center text-ink-soft py-10">
+              No locations yet.
+            </div>
+          `
+        }
+
+      </div>
+
+      <button
+        class="btn-primary w-full"
+        onclick="closeModal();openAddLocationModal();">
+
+        <i data-lucide="plus" class="w-4 h-4"></i>
+
+        Add Location
+
       </button>
 
     </div>
