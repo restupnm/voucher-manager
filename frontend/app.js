@@ -945,6 +945,26 @@ async function saveLocation(name){
   render();
 }
 
+async function updateLocation(id){
+  const name=document.getElementById('new-location-name').value.trim();
+  if(!name) return toast(t('required'),'error');
+
+  if(state.locations.some(l=>l.id!==id && l.name.toLowerCase()===name.toLowerCase()))
+    return toast("Location already exists","warn");
+
+  const loc=state.locations.find(l=>l.id===id);
+  if(!loc) return;
+
+  await DB.putLocation({
+    ...loc,
+    name
+  });
+
+  await refreshLocations();
+  closeModal();
+  openLocationModal();
+}
+
 async function deleteLocation(id){
   if(id==='all')
     return toast("Cannot delete System location","warn");
@@ -1865,13 +1885,14 @@ function openAddModal() {
   `);
 }
 
-function openAddLocationModal(){
+function openAddLocationModal(id=null){
+  const editing = id ? state.locations.find(l=>l.id===id) : null;
   openModal(`
 <div class="p-6 sm:p-7 space-y-5">
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-2">
       <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
-      <h2 class="text-xl font-bold">Add Location</h2>
+      <h2 class="text-xl font-bold">${editing ? 'Edit Location' : 'Add Location'}</h2>
     </div>
     <button class="btn-ghost" onclick="closeModal()">
       <i data-lucide="x" class="w-5 h-5"></i>
@@ -1887,7 +1908,8 @@ function openAddLocationModal(){
         <input
           id="new-location-name"
           class="input"
-          placeholder="e.g. Sorong"
+          placeholder="e.g. Mess Logistik"
+          value="${editing ? escapeHtml(editing.name) : ''}">
         >
       </div>
 
@@ -1945,7 +1967,7 @@ function openLocationModal(){
 
                 <button
                   class="btn-secondary"
-                  onclick="renameLocation('${l.id}')">
+                  onclick="closeModal();openAddLocationModal('${l.id}')"
 
                   <i data-lucide="pencil" class="w-4 h-4"></i>
 
