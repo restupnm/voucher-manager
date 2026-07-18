@@ -960,6 +960,22 @@ async function deleteLocation(id){
   render();
 }
 
+async function renameLocation(id,name){
+  name=name.trim();
+  if(!name)return;
+
+  if(state.locations.some(l=>l.id!==id&&l.name.toLowerCase()===name.toLowerCase()))
+    return toast("Location already exists","warn");
+
+  const loc=state.locations.find(l=>l.id===id);
+  if(!loc)return;
+
+  await DB.putLocation({...loc,name});
+  await refreshLocations();
+  closeModal();
+  openLocationModal();
+}
+
 function render() {
   // Sync html lang
   document.documentElement.lang = state.lang;
@@ -1365,6 +1381,7 @@ function viewDashboard() {
   ${state.sidebarView==='dashboard'?`
   <div class="flex items-center gap-3">
     <button data-testid="import-btn" onclick="openImportModal()" class="btn-secondary min-w-[180px] justify-center"><i data-lucide="upload" class="w-4 h-4"></i> ${t('importVoucher')}</button>
+${isSuperAdmin()?`<button class="btn btn-soft" onclick="openLocationModal()">Locations</button>`:''}
 <button
   data-testid="add-voucher-btn"
   onclick="openAddModal()"
@@ -1768,6 +1785,31 @@ function openAddModal() {
       <div class="flex gap-3 mt-6">
         <button class="btn-secondary flex-1" onclick="closeModal()">${t('cancel')}</button>
         <button data-testid="add-save-btn" class="btn-primary flex-1" onclick="saveNewVouchers()"><i data-lucide="plus" class="w-4 h-4"></i> ${t('save')}</button>
+      </div>
+    </div>
+  `);
+}
+
+async function openLocationModal(){
+  await refreshLocations();
+
+  openModal(`
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Manage Locations</h3>
+        <button class="btn btn-primary" onclick="const n=prompt('Location name');if(n)saveLocation(n)">Add</button>
+      </div>
+
+      <div class="divide-y">
+        ${state.locations.filter(l=>l.id!=='all').map(l=>`
+          <div class="flex items-center justify-between py-3">
+            <span>${escapeHtml(l.name)}</span>
+            <div class="flex gap-2">
+              <button class="btn btn-soft btn-sm" onclick="const n=prompt('Rename location','${escapeHtml(l.name)}');if(n&&n!=='${escapeHtml(l.name)}')renameLocation('${l.id}',n)">Rename</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteLocation('${l.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('')||'<div class="py-6 text-center text-ink-soft">No locations.</div>'}
       </div>
     </div>
   `);
