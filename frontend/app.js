@@ -1867,11 +1867,6 @@ function openAddLocationModal(){
     <button class="btn-ghost" onclick="closeModal()">
       <i data-lucide="x" class="w-5 h-5"></i>
     </button>
-  </div>
-
-  <button class="btn-ghost" onclick="closeModal()">
-    <i data-lucide="x" class="w-5 h-5"></i>
-  </button>
 
 </div>
 
