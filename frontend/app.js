@@ -1349,6 +1349,32 @@ function viewDashboard() {
     <i data-lucide="menu" class="w-7 h-7"></i>
 
 </button>
+
+${isSuperAdmin()?`
+<button
+    onclick="state.sidebarView='locations';render()"
+    class="
+        fixed
+        bottom-6
+        left-24
+        z-50
+        w-14
+        h-14
+        rounded-2xl
+        bg-white
+        text-brand
+        border
+        border-brand/20
+        shadow-lg
+        hover:scale-105
+        active:scale-95
+        transition-all
+        flex
+        items-center
+        justify-center">
+    <i data-lucide="map-pin" class="w-7 h-7"></i>
+</button>
+`:''}
    
     <div class="fixed bottom-5 right-5 z-50">
   ${langSwitcherHTML()}
@@ -1381,7 +1407,7 @@ function viewDashboard() {
   ${state.sidebarView==='dashboard'?`
   <div class="flex items-center gap-3">
     <button data-testid="import-btn" onclick="openImportModal()" class="btn-secondary min-w-[180px] justify-center"><i data-lucide="upload" class="w-4 h-4"></i> ${t('importVoucher')}</button>
-${isSuperAdmin()?`<button class="btn btn-soft" onclick="openLocationModal()">Locations</button>`:''}
+    
 <button
   data-testid="add-voucher-btn"
   onclick="openAddModal()"
