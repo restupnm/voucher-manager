@@ -950,8 +950,7 @@ async function deleteLocation(id){
     return toast("Cannot delete System location","warn");
   if(state.vouchers.some(v=>v.location===id))
     return toast("Location contains vouchers","warn");
-  if(DEFAULT_ADMINS.some(a=>a.location===id))
-    return toast("Location has admins","warn");
+  
   await DB.deleteLocation(id);
   if(state.selectedLocation===id)
     state.selectedLocation='all';
@@ -962,17 +961,27 @@ async function deleteLocation(id){
   render();
 }
 
-async function renameLocation(id,name){
-  name=name.trim();
-  if(!name)return;
+async function renameLocation(id){
+  const current = state.locations.find(l => l.id === id);
+  if (!current) return;
 
-  if(state.locations.some(l=>l.id!==id&&l.name.toLowerCase()===name.toLowerCase()))
+  const name = prompt("Location name", current.name);
+  if (name === null) return;
+
+  const newName = name.trim();
+  if (!newName) return;
+
+  if (state.locations.some(l =>
+    l.id !== id &&
+    l.name.toLowerCase() === newName.toLowerCase()
+  ))
     return toast("Location already exists","warn");
 
-  const loc=state.locations.find(l=>l.id===id);
-  if(!loc)return;
+  await DB.putLocation({
+    ...current,
+    name: newName
+  });
 
-  await DB.putLocation({...loc,name});
   await refreshLocations();
   closeModal();
   openLocationModal();
@@ -1912,7 +1921,7 @@ function openAddLocationModal(){
 
 function openLocationModal(){
   openModal(`
-    <div class="space-y-5">
+  <div class="p-6 sm:p-7 space-y-5">
 
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
