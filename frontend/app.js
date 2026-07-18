@@ -1850,27 +1850,38 @@ function openAddModal() {
   `);
 }
 
-async function openLocationModal(){
-  await refreshLocations();
-
+function openLocationModal(){
   openModal(`
-    <div class="space-y-4">
+    <div class="space-y-5">
+
       <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold">Manage Locations</h3>
-        <button class="btn btn-primary" onclick="const n=prompt('Location name');if(n)saveLocation(n)">Add</button>
+        <h2 class="text-xl font-bold flex items-center gap-2">
+          <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
+          Locations
+        </h2>
       </div>
 
-      <div class="divide-y">
-        ${state.locations.filter(l=>l.id!=='all').map(l=>`
-          <div class="flex items-center justify-between py-3">
-            <span>${escapeHtml(l.name)}</span>
-            <div class="flex gap-2">
-              <button class="btn btn-soft btn-sm" onclick="const n=prompt('Rename location','${escapeHtml(l.name)}');if(n&&n!=='${escapeHtml(l.name)}')renameLocation('${l.id}',n)">Rename</button>
-              <button class="btn btn-danger btn-sm" onclick="deleteLocation('${l.id}')">Delete</button>
-            </div>
+      ${state.locations.map(l=>`
+        <div class="flex items-center justify-between rounded-xl border border-brand/15 p-3">
+          <span>${escapeHtml(l.name)}</span>
+
+          <div class="flex gap-2">
+            <button class="btn-secondary" onclick="renameLocation('${l.id}')">
+              <i data-lucide="pencil" class="w-4 h-4"></i>
+            </button>
+
+            <button class="btn-secondary" onclick="deleteLocation('${l.id}')">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
           </div>
-        `).join('')||'<div class="py-6 text-center text-ink-soft">No locations.</div>'}
-      </div>
+        </div>
+      `).join('')}
+
+      <button class="btn-primary w-full" onclick="saveLocation()">
+        <i data-lucide="plus" class="w-4 h-4"></i>
+        Add Location
+      </button>
+
     </div>
   `);
 }
