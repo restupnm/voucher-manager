@@ -2084,18 +2084,18 @@ async function loginAdmin(){
   });
 }
 
-async function saveLocation(){
-  const name=document.getElementById('location-name').value.trim();
-  if(!name)return toast(t('required'),'error');
+async function saveLocation() {
+  const name = document.getElementById('new-location-name').value.trim();
+  if (!name) return toast(t('required'), 'error');
 
-  const id=name.toLowerCase().replace(/\s+/g,'-');
+  const id = name.toLowerCase().replace(/\s+/g, '-');
 
   await DB.putLocation({
     id,
     name,
-    host:'',
-    password:'',
-    active:true
+    host: '',
+    password: '',
+    active: true
   });
 
   await refreshLocations();
