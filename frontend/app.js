@@ -2678,6 +2678,26 @@ function bindEvents() { /* mostly inline onclick; nothing extra for now */ }
   render();
 })();
 
+document.addEventListener("pointerdown", (e) => {
+  const active = document.activeElement;
+
+  if (!active) return;
+
+  const isEditable =
+    active.matches("input, textarea, select") ||
+    active.isContentEditable;
+
+  if (!isEditable) return;
+
+  // Ignore taps on the same input
+  if (active === e.target || active.contains(e.target)) return;
+
+  // Ignore taps on another editable element
+  if (e.target.closest("input, textarea, select, [contenteditable]")) return;
+
+  active.blur();
+});
+
 // expose globals for inline handlers
 window.handleEntry = handleEntry;
 window.logout = logout;
