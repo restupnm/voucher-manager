@@ -1859,30 +1859,45 @@ function openAddLocationModal(){
       <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold flex items-center gap-2">
           <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
-          Locations
+          Add Location
         </h2>
       </div>
 
-      ${state.locations.map(l=>`
-        <div class="flex items-center justify-between rounded-xl border border-brand/15 p-3">
-          <span>${escapeHtml(l.name)}</span>
+      <div>
+        <label class="block text-sm font-semibold mb-2">
+          Location Name
+        </label>
 
-          <div class="flex gap-2">
-            <button class="btn-secondary" onclick="renameLocation('${l.id}')">
-              <i data-lucide="pencil" class="w-4 h-4"></i>
-            </button>
+        <input
+          id="new-location-name"
+          class="input"
+          placeholder="e.g. Sorong"
+        >
+      </div>
 
-            <button class="btn-secondary" onclick="deleteLocation('${l.id}')">
-              <i data-lucide="trash-2" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
-      `).join('')}
+      <div class="flex gap-3">
 
-      <button class="btn-primary w-full" onclick="saveLocation()">
-        <i data-lucide="plus" class="w-4 h-4"></i>
-        Add Location
-      </button>
+        <button
+          class="btn-secondary flex-1"
+          onclick="closeModal()">
+          Cancel
+        </button>
+
+        <button
+          class="btn-primary flex-1"
+          onclick="
+            saveLocation(
+              document.getElementById('new-location-name').value
+            )
+          ">
+
+          <i data-lucide="plus" class="w-4 h-4"></i>
+
+          Save
+
+        </button>
+
+      </div>
 
     </div>
   `);
