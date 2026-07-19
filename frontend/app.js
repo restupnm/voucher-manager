@@ -2385,7 +2385,7 @@ function openImportModal() {
       </div>
       <p class="text-ink-soft text-sm mb-4">${t('importDesc')}</p>
       <button data-testid="download-template-btn" onclick="downloadTemplate()" class="btn-secondary mb-4"><i data-lucide="download" class="w-4 h-4"></i> ${t('downloadTemplate')}</button>
-      <input data-testid="import-file" type="file" accept=".xlsx,.xls,.csv" onchange="prepareImport()" class="block w-full text-sm text-ink-soft file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:font-semibold file:bg-brand file:text-white hover:file:bg-brand-hover transition-colors cursor-pointer"/>
+      <input data-testid="import-file" type="file" accept=".xlsx,.xls,.csv" onchange="prepareImport(event)" class="block w-full text-sm text-ink-soft file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:font-semibold file:bg-brand file:text-white hover:file:bg-brand-hover transition-colors cursor-pointer"/>
       <div id="import-options" class="hidden mt-6">
     <div class="rounded-xl bg-brand-light p-4 mb-5">
         <div class="font-semibold text-brand">
