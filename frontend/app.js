@@ -836,14 +836,16 @@ function downloadDataURL(dataURL, filename) {
  *  Initial seed (only if DB is empty)
  * ================================================================== */
 async function seedIfEmpty() {
-  if(!state.locations.length) await DB.putLocation({id:'all',name:'All',type:'super'});
+  // Do NOT create a default "All" warehouse.
+  // A brand-new installation starts with zero warehouses.
   await refreshLocations();
+
   const all = await DB.getAllVouchers();
   if (all.length > 0) return;
 
   // disable demo
   return;
-  
+
   // Seed a few demo vouchers
   const now = Date.now();
   const demo = [
@@ -853,7 +855,7 @@ async function seedIfEmpty() {
     { period: '1B', code: '1B' + 'ym9v', buyer: 'Dewi',  phone: '628123456704', daysAgo: 12, msg: 'Demo' },
     { period: '1B', code: '1B' + 'bhvj', buyer: 'Adit',  phone: '628123456705', daysAgo: 45, msg: 'Demo' }, // expired
   ];
-  // Plus some available ones
+
   const available = [
     { period: '1M', code: '1M' + '2pgz' },
     { period: '1M', code: '1M' + 'n4uv' },
@@ -865,19 +867,34 @@ async function seedIfEmpty() {
     { period: '1B', code: '1B' + 'ysd5' },
     { period: '1B', code: '1B' + '5kru' },
   ];
+
   for (const d of demo) {
     await DB.putVoucher({
       code: d.code,
-      username: d.code, password: '',
+      username: d.code,
+      password: '',
       period: d.period,
       location: currentLocation(),
       purchasedAt: new Date(now - d.daysAgo * 86400000).toISOString(),
-      buyerName: d.buyer, buyerPhone: d.phone, message: d.msg,
+      buyerName: d.buyer,
+      buyerPhone: d.phone,
+      message: d.msg,
       createdAt: new Date(now - (d.daysAgo + 1) * 86400000).toISOString(),
     });
   }
+
   for (const a of available) {
-    await DB.putVoucher({ code: a.code, username: a.code, password: '', period: a.period, location: currentLocation(), purchasedAt: null, buyerName: '', buyerPhone: '', createdAt: new Date(now).toISOString() });
+    await DB.putVoucher({
+      code: a.code,
+      username: a.code,
+      password: '',
+      period: a.period,
+      location: currentLocation(),
+      purchasedAt: null,
+      buyerName: '',
+      buyerPhone: '',
+      createdAt: new Date(now).toISOString(),
+    });
   }
 }
 
