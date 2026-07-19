@@ -1922,7 +1922,7 @@ function openLocationModal(){
 
                 <button
                   class="btn-secondary"
-                  onclick="closeModal();openAddLocationModal('${l.id}')">
+                  onclick="closeModal();openLocationForm('${l.id}')">
 
                   <i data-lucide="pencil" class="w-4 h-4"></i>
 
@@ -1951,7 +1951,7 @@ function openLocationModal(){
 
       <button
         class="btn-primary w-full"
-        onclick="closeModal();openAddLocationModal();">
+        onclick="closeModal();openLocationForm();">
 
         <i data-lucide="plus" class="w-4 h-4"></i>
 
