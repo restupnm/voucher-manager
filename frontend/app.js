@@ -979,16 +979,26 @@ async function saveLocation(name){
 }
 
 async function deleteLocation(id){
-  if(id==='all')
-    return toast("Cannot delete System location","warn");
-  if(state.vouchers.some(v=>v.location===id))
+
+  const location = state.locations.find(l => l.id === id);
+  if(!location) return;
+
+  if(state.vouchers.some(v => v.location === id))
     return toast("Location contains vouchers","warn");
-  
+
   await DB.deleteLocation(id);
-  if(state.selectedLocation===id)
-    state.selectedLocation='all';
 
   await refreshLocations();
+
+  // If the deleted location was selected,
+  // automatically select the first remaining location.
+  if(state.selectedLocation === id){
+    state.selectedLocation =
+      state.locations.length
+        ? state.locations[0].id
+        : "";
+  }
+
   closeModal();
   openLocationModal();
   render();
