@@ -597,7 +597,13 @@ function locationSwitcherHTML(){
 }
 
 function changeWorkingLocation(location){
-  state.selectedLocation = location;
+  if(!location){
+    state.selectedLocation = "";
+    render();
+    return;
+  }
+  const exists = state.locations.some(l => l.id === location);
+  state.selectedLocation = exists ? location : "";
   render();
 }
 
