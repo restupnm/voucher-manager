@@ -506,6 +506,10 @@ const state = {
   adminPressTimer: null,
   adminPressRAF:null,
   editingLocation:null,
+  importWorkbook: null,
+  importRows: [],
+  importMode: "selected",
+  importLocation: "",
   adminLongPress:false,
   adminPressProgress:0,
   vouchers: [],
@@ -2381,7 +2385,7 @@ function openImportModal() {
       </div>
       <p class="text-ink-soft text-sm mb-4">${t('importDesc')}</p>
       <button data-testid="download-template-btn" onclick="downloadTemplate()" class="btn-secondary mb-4"><i data-lucide="download" class="w-4 h-4"></i> ${t('downloadTemplate')}</button>
-      <input data-testid="import-file" type="file" accept=".xlsx,.xls,.csv" onchange="handleImportFile(event)" class="block w-full text-sm text-ink-soft file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:font-semibold file:bg-brand file:text-white hover:file:bg-brand-hover transition-colors cursor-pointer"/>
+      <input data-testid="import-file" type="file" accept=".xlsx,.xls,.csv" onchange="prepareImport()" class="block w-full text-sm text-ink-soft file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:font-semibold file:bg-brand file:text-white hover:file:bg-brand-hover transition-colors cursor-pointer"/>
       <div id="import-result" class="mt-4 text-sm"></div>
     </div>
   `);
@@ -2396,6 +2400,20 @@ function downloadTemplate() {
   XLSX.utils.book_append_sheet(wb, ws, 'vouchers');
   const buf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
   downloadBlob(new Blob([buf], { type: 'application/octet-stream' }), 'voucher-template.xlsx');
+}
+
+async function prepareImport(ev){
+    const file = ev.target.files?.[0];
+    if(!file) return;
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf,{
+        type:"array"
+    });
+    const ws = wb.Sheets[wb.SheetNames[0]];
+    state.importWorkbook = wb;
+    state.importRows = XLSX.utils.sheet_to_json(ws);
+
+    renderImportOptions();
 }
 
 async function handleImportFile(ev) {
