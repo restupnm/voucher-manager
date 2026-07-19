@@ -514,7 +514,7 @@ const state = {
   adminPressProgress:0,
   vouchers: [],
   locations:[],
-  selectedLocation:'all',
+  selectedLocation:'',
   search: '',
   pendingWhatsAppUrl: '',
   statusFilter: 'all',
