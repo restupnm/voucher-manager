@@ -2509,6 +2509,180 @@ function renderImportOptions(){
     }
 }
 
+async function startImport(){
+
+    if(!state.importRows?.length){
+        toast("Please choose an Excel file first.","warning");
+        return;
+    }
+
+    let added = 0;
+    let updated = 0;
+    let skipped = 0;
+
+    const newLocations = [];
+
+    for(const r of state.importRows){
+
+        const period = (
+            r.period ||
+            r.Period ||
+            r.PERIOD ||
+            ""
+        ).toString().trim().toUpperCase();
+
+        if(!PERIODS[period]){
+            skipped++;
+            continue;
+        }
+
+        let code = (
+            r.code ||
+            r.Code ||
+            r.CODE ||
+            ""
+        ).toString().trim();
+
+        if(!code){
+            code = randCode(period,4);
+        }
+
+        const existing = await DB.getVoucher(code);
+
+        let location;
+
+        if(state.importMode==="selected"){
+
+            location = state.importLocation;
+
+        }else{
+
+            const excelLocation = (
+                r.location ||
+                r.Location ||
+                ""
+            ).toString().trim();
+
+            if(!excelLocation){
+
+                location = state.importLocation;
+
+            }else{
+
+                let match = state.locations.find(l =>
+                    l.id.toLowerCase()===excelLocation.toLowerCase() ||
+                    l.name.toLowerCase()===excelLocation.toLowerCase()
+                );
+
+                if(!match){
+
+                    const id = excelLocation
+                        .toLowerCase()
+                        .replace(/\s+/g,"-");
+
+                    const loc = {
+                        id,
+                        name: excelLocation
+                    };
+
+                    state.locations.push(loc);
+
+                    await DB.setSetting(
+                        "locations",
+                        state.locations.filter(l=>l.id!=="all")
+                    );
+
+                    newLocations.push(excelLocation);
+
+                    location = id;
+
+                }else{
+
+                    location = match.id;
+
+                }
+
+            }
+
+        }
+
+        const purchasedAt =
+            (r.purchasedAt || r.PurchasedAt)
+            ? new Date(
+                r.purchasedAt || r.PurchasedAt
+              ).toISOString()
+            : null;
+
+        await DB.putVoucher({
+
+            ...(existing||{}),
+
+            code,
+
+            username:
+                (
+                    r.username ||
+                    r.Username ||
+                    existing?.username ||
+                    code
+                ).toString().trim(),
+
+            password:
+                (
+                    r.password ||
+                    r.Password ||
+                    existing?.password ||
+                    ""
+                ).toString().trim(),
+
+            buyerName:
+                (
+                    r.buyer ||
+                    r.Buyer ||
+                    r.name ||
+                    existing?.buyerName ||
+                    ""
+                ).toString(),
+
+            buyerPhone:
+                (
+                    r.phone ||
+                    r.Phone ||
+                    existing?.buyerPhone ||
+                    ""
+                ).toString(),
+
+            period,
+            location,
+            purchasedAt,
+
+            createdAt:
+                existing?.createdAt ||
+                new Date().toISOString()
+
+        });
+
+        if(existing)
+            updated++;
+        else
+            added++;
+
+    }
+
+    await refreshLocations();
+    await refreshVouchers();
+
+    closeModal();
+
+    toast(
+        `Imported ${added} new, ${updated} updated.`,
+        "success"
+    );
+
+    render();
+
+}
+
 async function handleImportFile(ev) {
   const file = ev.target.files?.[0];
   if (!file) return;
