@@ -2620,13 +2620,12 @@ async function startImport(){
 
                 if(!match){
 
-                    const id = excelLocation
-                        .toLowerCase()
-                        .replace(/\s+/g,"-");
+                    const id = crypto.randomUUID();
 
                     const loc = {
-                        id,
-                        name: excelLocation
+                                 id,
+                                 name: excelLocation,
+                                 type: "branch"
                     };
 
                     state.locations.push(loc);
