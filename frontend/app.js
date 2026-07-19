@@ -2386,7 +2386,83 @@ function openImportModal() {
       <p class="text-ink-soft text-sm mb-4">${t('importDesc')}</p>
       <button data-testid="download-template-btn" onclick="downloadTemplate()" class="btn-secondary mb-4"><i data-lucide="download" class="w-4 h-4"></i> ${t('downloadTemplate')}</button>
       <input data-testid="import-file" type="file" accept=".xlsx,.xls,.csv" onchange="prepareImport()" class="block w-full text-sm text-ink-soft file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:font-semibold file:bg-brand file:text-white hover:file:bg-brand-hover transition-colors cursor-pointer"/>
-      <div id="import-result" class="mt-4 text-sm"></div>
+      <div id="import-options" class="hidden mt-6">
+    <div class="rounded-xl bg-brand-light p-4 mb-5">
+        <div class="font-semibold text-brand">
+            ✔ Excel loaded
+        </div>
+        <div id="import-summary"
+             class="text-sm text-ink-soft mt-1">
+        </div>
+    </div>
+    <label class="block font-semibold mb-3">
+        Import Location
+    </label>
+    <label class="flex items-center gap-3 mb-3 cursor-pointer">
+        <input
+            type="radio"
+            name="import-mode"
+            value="excel"
+            onchange="state.importMode='excel'">
+        Use Location from Excel
+    </label>
+
+    <label class="flex items-center gap-3 mb-4 cursor-pointer">
+        <input
+            type="radio"
+            name="import-mode"
+            value="selected"
+            checked
+            onchange="state.importMode='selected'">
+        Use Selected Warehouse
+    </label>
+    <div class="flex gap-3">
+        <select
+            id="import-location"
+            class="input flex-1"
+            onchange="state.importLocation=this.value">
+
+            ${state.locations
+                .filter(l=>l.id!=="all")
+                .map(l=>`
+                    <option value="${l.id}">
+                        ${l.name}
+                    </option>
+                `).join("")}
+
+        </select>
+
+        <button
+            class="btn-secondary"
+            onclick="openLocationForm()">
+
+            + New
+
+        </button>
+
+    </div>
+
+    <div class="flex justify-end gap-3 mt-6">
+
+        <button
+            class="btn-secondary"
+            onclick="closeModal()">
+
+            Cancel
+
+        </button>
+
+        <button
+            class="btn-primary"
+            onclick="startImport()">
+
+            Import
+
+        </button>
+
+    </div>
+
+</div>
     </div>
   `);
 }
@@ -2414,6 +2490,23 @@ async function prepareImport(ev){
     state.importRows = XLSX.utils.sheet_to_json(ws);
 
     renderImportOptions();
+}
+
+function renderImportOptions(){
+    document
+        .getElementById("import-options")
+        .classList
+        .remove("hidden")
+    document
+        .getElementById("import-summary")
+        .textContent =
+            `${state.importRows.length} voucher(s) detected`;
+    if(!state.importLocation && state.locations.length){
+        state.importLocation = state.locations[0].id;
+        document
+            .getElementById("import-location")
+            .value = state.importLocation;
+    }
 }
 
 async function handleImportFile(ev) {
