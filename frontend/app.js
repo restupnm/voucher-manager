@@ -418,7 +418,7 @@ const PERIOD_ORDER = ['1H', '1M', '1B'];
 const DEFAULT_ADMINS = [
 {
   displayName:"Super Admin",
-  adminpassword:"1234",
+  adminpassword:"z",
   role:"superadmin"
 },
 {
@@ -505,6 +505,7 @@ const state = {
   currentVoucher: null,   // for check-result
   adminPressTimer: null,
   adminPressRAF:null,
+  editingLocation:null,
   adminLongPress:false,
   adminPressProgress:0,
   vouchers: [],
@@ -945,26 +946,6 @@ async function saveLocation(name){
   render();
 }
 
-async function updateLocation(id){
-  const name=document.getElementById('new-location-name').value.trim();
-  if(!name) return toast(t('required'),'error');
-
-  if(state.locations.some(l=>l.id!==id && l.name.toLowerCase()===name.toLowerCase()))
-    return toast("Location already exists","warn");
-
-  const loc=state.locations.find(l=>l.id===id);
-  if(!loc) return;
-
-  await DB.putLocation({
-    ...loc,
-    name
-  });
-
-  await refreshLocations();
-  closeModal();
-  openLocationModal();
-}
-
 async function deleteLocation(id){
   if(id==='all')
     return toast("Cannot delete System location","warn");
@@ -979,32 +960,6 @@ async function deleteLocation(id){
   closeModal();
   openLocationModal();
   render();
-}
-
-async function renameLocation(id){
-  const current = state.locations.find(l => l.id === id);
-  if (!current) return;
-
-  const name = prompt("Location name", current.name);
-  if (name === null) return;
-
-  const newName = name.trim();
-  if (!newName) return;
-
-  if (state.locations.some(l =>
-    l.id !== id &&
-    l.name.toLowerCase() === newName.toLowerCase()
-  ))
-    return toast("Location already exists","warn");
-
-  await DB.putLocation({
-    ...current,
-    name: newName
-  });
-
-  await refreshLocations();
-  closeModal();
-  openLocationModal();
 }
 
 function render() {
@@ -1885,8 +1840,9 @@ function openAddModal() {
   `);
 }
 
-function openAddLocationModal(id=null){
-  const editing = id ? state.locations.find(l=>l.id===id) : null;
+function openLocationForm(id=null){
+ state.editingLocation=id;
+ const editing=id? state.locations.find(l=>l.id===id) : null;
   openModal(`
 <div class="p-6 sm:p-7 space-y-5">
   <div class="flex items-center justify-between">
@@ -2109,22 +2065,34 @@ async function loginAdmin(){
   });
 }
 
-async function saveLocation() {
-  const name = document.getElementById('new-location-name').value.trim();
-  if (!name) return toast(t('required'), 'error');
-
-  const id = name.toLowerCase().replace(/\s+/g, '-');
+async function saveLocation(){
+  const name=document.getElementById('new-location-name').value.trim();
+  if(!name)
+    return toast("Location name required","warn");
+  const editing=state.editingLocation;
+  const id=editing
+    ? editing
+    : name.toLowerCase().replace(/\s+/g,'');
+  if(state.locations.some(l=>
+      l.id!==id &&
+      l.name.toLowerCase()===name.toLowerCase()))
+    return toast("Location already exists","warn");
+  const old=editing
+    ? state.locations.find(l=>l.id===editing)
+    : {};
 
   await DB.putLocation({
+    ...old,
     id,
     name,
-    host: '',
-    password: '',
-    active: true
+    type:'branch'
   });
 
+  state.editingLocation=null;
   await refreshLocations();
+
   closeModal();
+  openLocationModal();
   render();
 }
 
