@@ -605,8 +605,8 @@ function normalizeLocation(location){
     if(!location) return currentLocation();
     const input = location.toString().trim().toLowerCase();
     const match = state.locations.find(l =>
-        l.id.toLowerCase() === input ||
-        l.name.toLowerCase() === input
+        l.name.toLowerCase() === input ||
+        l.id === location
     );
     return match ? match.id : null;
 }
@@ -954,14 +954,25 @@ async function refreshVouchers() { state.vouchers = await DB.getAllVouchers();}
 async function refreshLocations(){state.locations=await DB.getLocations();}
 
 async function saveLocation(name){
-  name=name.trim();
-  if(!name)return;
-  const id=name.toLowerCase().replace(/\s+/g,'');
-  if(state.locations.some(l=>l.id===id))
-    return toast("Location already exists","warn");
+  name = name.trim();
+  if(!name) return;
 
-  await DB.putLocation({id,name,type:'branch'});
+  if(
+    state.locations.some(
+      l => l.name.toLowerCase() === name.toLowerCase()
+    )
+  ){
+    return toast("Location already exists","warn");
+  }
+
+  await DB.putLocation({
+    id: crypto.randomUUID(),
+    name,
+    type:"branch"
+  });
+
   await refreshLocations();
+
   closeModal();
   openLocationModal();
   render();
