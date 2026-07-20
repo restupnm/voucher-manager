@@ -963,25 +963,43 @@ async function saveLocation(name){
   name = name.trim();
   if(!name) return;
 
+  const editing = state.editingLocation;
+
   if(
     state.locations.some(
-      l => l.name.toLowerCase() === name.toLowerCase()
+      l =>
+        l.id !== editing &&
+        l.name.toLowerCase() === name.toLowerCase()
     )
   ){
     return toast("Location already exists","warn");
   }
 
+  const host = normalizeHost(
+    document.getElementById("location-host")?.value || ""
+  );
+
+  const existing = editing
+    ? state.locations.find(l => l.id === editing)
+    : null;
+
   await DB.putLocation({
-    id: crypto.randomUUID(),
+    ...(existing || {}),
+    id: existing?.id || crypto.randomUUID(),
     name,
-    type:"branch"
+    host,
+    type: existing?.type || "branch"
   });
+
+  state.editingLocation = null;
 
   await refreshLocations();
 
   closeModal();
   openLocationModal();
   render();
+
+  toast(t("saved"), "success");
 }
 
 async function deleteLocation(id){
@@ -1910,11 +1928,23 @@ function openLocationForm(id=null){
         </label>
 
         <input
-          id="new-location-name"
+          id="location-name"
           class="input"
           placeholder="e.g. Mess Logistik"
           value="${editing ? escapeHtml(editing.name) : ''}">
       </div>
+     
+      <div>
+        <label class="block text-sm font-semibold mb-2">
+         Router Address
+        </label>
+
+     <input
+       id="location-host"
+      class="input"
+      placeholder="192.168.88.1"
+      value="${editing ? escapeHtml(editing.host || '') : ''}">
+     </div>
 
       <div class="flex gap-3">
 
@@ -1928,7 +1958,7 @@ function openLocationForm(id=null){
           class="btn-primary flex-1"
           onclick="
             saveLocation(
-              document.getElementById('new-location-name').value
+              document.getElementById('location-name').value
             )
           ">
 
