@@ -2597,15 +2597,9 @@ async function startImport(){
                                  type: "branch"
                     };
 
+                    await DB.putLocation(loc);
                     state.locations.push(loc);
-
-                    await DB.setSetting(
-                        "locations",
-                        state.locations.filter(l=>l.id!=="all")
-                    );
-
                     newLocations.push(excelLocation);
-
                     location = id;
 
                 }else{
