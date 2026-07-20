@@ -2113,37 +2113,6 @@ async function loginAdmin(){
   });
 }
 
-async function saveLocation(){
-  const name=document.getElementById('new-location-name').value.trim();
-  if(!name)
-    return toast("Location name required","warn");
-  const editing=state.editingLocation;
-  const id=editing
-    ? editing
-    : name.toLowerCase().replace(/\s+/g,'');
-  if(state.locations.some(l=>
-      l.id!==id &&
-      l.name.toLowerCase()===name.toLowerCase()))
-    return toast("Location already exists","warn");
-  const old=editing
-    ? state.locations.find(l=>l.id===editing)
-    : {};
-
-  await DB.putLocation({
-    ...old,
-    id,
-    name,
-    type:'branch'
-  });
-
-  state.editingLocation=null;
-  await refreshLocations();
-
-  closeModal();
-  openLocationModal();
-  render();
-}
-
 async function saveLocationEdit(id){
   const l=state.locations.find(x=>x.id===id);
   if(!l)return;
