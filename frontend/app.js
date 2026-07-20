@@ -1876,31 +1876,7 @@ function closeModal() { document.getElementById('modal-root').innerHTML = ''; }
 function openAddModal() {
   openModal(`
     <div class="p-6 sm:p-8">
-<div class="flex items-center justify-between">
-  <div class="flex items-center gap-2">
-    ${
-      state.locationReturnTo === "import"
-      ? `
-      <button
-        class="btn-ghost"
-        onclick="
-          closeModal();
-          openImportModal();
-        ">
-        <i data-lucide="arrow-left" class="w-5 h-5"></i>
-      </button>
-      `
-      : ""
-    }
-
-    <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
-
-    <h2 class="text-xl font-bold">
-      Manage Locations
-    </h2>
-
-  </div>
-</div>
+      <div class="flex items-center justify-between mb-5">
         <div>
           <h2 class="font-display font-bold text-2xl text-ink">${t('addVoucherTitle')}</h2>
           <p class="text-ink-soft text-sm mt-1">${t('addVoucherDesc')}</p>
@@ -2003,12 +1979,40 @@ function openLocationModal(){
   openModal(`
   <div class="p-6 sm:p-7 space-y-5">
 
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
-          <h2 class="text-xl font-bold">Manage Locations</h2>
-        </div>
-      </div>
+<div class="flex items-center justify-between">
+
+  <div class="flex items-center gap-2">
+
+    ${
+      state.locationReturnTo === "import"
+      ? `
+      <button
+        class="btn-ghost"
+        onclick="
+          closeModal();
+          openImportModal();
+        ">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </button>
+      `
+      : ""
+    }
+
+    <i data-lucide="map-pin" class="w-5 h-5 text-brand"></i>
+
+    <h2 class="text-xl font-bold">
+      Manage Locations
+    </h2>
+
+  </div>
+
+  <button
+    class="btn-ghost"
+    onclick="closeModal()">
+    <i data-lucide="x" class="w-5 h-5"></i>
+  </button>
+
+</div>
 
       <div class="max-h-80 overflow-y-auto space-y-2">
 
