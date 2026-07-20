@@ -1782,11 +1782,11 @@ ${state.locations.map(l=>`
 <div onclick="openLocationEdit('${l.id}')" class="rounded-xl border border-brand/10 p-4 flex items-center justify-between mb-3 cursor-pointer hover:bg-brand-light/30 transition">
   <div>
     <div class="font-semibold text-ink">${escapeHtml(l.name)}</div>
-    <div class="text-sm text-ink-soft">${l.id==='all'?'Super Administrator':'Location'}</div>
+    <div class="text-sm text-ink-soft">Location</div>
   </div>
 
 <div class="flex items-center gap-3">
-<span class="pill ${l.id==='all'?'pill-available':'pill-1M'}"> ${l.id==='all'?'System':'Active'} </span>
+<span class="pill pill-1M">Active</span>
 <i data-lucide="chevron-right" class="w-5 h-5 text-ink-soft"></i>
 </div>
 </div>
@@ -2436,7 +2436,6 @@ function openImportModal() {
             onchange="state.importLocation=this.value">
 
             ${state.locations
-                .filter(l=>l.id!=="all")
                 .map(l=>`
                     <option value="${l.id}">
                         ${l.name}
