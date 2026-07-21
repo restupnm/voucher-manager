@@ -2507,7 +2507,7 @@ function openImportModal() {
             class="btn-secondary"
             onclick="state.locationReturnTo='import';
                      closeModal();
-                     openLocationForm();"
+                     openLocationForm();">
 
             + New
 
